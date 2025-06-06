@@ -4,386 +4,349 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free FiveM Scripts</title>
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-    
-    <!-- reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+        }
+
+        [dir="rtl"] {
+            --text-primary: #1f2937;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --dark: #1a1b2e;
-            --darker: #0f0f23;
-            --light: #ffffff;
-            --gray: #6b7280;
-            --gray-light: #f3f4f6;
-            --error: #ef4444;
-            --success: #10b981;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(26, 27, 46, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
             transition: all 0.3s ease;
         }
 
-        nav {
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
+            align-items: center;
             gap: 2rem;
-            align-items: center;
         }
 
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
+        .discord-link {
+            color: #5865f2;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        .discord-link:hover {
+            transform: scale(1.2);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 25px;
+        .lang-switcher {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
             padding: 0.5rem 1rem;
+            border-radius: 25px;
+            color: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: var(--light);
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .lang-toggle:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
+        .lang-switcher:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
-        
-        /* Auth buttons */
-        .auth-container {
+
+        .user-menu {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
-        
-        .auth-button {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--primary);
+
+        .login-btn, .logout-btn {
+            background: var(--secondary-gradient);
+            border: none;
+            padding: 0.5rem 1.5rem;
             border-radius: 25px;
-            padding: 0.5rem 1rem;
+            color: white;
             cursor: pointer;
+            font-weight: 500;
             transition: all 0.3s ease;
-            color: var(--light);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        
-        .auth-button:hover {
-            background: var(--primary);
+
+        .login-btn:hover, .logout-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        
-        .user-info {
+
+        .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 1rem;
+            color: white;
         }
-        
+
         .user-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary);
-        }
-        
-        .user-name {
-            font-size: 0.9rem;
-            max-width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        
-        .sign-out-button {
-            background: rgba(234, 67, 53, 0.1);
-            border: 1px solid #ea4335;
-            border-radius: 25px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--light);
-            font-size: 0.9rem;
-        }
-        
-        .sign-out-button:hover {
-            background: #ea4335;
+            border: 2px solid white;
         }
 
-        /* Hero Section */
-        .hero {
+        .main-content {
             margin-top: 80px;
-            padding: 4rem 0;
-            text-align: center;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--light), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: fadeInUp 1s ease;
         }
 
-        .hero p {
+        .hero-subtitle {
             font-size: 1.2rem;
-            color: var(--gray);
-            margin-bottom: 2rem;
+            opacity: 0.9;
             animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--light);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-        }
-
-        /* Scripts Grid */
-        .scripts-section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--light);
         }
 
         .scripts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-top: 3rem;
         }
 
         .script-card {
-            background: rgba(26, 27, 46, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
             border-radius: 15px;
-            padding: 0;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
         }
 
-        .script-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        .script-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .script-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 15px 15px 0 0;
-        }
-
-        .script-content {
-            padding: 2rem;
-        }
-
-        .script-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-
-        .script-card h3 {
-            color: var(--primary);
+            border-radius: 10px;
             margin-bottom: 1rem;
+        }
+
+        .script-title {
             font-size: 1.3rem;
-        }
-
-        .script-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .script-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, var(--secondary), #d97706);
-            color: var(--light);
-            text-decoration: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
             font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--darker);
-            padding: 3rem 0 1rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .footer-section p, .footer-section li {
-            color: var(--gray);
+            color: white;
             margin-bottom: 0.5rem;
         }
 
-        .footer-section ul {
-            list-style: none;
+        .script-date {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
-        .footer-section a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .download-btn {
+            width: 100%;
+            background: var(--secondary-gradient);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .footer-section a:hover {
-            color: var(--primary);
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .footer-bottom {
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark-gradient);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            color: white;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-input {
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .google-login-btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .google-login-btn:hover {
+            background: #357ae8;
+        }
+
+        .download-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .script-details {
+            margin-bottom: 2rem;
+        }
+
+        .countdown {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            color: var(--gray);
+            font-size: 2rem;
+            margin: 2rem 0;
+            color: var(--warning-color);
         }
 
-        /* Animations */
+        .captcha-container {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .captcha-checkbox {
+            transform: scale(1.5);
+            margin: 1rem;
+        }
+
+        .final-download {
+            display: none;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+        }
+
+        .privacy-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -395,1045 +358,631 @@
             }
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
             }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .scripts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .auth-container {
-                gap: 8px;
-            }
-            
-            .user-name {
-                max-width: 80px;
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
             }
         }
 
-        /* Language Direction */
-        [dir="rtl"] {
-            text-align: right;
+        /* RTL Styles */
+        [dir="rtl"] .nav-content {
+            flex-direction: row-reverse;
         }
-        
-        [dir="ltr"] {
-            text-align: left;
+
+        [dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
         }
-        
-        .hero {
-            text-align: center;
+
+        [dir="rtl"] .user-profile {
+            flex-direction: row-reverse;
         }
-        
-        .section-title {
-            text-align: center;
-        }
-        
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: var(--darker);
-            border-radius: 15px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-            border: 1px solid var(--primary);
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: var(--gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .close-modal:hover {
-            color: var(--primary);
-        }
-        
-        .modal-title {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--light);
-        }
-        
-        .auth-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .auth-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .auth-option:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .auth-icon {
-            width: 24px;
-            height: 24px;
-        }
-        
-        .auth-text {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        
-        .email-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .input-group label {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .input-group input {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            background: rgba(26, 27, 46, 0.5);
-            color: var(--light);
-            outline: none;
-        }
-        
-        .input-group input:focus {
-            border-color: var(--primary);
-        }
-        
-        .error-message {
-            color: var(--error);
-            font-size: 0.8rem;
-            margin-top: 3px;
-            display: none;
-        }
-        
-        .form-button {
-            padding: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .form-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-        }
-        
-        .switch-form {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .switch-form span {
-            color: var(--primary);
-            cursor: pointer;
-            text-decoration: underline;
-        }
-        
-        .switch-form span:hover {
-            text-decoration: none;
-        }
-        
-        .forgot-password {
-            text-align: left;
-            font-size: 0.9rem;
-            margin-top: -10px;
-            margin-bottom: 5px;
-        }
-        
-        .forgot-password a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Download page */
-        .download-container {
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 2rem;
-            background: rgba(26, 27, 46, 0.8);
-            border-radius: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            text-align: center;
-        }
-        
-        .script-preview {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-        }
-        
-        .script-description {
-            margin: 2rem 0;
-            line-height: 1.8;
-            text-align: left;
-        }
-        
-        .download-process {
-            margin: 3rem 0;
-        }
-        
-        .timer-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .timer-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: var(--darker);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            margin-bottom: 1rem;
-        }
-        
-        .timer-circle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            border-top-color: transparent;
-            animation: timerAnimation 60s linear forwards;
-        }
-        
-        .timer-text {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        .captcha-container {
-            margin: 2rem 0;
-        }
-        
-        .download-ready {
-            margin: 2rem 0;
-        }
-        
-        .download-ready-btn {
-            background: linear-gradient(135deg, var(--success), #059669);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .download-ready-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-        
-        @keyframes timerAnimation {
-            0% {
-                transform: rotate(0deg);
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
             }
-            100% {
-                transform: rotate(360deg);
+
+            .hero-title {
+                font-size: 2rem;
             }
-        }
-        
-        /* Privacy policy */
-        .privacy-container {
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 2rem;
-            background: rgba(26, 27, 46, 0.8);
-            border-radius: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        .privacy-container h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-        
-        .privacy-section {
-            margin-bottom: 2rem;
-        }
-        
-        .privacy-section h2 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .privacy-section p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .privacy-section ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .privacy-section li {
-            margin-bottom: 0.5rem;
+
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">FiveM Scripts</div>
-            <ul class="nav-links">
-                <li><a href="#home" data-ar="الرئيسية" data-en="Home">Home</a></li>
-                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">Scripts</a></li>
-                <li><a href="privacy.html" data-ar="سياسة الخصوصية" data-en="Privacy Policy">Privacy Policy</a></li>
-                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">Contact</a></li>
-                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="العربية" data-en="English">العربية</button></li>
-            </ul>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo" data-en="Free FiveM Scripts" data-ar="سكربتات فايف ام مجانية">Free FiveM Scripts</a>
             
-            <!-- قسم تسجيل الدخول -->
-            <div class="auth-container">
-                <div id="user-info" style="display: none;">
-                    <div class="user-info">
-                        <img id="user-avatar" class="user-avatar" src="" alt="User Avatar">
-                        <div id="user-display-name" class="user-name"></div>
-                    </div>
-                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">Sign Out</button>
-                </div>
-                <button id="sign-in-btn" class="auth-button" data-ar="تسجيل الدخول" data-en="Sign In">
-                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    <span data-ar="تسجيل الدخول" data-en="Sign In">Sign In</span>
+            <div class="nav-links">
+                <a href="https://discord.gg/uDk5kw6KQe" class="discord-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                
+                <button class="lang-switcher" onclick="toggleLanguage()">
+                    <span class="flag">🇺🇸</span>
+                    <span class="lang-text" data-en="EN" data-ar="AR">EN</span>
                 </button>
             </div>
-        </nav>
-    </header>
 
-    <!-- نافذة تسجيل الدخول -->
-    <div id="login-modal" class="modal">
+            <div class="user-menu">
+                <div id="loginSection">
+                    <button class="login-btn" onclick="openLoginModal()" data-en="Login" data-ar="تسجيل الدخول">Login</button>
+                </div>
+                <div id="userSection" style="display: none;">
+                    <div class="user-profile">
+                        <img id="userAvatar" class="user-avatar" src="" alt="User Avatar">
+                        <span id="userName"></span>
+                        <button class="logout-btn" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <h1 class="hero-title" data-en="Free FiveM Scripts Collection" data-ar="مجموعة سكربتات فايف ام مجانية">Free FiveM Scripts Collection</h1>
+            <p class="hero-subtitle" data-en="Download high-quality FiveM scripts for free. No registration required!" data-ar="حمل سكربتات فايف ام عالية الجودة مجاناً. لا يتطلب تسجيل!">Download high-quality FiveM scripts for free. No registration required!</p>
+        </section>
+
+        <section class="scripts-grid" id="scriptsGrid">
+            <!-- Scripts will be loaded here -->
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="#" class="privacy-link" onclick="openPrivacyModal()" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title" data-ar="تسجيل الدخول" data-en="Sign In">Sign In</h2>
+            <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+            <h2 data-en="Login to Your Account" data-ar="تسجيل الدخول لحسابك">Login to Your Account</h2>
             
-            <div class="auth-options">
-                <div class="auth-option" id="google-signin">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="auth-icon">
-                    <span class="auth-text" data-ar="تسجيل الدخول باستخدام Google" data-en="Sign in with Google">Sign in with Google</span>
-                </div>
-            </div>
-            
-            <div class="email-form" id="email-form">
-                <div class="input-group">
-                    <label for="email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
-                    <input type="email" id="email" required>
-                    <div class="error-message" id="email-error"></div>
-                </div>
-                
-                <div class="input-group">
-                    <label for="password" data-ar="كلمة المرور" data-en="Password">Password</label>
-                    <input type="password" id="password" required>
-                    <div class="error-message" id="password-error"></div>
-                </div>
-                
-                <div class="forgot-password">
-                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">Forgot Password?</a>
-                </div>
-                
-                <button type="button" class="form-button" id="email-signin" data-ar="تسجيل الدخول" data-en="Sign In">
-                    <span id="signin-text">Sign In</span>
-                    <span id="signin-spinner" class="spinner" style="display: none;"></span>
+            <div class="login-form">
+                <button class="google-login-btn" onclick="loginWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    <span data-en="Continue with Google" data-ar="متابعة مع جوجل">Continue with Google</span>
                 </button>
                 
-                <div class="switch-form">
-                    <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">Create Account</span>
-                </div>
-            </div>
-            
-            <div class="email-form" id="register-form" style="display: none;">
-                <div class="input-group">
-                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">Username</label>
-                    <input type="text" id="reg-username" required>
-                    <div class="error-message" id="username-error"></div>
+                <div style="text-align: center; margin: 1rem 0; color: rgba(255,255,255,0.7);" data-en="Or" data-ar="أو">Or</div>
+                
+                <div class="form-group">
+                    <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+                    <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com">
                 </div>
                 
-                <div class="input-group">
-                    <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
-                    <input type="email" id="reg-email" required>
-                    <div class="error-message" id="reg-email-error"></div>
+                <div class="form-group">
+                    <label data-en="Password" data-ar="كلمة المرور">Password</label>
+                    <input type="password" class="form-input" id="loginPassword" data-placeholder-en="Enter your password" data-placeholder-ar="ادخل كلمة المرور" placeholder="Enter your password">
                 </div>
                 
-                <div class="input-group">
-                    <label for="reg-password" data-ar="كلمة المرور" data-en="Password">Password</label>
-                    <input type="password" id="reg-password" required>
-                    <div class="error-message" id="reg-password-error"></div>
-                </div>
+                <button class="login-btn" onclick="loginWithEmail()" data-en="Login" data-ar="تسجيل الدخول">Login</button>
                 
-                <div class="input-group">
-                    <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">Confirm Password</label>
-                    <input type="password" id="reg-confirm" required>
-                    <div class="error-message" id="confirm-error"></div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <span style="color: rgba(255,255,255,0.7);" data-en="Don't have an account?" data-ar="ليس لديك حساب؟">Don't have an account?</span>
+                    <a href="#" onclick="showSignup()" style="color: #3b82f6; margin-left: 0.5rem;" data-en="Sign up" data-ar="إنشاء حساب">Sign up</a>
                 </div>
-                
-                <button type="button" class="form-button" id="email-register" data-ar="إنشاء حساب" data-en="Create Account">
-                    <span id="register-text">Create Account</span>
-                    <span id="register-spinner" class="spinner" style="display: none;"></span>
-                </button>
-                
-                <div class="switch-form">
-                    <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">Have account? Sign In</span>
-                </div>
-            </div>
-            
-            <div class="email-form" id="forgot-form" style="display: none;">
-                <div class="input-group">
-                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
-                    <input type="email" id="forgot-email" required>
-                    <div class="error-message" id="forgot-email-error"></div>
-                </div>
-                
-                <button type="button" class="form-button" id="reset-password" data-ar="إرسال رابط إعادة التعيين" data-en="Send Reset Link">
-                    <span id="reset-text">Send Reset Link</span>
-                    <span id="reset-spinner" class="spinner" style="display: none;"></span>
-                </button>
-                
-                <div class="switch-form">
-                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">Back to Sign In</span>
-                </div>
-            </div>
-            
-            <div id="reset-success" style="display: none; text-align: center; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; margin-top: 20px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#10b981" viewBox="0 0 16 16" style="margin: 0 auto 10px;">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">Password reset link has been sent to your email</p>
             </div>
         </div>
     </div>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">Free FiveM Scripts</h1>
-                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">Discover a wide range of free and premium FiveM scripts to enhance your server</p>
-                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">Browse Scripts</a>
-            </div>
-        </section>
-
-        <section class="scripts-section" id="scripts">
-            <div class="container">
-                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">Latest Scripts</h2>
-                <div class="scripts-grid">
-                    <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="Vehicle System" class="script-image">
-                        <div class="script-content">
-                            <h3>Advanced Vehicle System</h3>
-                            <p>Comprehensive vehicle management system for your server with customization options</p>
-                            <div class="script-meta">
-                                <span>Version: 1.2.0</span>
-                                <span>Downloads: 542</span>
-                            </div>
-                            <a href="download.html" class="download-btn">Download Now</a>
-                        </div>
-                    </div>
-                    
-                    <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="Job System" class="script-image">
-                        <div class="script-content">
-                            <h3>Integrated Job System</h3>
-                            <p>Over 20 different jobs with unique systems and realistic interactions</p>
-                            <div class="script-meta">
-                                <span>Version: 2.0.3</span>
-                                <span>Downloads: 876</span>
-                            </div>
-                            <a href="download.html" class="download-btn">Download Now</a>
-                        </div>
-                    </div>
-                    
-                    <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="Housing System" class="script-image">
-                        <div class="script-content">
-                            <h3>Housing and Properties System</h3>
-                            <p>Complete management of houses and properties with purchase, rent and environment interaction</p>
-                            <div class="script-meta">
-                                <span>Version: 1.5.1</span>
-                                <span>Downloads: 321</span>
-                            </div>
-                            <a href="download.html" class="download-btn">Download Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Privacy Policy Section -->
-        <section id="privacy" class="privacy-container" style="display: none;">
-            <h1>Privacy Policy</h1>
-            
-            <div class="privacy-section">
-                <h2>Introduction</h2>
-                <p>Welcome to FiveM Scripts! We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, and disclose your personal information when you visit our website and use our services.</p>
-                <p>By using our website, you agree to the collection and use of information in accordance with this policy.</p>
+    <!-- Download Modal -->
+    <div id="downloadModal" class="modal download-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('downloadModal')">&times;</button>
+            <div class="script-details">
+                <h2 id="modalScriptTitle"></h2>
+                <p id="modalScriptDescription" data-en="This is a high-quality FiveM script that includes all necessary files and documentation. Perfect for enhancing your FiveM server experience." data-ar="هذا سكربت فايف ام عالي الجودة يتضمن جميع الملفات والتوثيق المطلوب. مثالي لتحسين تجربة خادم فايف ام الخاص بك.">This is a high-quality FiveM script that includes all necessary files and documentation. Perfect for enhancing your FiveM server experience.</p>
             </div>
             
-            <div class="privacy-section">
-                <h2>Information We Collect</h2>
-                <p>We collect several different types of information for various purposes to provide and improve our service to you:</p>
-                <ul>
-                    <li><strong>Personal Data:</strong> When you register for an account, we may ask for your name, email address, and other contact information.</li>
-                    <li><strong>Usage Data:</strong> We collect information on how the service is accessed and used. This may include your IP address, browser type, pages visited, and other diagnostic data.</li>
-                    <li><strong>Cookies and Tracking Data:</strong> We use cookies and similar tracking technologies to track activity on our service.</li>
-                </ul>
+            <div id="countdownSection">
+                <div class="countdown" id="countdown">60</div>
+                <p style="text-align: center; color: rgba(255,255,255,0.7);" data-en="Please wait before downloading..." data-ar="يرجى الانتظار قبل التحميل...">Please wait before downloading...</p>
             </div>
             
-            <div class="privacy-section">
-                <h2>How We Use Your Information</h2>
-                <p>We use the collected data for various purposes:</p>
-                <ul>
-                    <li>To provide and maintain our service</li>
-                    <li>To notify you about changes to our service</li>
-                    <li>To allow you to participate in interactive features of our service when you choose to do so</li>
-                    <li>To provide customer support</li>
-                    <li>To monitor the usage of our service</li>
-                    <li>To detect, prevent and address technical issues</li>
-                </ul>
+            <div class="captcha-container" id="captchaSection">
+                <h3 data-en="Verify you're not a robot" data-ar="تحقق من أنك لست روبوت">Verify you're not a robot</h3>
+                <label style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0;">
+                    <input type="checkbox" class="captcha-checkbox" id="robotCheck">
+                    <span data-en="I'm not a robot" data-ar="لست روبوت">I'm not a robot</span>
+                </label>
             </div>
             
-            <div class="privacy-section">
-                <h2>Security</h2>
-                <p>The security of your data is important to us. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-            </div>
-            
-            <div class="privacy-section">
-                <h2>FiveM Scripts</h2>
-                <p>All scripts provided on this website are intended for use with FiveM, a modification framework for Grand Theft Auto V. We ensure that all scripts are thoroughly tested and free from malicious code. However, we are not responsible for any issues that may arise from improper installation or use of our scripts.</p>
-                <p>Our scripts are provided "as is" without warranty of any kind, either express or implied.</p>
-            </div>
-            
-            <div class="privacy-section">
-                <h2>Changes to This Privacy Policy</h2>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-            </div>
-            
-            <div class="privacy-section">
-                <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy, please contact us:</p>
-                <p>Email: privacy@fivem-scripts.com</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About Us</h3>
-                    <p>We provide the best free and premium FiveM scripts to enhance your server experience.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#scripts">Scripts</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p>Email: support@fivem-scripts.com</p>
-                    <p>24/7 Technical Support</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-ar="© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة." data-en="© 2025 Free FiveM Scripts. All rights reserved.">© 2025 Free FiveM Scripts. All rights reserved.</p>
+            <div class="final-download" id="finalDownloadSection">
+                <button class="download-btn" onclick="finalDownload()" data-en="Download Now" data-ar="تحميل الآن">Download Now</button>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // تهيئة Firebase
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
+            <h2 data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</h2>
+            <div style="text-align: left; line-height: 1.6; margin-top: 1rem;">
+                <div class="en-content">
+                    <h3>Information Collection and Use</h3>
+                    <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us. This may include your name, email address, and other contact information.</p>
+                    
+                    <h3>Content and Scripts</h3>
+                    <p>All scripts and content provided on this website are for educational and entertainment purposes only. Users are responsible for ensuring compliance with all applicable laws and regulations in their jurisdiction. We do not guarantee the functionality, security, or legality of any scripts provided.</p>
+                    
+                    <h3>Third-Party Services</h3>
+                    <p>We use third-party services including Google Analytics, Firebase Authentication, and advertising networks. These services may collect information about your use of our website.</p>
+                    
+                    <h3>Disclaimer</h3>
+                    <p>The website owner is not responsible for any damages, losses, or legal issues arising from the use of scripts or content provided on this website. Users download and use content at their own risk.</p>
+                    
+                    <h3>Data Security</h3>
+                    <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.</p>
+                    
+                    <h3>Changes to This Policy</h3>
+                    <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.</p>
+                </div>
+                
+                <div class="ar-content" style="direction: rtl; display: none;">
+                    <h3>جمع المعلومات واستخدامها</h3>
+                    <p>نحن نجمع المعلومات التي تقدمها لنا مباشرة، مثل عندما تنشئ حساباً أو تستخدم خدماتنا أو تتصل بنا. قد يشمل ذلك اسمك وعنوان بريدك الإلكتروني ومعلومات الاتصال الأخرى.</p>
+                    
+                    <h3>المحتوى والسكربتات</h3>
+                    <p>جميع السكربتات والمحتوى المقدم في هذا الموقع مخصص للأغراض التعليمية والترفيهية فقط. المستخدمون مسؤولون عن ضمان الامتثال لجميع القوانين واللوائح المطبقة في ولايتهم القضائية. نحن لا نضمن وظائف أو أمان أو قانونية أي سكربتات مقدمة.</p>
+                    
+                    <h3>خدمات الطرف الثالث</h3>
+                    <p>نحن نستخدم خدمات الطرف الثالث بما في ذلك Google Analytics وFirebase Authentication وشبكات الإعلانات. قد تجمع هذه الخدمات معلومات حول استخدامك لموقعنا.</p>
+                    
+                    <h3>إخلاء المسؤولية</h3>
+                    <p>مالك الموقع غير مسؤول عن أي أضرار أو خسائر أو قضايا قانونية تنشأ من استخدام السكربتات أو المحتوى المقدم في هذا الموقع. المستخدمون يحملون ويستخدمون المحتوى على مسؤوليتهم الخاصة.</p>
+                    
+                    <h3>أمان البيانات</h3>
+                    <p>نحن نطبق التدابير الأمنية المناسبة لحماية معلوماتك الشخصية. ومع ذلك، لا توجد طريقة نقل عبر الإنترنت آمنة بنسبة 100%.</p>
+                    
+                    <h3>التغييرات على هذه السياسة</h3>
+                    <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyCQ2khhLVXys2Rln0dAZ61_b_CYDaYKpxU",
             authDomain: "freefivemscript.firebaseapp.com",
             projectId: "freefivemscript",
-            storageBucket: "freefivemscript.appspot.com",
+            storageBucket: "freefivemscript.firebasestorage.app",
             messagingSenderId: "581459763818",
-            appId: "1:581459763818:web:346fb334207d67b8e76013",
-            measurementId: "G-4BQ6LDHHNX"
+            appId: "1:581459763818:web:c37684bea59b88b9e76013",
+            measurementId: "G-672WRZZYKK"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        
-        // متغيرات الواجهة
-        const signInBtn = document.getElementById('sign-in-btn');
-        const signOutBtn = document.getElementById('sign-out-btn');
-        const userInfo = document.getElementById('user-info');
-        const userAvatar = document.getElementById('user-avatar');
-        const userDisplayName = document.getElementById('user-display-name');
-        const loginModal = document.getElementById('login-modal');
-        const googleSignin = document.getElementById('google-signin');
-        const emailSignin = document.getElementById('email-signin');
-        const emailRegister = document.getElementById('email-register');
-        const toggleRegister = document.getElementById('toggle-register');
-        const toggleLogin = document.getElementById('toggle-login');
-        const emailForm = document.getElementById('email-form');
-        const registerForm = document.getElementById('register-form');
-        const forgotForm = document.getElementById('forgot-form');
-        const forgotPasswordLink = document.getElementById('forgot-password-link');
-        const forgotCancel = document.getElementById('forgot-cancel');
-        const resetPasswordBtn = document.getElementById('reset-password');
-        const resetSuccess = document.getElementById('reset-success');
-        
-        // إخفاء جميع رسائل الخطأ عند البدء
-        document.querySelectorAll('.error-message').forEach(el => {
-            el.style.display = 'none';
-        });
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+        const provider = new GoogleAuthProvider();
 
-        // فتح نافذة تسجيل الدخول
-        signInBtn.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-            emailForm.style.display = 'block';
-            registerForm.style.display = 'none';
-            forgotForm.style.display = 'none';
-            resetSuccess.style.display = 'none';
-        });
+        // Global variables
+        window.auth = auth;
+        window.signInWithPopup = signInWithPopup;
+        window.GoogleAuthProvider = GoogleAuthProvider;
+        window.provider = provider;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.sendEmailVerification = sendEmailVerification;
+        window.signOut = signOut;
 
-        // إغلاق النافذة
-        function closeModal() {
-            loginModal.style.display = 'none';
-            // إعادة تعيين النماذج
-            emailForm.style.display = 'block';
-            registerForm.style.display = 'none';
-            forgotForm.style.display = 'none';
-            resetSuccess.style.display = 'none';
-            
-            // إخفاء رسائل الخطأ
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            // مسح حقول الإدخال
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('reg-username').value = '';
-            document.getElementById('reg-email').value = '';
-            document.getElementById('reg-password').value = '';
-            document.getElementById('reg-confirm').value = '';
-            document.getElementById('forgot-email').value = '';
-        }
-
-        // التبديل بين تسجيل الدخول والتسجيل
-        toggleRegister.addEventListener('click', () => {
-            emailForm.style.display = 'none';
-            registerForm.style.display = 'block';
-            forgotForm.style.display = 'none';
-            resetSuccess.style.display = 'none';
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-        });
-
-        toggleLogin.addEventListener('click', () => {
-            registerForm.style.display = 'none';
-            emailForm.style.display = 'block';
-            forgotForm.style.display = 'none';
-            resetSuccess.style.display = 'none';
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-        });
-
-        // فتح نموذج نسيان كلمة المرور
-        forgotPasswordLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            emailForm.style.display = 'none';
-            registerForm.style.display = 'none';
-            forgotForm.style.display = 'block';
-            resetSuccess.style.display = 'none';
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-        });
-
-        // العودة من نسيان كلمة المرور
-        forgotCancel.addEventListener('click', () => {
-            forgotForm.style.display = 'none';
-            emailForm.style.display = 'block';
-            resetSuccess.style.display = 'none';
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-        });
-
-        // تسجيل الدخول باستخدام Google
-        googleSignin.addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            // إصلاح مشكلة تسجيل الدخول بجوجل
-            firebase.auth().languageCode = currentLang;
-            
-            auth.signInWithPopup(provider)
-                .then(() => {
-                    closeModal();
-                })
-                .catch(error => {
-                    console.error("Login error:", error);
-                    showError('email-error', `Login error: ${error.message}`);
-                });
-        });
-
-        // تسجيل الدخول باستخدام البريد الإلكتروني
-        emailSignin.addEventListener('click', () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // إخفاء رسائل الخطأ السابقة
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            // التحقق من صحة المدخلات
-            if (!validateEmail(email)) {
-                showError('email-error', 'Invalid email address');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showError('password-error', 'Password must be at least 6 characters');
-                return;
-            }
-            
-            // عرض مؤشر التحميل
-            document.getElementById('signin-text').style.display = 'none';
-            document.getElementById('signin-spinner').style.display = 'inline-block';
-            
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    closeModal();
-                })
-                .catch(error => {
-                    console.error("Login error:", error);
-                    document.getElementById('signin-text').style.display = 'inline';
-                    document.getElementById('signin-spinner').style.display = 'none';
-                    
-                    let errorMessage = "Login failed";
-                    if (error.code === 'auth/wrong-password') {
-                        errorMessage = "Incorrect password";
-                    } else if (error.code === 'auth/user-not-found') {
-                        errorMessage = "No account found with this email";
-                    } else if (error.code === 'auth/too-many-requests') {
-                        errorMessage = "Too many attempts, try again later";
-                    }
-                    
-                    showError('password-error', errorMessage);
-                });
-        });
-
-        // إنشاء حساب جديد
-        emailRegister.addEventListener('click', () => {
-            const username = document.getElementById('reg-username').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            const confirmPassword = document.getElementById('reg-confirm').value;
-            
-            // إخفاء رسائل الخطأ السابقة
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            // التحقق من صحة المدخلات
-            let isValid = true;
-            
-            if (username.length < 3) {
-                showError('username-error', 'Username must be at least 3 characters');
-                isValid = false;
-            }
-            
-            if (!validateEmail(email)) {
-                showError('reg-email-error', 'Invalid email address');
-                isValid = false;
-            }
-            
-            if (password.length < 6) {
-                showError('reg-password-error', 'Password must be at least 6 characters');
-                isValid = false;
-            }
-            
-            if (password !== confirmPassword) {
-                showError('confirm-error', 'Passwords do not match');
-                isValid = false;
-            }
-            
-            if (!isValid) return;
-            
-            // عرض مؤشر التحميل
-            document.getElementById('register-text').style.display = 'none';
-            document.getElementById('register-spinner').style.display = 'inline-block';
-            
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // تحديث ملف المستخدم بإضافة اسم المستخدم
-                    return userCredential.user.updateProfile({
-                        displayName: username
-                    });
-                })
-                .then(() => {
-                    closeModal();
-                })
-                .catch(error => {
-                    console.error("Account creation error:", error);
-                    document.getElementById('register-text').style.display = 'inline';
-                    document.getElementById('register-spinner').style.display = 'none';
-                    
-                    let errorMessage = "Account creation failed";
-                    if (error.code === 'auth/email-already-in-use') {
-                        errorMessage = "Email already in use";
-                        showError('reg-email-error', errorMessage);
-                    } else if (error.code === 'auth/weak-password') {
-                        errorMessage = "Weak password (must be at least 6 characters)";
-                        showError('reg-password-error', errorMessage);
-                    } else {
-                        showError('reg-email-error', errorMessage);
-                    }
-                });
-        });
-
-        // إعادة تعيين كلمة المرور
-        resetPasswordBtn.addEventListener('click', () => {
-            const email = document.getElementById('forgot-email').value;
-            
-            // إخفاء رسائل الخطأ السابقة
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            // التحقق من صحة البريد الإلكتروني
-            if (!validateEmail(email)) {
-                showError('forgot-email-error', 'Invalid email address');
-                return;
-            }
-            
-            // عرض مؤشر التحميل
-            document.getElementById('reset-text').style.display = 'none';
-            document.getElementById('reset-spinner').style.display = 'inline-block';
-            
-            auth.sendPasswordResetEmail(email)
-                .then(() => {
-                    forgotForm.style.display = 'none';
-                    resetSuccess.style.display = 'block';
-                })
-                .catch(error => {
-                    console.error("Reset error:", error);
-                    document.getElementById('reset-text').style.display = 'inline';
-                    document.getElementById('reset-spinner').style.display = 'none';
-                    
-                    let errorMessage = "Failed to send reset link";
-                    if (error.code === 'auth/user-not-found') {
-                        errorMessage = "No account found with this email";
-                    }
-                    
-                    showError('forgot-email-error', errorMessage);
-                });
-        });
-
-        // تسجيل الخروج
-        signOutBtn.addEventListener('click', () => {
-            auth.signOut();
-        });
-
-        // متابعة حالة المصادقة
-        auth.onAuthStateChanged(user => {
+        // Auth state observer
+        onAuthStateChanged(auth, (user) => {
             if (user) {
-                // المستخدم مسجل الدخول
-                signInBtn.style.display = 'none';
-                userInfo.style.display = 'flex';
-                
-                // عرض اسم المستخدم (بدلاً من البريد الإلكتروني)
-                userAvatar.src = user.photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
-                userDisplayName.textContent = user.displayName || user.email.split('@')[0]; // عرض اسم المستخدم فقط
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('userSection').style.display = 'block';
+                document.getElementById('userName').textContent = user.displayName || user.email;
+                document.getElementById('userAvatar').src = user.photoURL || 'https://via.placeholder.com/40';
             } else {
-                // المستخدم غير مسجل الدخول
-                signInBtn.style.display = 'flex';
-                userInfo.style.display = 'none';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('userSection').style.display = 'none';
             }
         });
+    </script>
 
-        // دالة للتحقق من صحة البريد الإلكتروني
-        function validateEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
+    <script>
+        // Sample scripts data
+        const scriptsData = [
+            {
+                id: 1,
+                title: "Advanced Car Dealer",
+                image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=300&fit=crop",
+                date: "2024-01-15",
+                description: "Complete car dealership system with financing options"
+            },
+            {
+                id: 2,
+                title: "Police MDT System",
+                image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?w=400&h=300&fit=crop",
+                date: "2024-01-20",
+                description: "Professional police mobile data terminal"
+            },
+            {
+                id: 3,
+                title: "Banking System Pro",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+                date: "2024-01-25",
+                description: "Complete banking system with ATMs and loans"
+            },
+            {
+                id: 4,
+                title: "Hospital Management",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
+                date: "2024-02-01",
+                description: "Advanced hospital and EMS system"
+            },
+            {
+                id: 5,
+                title: "Real Estate Agency",
+                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+                date: "2024-02-05",
+                description: "Property buying and selling system"
+            },
+            {
+                id: 6,
+                title: "Racing Circuit",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+                date: "2024-02-10",
+                description: "Street racing and circuit racing system"
+            }
+        ];
+
+        let currentLanguage = 'en';
+        let currentScript = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadScripts();
+            updateLanguage();
+        });
+
+        function loadScripts() {
+            const grid = document.getElementById('scriptsGrid');
+            grid.innerHTML = '';
+
+            scriptsData.forEach(script => {
+                const card = document.createElement('div');
+                card.className = 'script-card';
+                card.innerHTML = `
+                    <img src="${script.image}" alt="${script.title}" class="script-image">
+                    <h3 class="script-title">${script.title}</h3>
+                    <p class="script-date">Released: ${script.date}</p>
+                    <button class="download-btn" onclick="startDownload(${script.id})" data-en="Download" data-ar="تحميل">Download</button>
+                `;
+                grid.appendChild(card);
+            });
+
+            updateLanguage();
         }
-        
-        // دالة لعرض رسائل الخطأ
-        function showError(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.textContent = message;
-            element.style.display = 'block';
-        }
-        
-        // بقية الكود للغة والتأثيرات...
-        let currentLang = 'en';
 
         function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLanguage;
             
-            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
-                element.textContent = element.getAttribute(`data-${currentLang}`);
-            });
+            const flag = document.querySelector('.flag');
+            const langText = document.querySelector('.lang-text');
             
-            document.body.style.transition = 'all 0.3s ease';
-            setTimeout(() => document.body.style.transition = '', 300);
+            if (currentLanguage === 'ar') {
+                flag.textContent = '🇸🇦';
+                langText.textContent = 'AR';
+            } else {
+                flag.textContent = '🇺🇸';
+                langText.textContent = 'EN';
+            }
+            
+            updateLanguage();
         }
-        
-        // تحديث اللغة عند التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            // تطبيق اللغة الإنجليزية عند التحميل
-            document.documentElement.lang = 'en';
-            document.documentElement.dir = 'ltr';
-            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
-                element.textContent = element.getAttribute('data-en');
-            });
-            
-            // إصلاح مشكلة تسجيل الدخول عند تغيير اللغة
-            firebase.auth().languageCode = currentLang;
-        });
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.style.background = window.scrollY > 100 ? 
-                'rgba(26, 27, 46, 0.98)' : 'rgba(26, 27, 46, 0.95)';
-        });
-
-        // Animation on scroll
-        function animateOnScroll() {
-            document.querySelectorAll('.script-card').forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (cardTop < windowHeight - 100) {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-en][data-ar]');
+            elements.forEach(element => {
+                if (currentLanguage === 'ar') {
+                    element.textContent = element.getAttribute('data-ar');
+                } else {
+                    element.textContent = element.getAttribute('data-en');
                 }
             });
+
+            // Update placeholders
+            const inputs = document.querySelectorAll('[data-placeholder-en][data-placeholder-ar]');
+            inputs.forEach(input => {
+                if (currentLanguage === 'ar') {
+                    input.placeholder = input.getAttribute('data-placeholder-ar');
+                } else {
+                    input.placeholder = input.getAttribute('data-placeholder-en');
+                }
+            });
+
+            // Update privacy policy content
+            const enContent = document.querySelector('.en-content');
+            const arContent = document.querySelector('.ar-content');
+            if (currentLanguage === 'ar') {
+                enContent.style.display = 'none';
+                arContent.style.display = 'block';
+            } else {
+                enContent.style.display = 'block';
+                arContent.style.display = 'none';
+            }
         }
 
-        // Initialize animations
-        document.querySelectorAll('.script-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Authentication functions
+        async function loginWithGoogle() {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                closeModal('loginModal');
+                showNotification('Login successful!', 'success');
+            } catch (error) {
+                showNotification('Login failed: ' + error.message, 'error');
+            }
+        }
+
+        async function loginWithEmail() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            try {
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                closeModal('loginModal');
+                showNotification('Login successful!', 'success');
+            } catch (error) {
+                if (error.code === 'auth/user-not-found') {
+                    // Create new account
+                    try {
+                        const newUser = await createUserWithEmailAndPassword(auth, email, password);
+                        await sendEmailVerification(newUser.user);
+                        showNotification('Account created! Please check your email for verification.', 'success');
+                        closeModal('loginModal');
+                    } catch (signupError) {
+                        showNotification('Account creation failed: ' + signupError.message, 'error');
+                    }
+                } else {
+                    showNotification('Login failed: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function showSignup() {
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            showNotification('Enter your email and password to create a new account', 'info');
+        }
+
+        async function logout() {
+            try {
+                await signOut(auth);
+                showNotification('Logged out successfully', 'success');
+            } catch (error) {
+                showNotification('Logout failed: ' + error.message, 'error');
+            }
+        }
+
+        // Download functions
+        function startDownload(scriptId) {
+            currentScript = scriptsData.find(s => s.id === scriptId);
+            document.getElementById('modalScriptTitle').textContent = currentScript.title;
+            document.getElementById('downloadModal').style.display = 'block';
+            
+            // Reset modal state
+            document.getElementById('countdownSection').style.display = 'block';
+            document.getElementById('captchaSection').style.display = 'none';
+            document.getElementById('finalDownloadSection').style.display = 'none';
+            document.getElementById('robotCheck').checked = false;
+            
+            startCountdown();
+        }
+
+        function startCountdown() {
+            let timeLeft = 60;
+            const countdownElement = document.getElementById('countdown');
+            
+            const timer = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdownSection').style.display = 'none';
+                    document.getElementById('captchaSection').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        // Add event listener for captcha
+        document.addEventListener('DOMContentLoaded', function() {
+            const robotCheck = document.getElementById('robotCheck');
+            if (robotCheck) {
+                robotCheck.addEventListener('change', function() {
+                    if (this.checked) {
+                        setTimeout(() => {
+                            document.getElementById('captchaSection').style.display = 'none';
+                            document.getElementById('finalDownloadSection').style.display = 'block';
+                        }, 1000);
+                    }
+                });
+            }
         });
 
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();
-        
-        // تحميل صفحة سياسة الخصوصية
-        document.querySelector('a[href="privacy.html"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('privacy').style.display = 'block';
-            document.getElementById('scripts').style.display = 'none';
-            document.getElementById('home').style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function finalDownload() {
+            // Simulate download
+            const link = document.createElement('a');
+            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`# ${currentScript.title}\n\nThis is a sample FiveM script file.\n\n## Installation\n1. Extract to your resources folder\n2. Add to server.cfg\n3. Restart server\n\n## Features\n- ${currentScript.description}\n- Easy installation\n- Full documentation included\n\nEnjoy your new script!`);
+            link.download = `${currentScript.title.replace(/\s+/g, '_').toLowerCase()}.txt`;
+            link.click();
+            
+            showNotification('Download started!', 'success');
+            closeModal('downloadModal');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success-color)' : type === 'error' ? 'var(--danger-color)' : 'var(--warning-color)'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                z-index: 3000;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal[style*="block"]');
+                if (openModal) {
+                    openModal.style.display = 'none';
+                }
+            }
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parallax effect for hero section
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-section');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Add hover effects to script cards
+            const scriptCards = document.querySelectorAll('.script-card');
+            scriptCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Add loading animation
+        function showLoading() {
+            const loader = document.createElement('div');
+            loader.id = 'loader';
+            loader.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            `;
+            loader.innerHTML = `
+                <div style="
+                    width: 50px;
+                    height: 50px;
+                    border: 5px solid rgba(255,255,255,0.3);
+                    border-top: 5px solid white;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                "></div>
+            `;
+            document.body.appendChild(loader);
+        }
+
+        function hideLoading() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.remove();
+            }
+        }
+
+        // Add spin animation
+        const spinStyle = document.createElement('style');
+        spinStyle.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(spinStyle);
     </script>
 </body>
 </html>
