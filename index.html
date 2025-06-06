@@ -9,9 +9,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         * {
             margin: 0;
@@ -28,6 +25,7 @@
             --light: #ffffff;
             --gray: #6b7280;
             --gray-light: #f3f4f6;
+            --error: #ef4444;
         }
 
         body {
@@ -171,23 +169,18 @@
         }
         
         .sign-out-button {
-            background: transparent;
-            border: none;
+            background: rgba(234, 67, 53, 0.1);
+            border: 1px solid #ea4335;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             color: var(--light);
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            font-size: 0.9rem;
         }
         
         .sign-out-button:hover {
-            background: rgba(234, 67, 53, 0.2);
-            color: #ea4335;
+            background: #ea4335;
         }
 
         /* Hero Section */
@@ -542,6 +535,13 @@
             border-color: var(--primary);
         }
         
+        .error-message {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 3px;
+            display: none;
+        }
+        
         .form-button {
             padding: 12px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -575,13 +575,35 @@
             text-decoration: none;
         }
         
-        /* Error message */
-        .error-message {
-            color: #ff6b6b;
+        .forgot-password {
+            text-align: left;
             font-size: 0.9rem;
-            text-align: center;
-            margin-top: 10px;
-            display: none;
+            margin-top: -10px;
+            margin-bottom: 5px;
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -604,12 +626,12 @@
                         <img id="user-avatar" class="user-avatar" src="" alt="صورة المستخدم">
                         <div id="user-display-name" class="user-name"></div>
                     </div>
-                    <button id="sign-out-btn" class="sign-out-button" title="تسجيل الخروج">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
+                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">تسجيل الخروج</button>
                 </div>
                 <button id="sign-in-btn" class="auth-button" data-ar="تسجيل الدخول" data-en="Sign In">
-                    <i class="fas fa-user"></i>
+                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
                     <span data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</span>
                 </button>
             </div>
@@ -633,14 +655,23 @@
                 <div class="input-group">
                     <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
                     <input type="email" id="email" required>
+                    <div class="error-message" id="email-error"></div>
                 </div>
                 
                 <div class="input-group">
                     <label for="password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
                     <input type="password" id="password" required>
+                    <div class="error-message" id="password-error"></div>
                 </div>
                 
-                <button type="button" class="form-button" id="email-signin" data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</button>
+                <div class="forgot-password">
+                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">هل نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="button" class="form-button" id="email-signin" data-ar="تسجيل الدخول" data-en="Sign In">
+                    <span id="signin-text">تسجيل الدخول</span>
+                    <span id="signin-spinner" class="spinner" style="display: none;"></span>
+                </button>
                 
                 <div class="switch-form">
                     <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">إنشاء حساب جديد</span>
@@ -649,33 +680,62 @@
             
             <div class="email-form" id="register-form" style="display: none;">
                 <div class="input-group">
-                    <label for="username" data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
-                    <input type="text" id="username" required>
+                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
+                    <input type="text" id="reg-username" required>
+                    <div class="error-message" id="username-error"></div>
                 </div>
                 
                 <div class="input-group">
                     <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
                     <input type="email" id="reg-email" required>
+                    <div class="error-message" id="reg-email-error"></div>
                 </div>
                 
                 <div class="input-group">
                     <label for="reg-password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
                     <input type="password" id="reg-password" required>
+                    <div class="error-message" id="reg-password-error"></div>
                 </div>
                 
                 <div class="input-group">
                     <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">تأكيد كلمة المرور</label>
                     <input type="password" id="reg-confirm" required>
+                    <div class="error-message" id="confirm-error"></div>
                 </div>
                 
-                <button type="button" class="form-button" id="email-register" data-ar="إنشاء حساب" data-en="Create Account">إنشاء حساب</button>
+                <button type="button" class="form-button" id="email-register" data-ar="إنشاء حساب" data-en="Create Account">
+                    <span id="register-text">إنشاء حساب</span>
+                    <span id="register-spinner" class="spinner" style="display: none;"></span>
+                </button>
                 
                 <div class="switch-form">
                     <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">لديك حساب؟ تسجيل الدخول</span>
                 </div>
             </div>
             
-            <div id="error-message" class="error-message"></div>
+            <div class="email-form" id="forgot-form" style="display: none;">
+                <div class="input-group">
+                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                    <input type="email" id="forgot-email" required>
+                    <div class="error-message" id="forgot-email-error"></div>
+                </div>
+                
+                <button type="button" class="form-button" id="reset-password" data-ar="إرسال رابط إعادة التعيين" data-en="Send Reset Link">
+                    <span id="reset-text">إرسال رابط إعادة التعيين</span>
+                    <span id="reset-spinner" class="spinner" style="display: none;"></span>
+                </button>
+                
+                <div class="switch-form">
+                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">العودة لتسجيل الدخول</span>
+                </div>
+            </div>
+            
+            <div id="reset-success" style="display: none; text-align: center; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; margin-top: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#10b981" viewBox="0 0 16 16" style="margin: 0 auto 10px;">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
+                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني</p>
+            </div>
         </div>
     </div>
 
@@ -693,80 +753,41 @@
                 <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">أحدث السكربتات</h2>
                 <div class="scripts-grid">
                     <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=200&fit=crop&crop=center" alt="نظام الوظائف" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="نظام السيارات" class="script-image">
                         <div class="script-content">
-                            <h3 data-ar="نظام الوظائف المتطور" data-en="Advanced Job System">نظام الوظائف المتطور</h3>
+                            <h3>نظام السيارات المتقدم</h3>
+                            <p>نظام شامل لإدارة السيارات في سيرفرك مع إمكانية التعديل والتخصيص</p>
                             <div class="script-meta">
-                                <span data-ar="الفئة: وظائف" data-en="Category: Jobs">الفئة: وظائف</span>
-                                <span data-ar="التحديث: اليوم" data-en="Updated: Today">التحديث: اليوم</span>
+                                <span>الإصدار: 1.2.0</span>
+                                <span>التنزيلات: 542</span>
                             </div>
-                            <p data-ar="نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة." data-en="Comprehensive job system supporting 15+ different jobs with advanced salary system and daily missions. Includes police, medic, taxi driver, construction worker, and more. Each job has unique tasks and promotion system with money and experience rewards.">نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة.</p>
-                            <a href="#job-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('job-system')">تحميل مجاني</a>
+                            <a href="#" class="download-btn">تحميل الآن</a>
                         </div>
                     </div>
-
+                    
                     <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center" alt="سكربت البنك" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="نظام الوظائف" class="script-image">
                         <div class="script-content">
-                            <h3 data-ar="سكربت البنك الذكي" data-en="Smart Banking Script">سكربت البنك الذكي</h3>
+                            <h3>نظام الوظائف المتكامل</h3>
+                            <p>أكثر من 20 وظيفة مختلفة مع أنظمة خاصة لكل وظيفة وتفاعل حقيقي</p>
                             <div class="script-meta">
-                                <span data-ar="الفئة: اقتصاد" data-en="Category: Economy">الفئة: اقتصاد</span>
-                                <span data-ar="التحديث: أمس" data-en="Updated: Yesterday">التحديث: أمس</span>
+                                <span>الإصدار: 2.0.3</span>
+                                <span>التنزيلات: 876</span>
                             </div>
-                            <p data-ar="نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية." data-en="Complete banking system with deposits, withdrawals, transfers, and smart credit cards. Supports savings and current accounts with monthly interest, ATMs throughout the city. Features advanced security system and realistic transaction fees.">نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية.</p>
-                            <a href="#banking-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('banking')">تحميل مجاني</a>
+                            <a href="#" class="download-btn">تحميل الآن</a>
                         </div>
                     </div>
-
+                    
                     <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=200&fit=crop&crop=center" alt="محل السيارات" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="نظام المنازل" class="script-image">
                         <div class="script-content">
-                            <h3 data-ar="سكربت محل السيارات" data-en="Car Dealership Script">سكربت محل السيارات</h3>
+                            <h3>نظام المنازل والممتلكات</h3>
+                            <p>إدارة كاملة للمنازل والممتلكات مع نظام شراء وإيجار وتفاعل مع البيئة</p>
                             <div class="script-meta">
-                                <span data-ar="الفئة: مركبات" data-en="Category: Vehicles">الفئة: مركبات</span>
-                                <span data-ar="التحديث: منذ 3 أيام" data-en="Updated: 3 days ago">التحديث: منذ 3 أيام</span>
+                                <span>الإصدار: 1.5.1</span>
+                                <span>التنزيلات: 321</span>
                             </div>
-                            <p data-ar="معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط." data-en="Interactive car showroom with test drives, multiple payment systems, and comprehensive catalog. Features 200+ different vehicles from economy to luxury and sports cars. Includes financing system and car loans with installment payments.">معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط.</p>
-                            <a href="#car-dealership-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('car-dealership')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=200&fit=crop&crop=center" alt="نظام العقارات" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="نظام العقارات الذكي" data-en="Smart Real Estate System">نظام العقارات الذكي</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: عقارات" data-en="Category: Real Estate">الفئة: عقارات</span>
-                                <span data-ar="التحديث: منذ أسبوع" data-en="Updated: 1 week ago">التحديث: منذ أسبوع</span>
-                            </div>
-                            <p data-ar="نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع." data-en="Advanced real estate system supporting buying/selling houses and apartments with smart key system and advanced management. Includes 150+ purchasable properties, monthly rental system, and home customization with furniture. Supports commercial and residential properties with realistic location-based pricing.">نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع.</p>
-                            <a href="#real-estate-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('real-estate')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=200&fit=crop&crop=center" alt="سكربت الشرطة" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="سكربت الشرطة المتقدم" data-en="Advanced Police Script">سكربت الشرطة المتقدم</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: الشرطة" data-en="Category: Police">الفئة: الشرطة</span>
-                                <span data-ar="التحديث: منذ 5 أيام" data-en="Updated: 5 days ago">التحديث: منذ 5 أيام</span>
-                            </div>
-                            <p data-ar="نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات." data-en="Comprehensive police system with advanced MDT, dispatch system, crime management, and investigation tools. Includes criminal database, search and investigation system, issuing tickets and warrants. Supports complex investigations with advanced evidence system and interrogation recording.">نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات.</p>
-                            <a href="#police-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('police')">تحميل مجاني</a>
-                        </div>
-                    </div>
-
-                    <div class="script-card">
-                        <img src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&h=200&fit=crop&crop=center" alt="نظام المخدرات" class="script-image">
-                        <div class="script-content">
-                            <h3 data-ar="نظام المخدرات الواقعي" data-en="Realistic Drug System">نظام المخدرات الواقعي</h3>
-                            <div class="script-meta">
-                                <span data-ar="الفئة: إجرام" data-en="Category: Crime">الفئة: إجرام</span>
-                                <span data-ar="التحديث: منذ يومين" data-en="Updated: 2 days ago">التحديث: منذ يومين</span>
-                            </div>
-                            <p data-ar="نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية." data-en="Realistic drug system with cultivation, manufacturing, and distribution, with advanced security systems and realistic risks. Features 8 different drug types, secret labs, complex distribution networks, and money laundering system. Includes arrest risks and police raids with realistic consequences.">نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية.</p>
-                            <a href="#drug-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('drug-system')">تحميل مجاني</a>
+                            <a href="#" class="download-btn">تحميل الآن</a>
                         </div>
                     </div>
                 </div>
@@ -778,28 +799,24 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <h3>عن الموقع</h3>
+                    <p>نقدم أفضل سكربتات FiveM المجانية والمدفوعة لتحسين تجربة سيرفرك وتطويره.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
                     <ul>
-                        <li><a href="#" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                        <li><a href="#" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
-                        <li><a href="#" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
-                        <li><a href="#" data-ar="الدعم" data-en="Support">الدعم</a></li>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#scripts">السكربتات</a></li>
+                        <li><a href="#tutorials">التعليمات</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h3 data-ar="الفئات" data-en="Categories">الفئات</h3>
-                    <ul>
-                        <li><a href="#" data-ar="سكربتات الوظائف" data-en="Job Scripts">سكربتات الوظائف</a></li>
-                        <li><a href="#" data-ar="سكربتات الاقتصاد" data-en="Economy Scripts">سكربتات الاقتصاد</a></li>
-                        <li><a href="#" data-ar="سكربتات الشرطة" data-en="Police Scripts">سكربتات الشرطة</a></li>
-                        <li><a href="#" data-ar="سكربتات العقارات" data-en="Real Estate Scripts">سكربتات العقارات</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
-                    <p data-ar="للدعم والاستفسارات" data-en="For support and inquiries">للدعم والاستفسارات</p>
-                    <p data-ar="البريد: support@fivemscripts.com" data-en="Email: support@fivemscripts.com">البريد: support@fivemscripts.com</p>
-                    <p data-ar="ديسكورد: FiveM Scripts" data-en="Discord: FiveM Scripts">ديسكورد: FiveM Scripts</p>
+                    <h3>اتصل بنا</h3>
+                    <p>البريد الإلكتروني: support@fivem-scripts.com</p>
+                    <p>الدعم الفني متاح 24/7</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -838,38 +855,91 @@
         const toggleLogin = document.getElementById('toggle-login');
         const emailForm = document.getElementById('email-form');
         const registerForm = document.getElementById('register-form');
-        const errorMessage = document.getElementById('error-message');
+        const forgotForm = document.getElementById('forgot-form');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const forgotCancel = document.getElementById('forgot-cancel');
+        const resetPasswordBtn = document.getElementById('reset-password');
+        const resetSuccess = document.getElementById('reset-success');
+        
+        // إخفاء جميع رسائل الخطأ عند البدء
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+        });
 
         // فتح نافذة تسجيل الدخول
         signInBtn.addEventListener('click', () => {
             loginModal.style.display = 'flex';
-            errorMessage.style.display = 'none';
+            emailForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            forgotForm.style.display = 'none';
+            resetSuccess.style.display = 'none';
         });
 
         // إغلاق النافذة
         function closeModal() {
             loginModal.style.display = 'none';
-            errorMessage.style.display = 'none';
-            // إعادة تعيين الحقول
+            // إعادة تعيين النماذج
+            emailForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            forgotForm.style.display = 'none';
+            resetSuccess.style.display = 'none';
+            
+            // إخفاء رسائل الخطأ
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // مسح حقول الإدخال
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').value = '';
+            document.getElementById('reg-username').value = '';
             document.getElementById('reg-email').value = '';
             document.getElementById('reg-password').value = '';
             document.getElementById('reg-confirm').value = '';
+            document.getElementById('forgot-email').value = '';
         }
 
         // التبديل بين تسجيل الدخول والتسجيل
         toggleRegister.addEventListener('click', () => {
             emailForm.style.display = 'none';
             registerForm.style.display = 'block';
-            errorMessage.style.display = 'none';
+            forgotForm.style.display = 'none';
+            resetSuccess.style.display = 'none';
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
         });
 
         toggleLogin.addEventListener('click', () => {
             registerForm.style.display = 'none';
             emailForm.style.display = 'block';
-            errorMessage.style.display = 'none';
+            forgotForm.style.display = 'none';
+            resetSuccess.style.display = 'none';
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+
+        // فتح نموذج نسيان كلمة المرور
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            emailForm.style.display = 'none';
+            registerForm.style.display = 'none';
+            forgotForm.style.display = 'block';
+            resetSuccess.style.display = 'none';
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+
+        // العودة من نسيان كلمة المرور
+        forgotCancel.addEventListener('click', () => {
+            forgotForm.style.display = 'none';
+            emailForm.style.display = 'block';
+            resetSuccess.style.display = 'none';
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
         });
 
         // تسجيل الدخول باستخدام Google
@@ -881,7 +951,7 @@
                 })
                 .catch(error => {
                     console.error("خطأ في تسجيل الدخول:", error);
-                    showError(`خطأ في تسجيل الدخول: ${error.message}`);
+                    showError('email-error', `خطأ في تسجيل الدخول: ${error.message}`);
                 });
         });
 
@@ -890,10 +960,27 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            if (!email || !password) {
-                showError("يرجى ملء جميع الحقول");
+            // إخفاء رسائل الخطأ السابقة
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // التحقق من صحة المدخلات
+            if (!validateEmail(email)) {
+                document.getElementById('email-error').textContent = 'البريد الإلكتروني غير صحيح';
+                document.getElementById('email-error').style.display = 'block';
                 return;
             }
+            
+            if (password.length < 6) {
+                document.getElementById('password-error').textContent = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+                document.getElementById('password-error').style.display = 'block';
+                return;
+            }
+            
+            // عرض مؤشر التحميل
+            document.getElementById('signin-text').style.display = 'none';
+            document.getElementById('signin-spinner').style.display = 'inline-block';
             
             auth.signInWithEmailAndPassword(email, password)
                 .then(() => {
@@ -901,35 +988,69 @@
                 })
                 .catch(error => {
                     console.error("خطأ في تسجيل الدخول:", error);
-                    showError(`خطأ في تسجيل الدخول: ${error.message}`);
+                    document.getElementById('signin-text').style.display = 'inline';
+                    document.getElementById('signin-spinner').style.display = 'none';
+                    
+                    let errorMessage = "خطأ في تسجيل الدخول";
+                    if (error.code === 'auth/wrong-password') {
+                        errorMessage = "كلمة المرور غير صحيحة";
+                    } else if (error.code === 'auth/user-not-found') {
+                        errorMessage = "لا يوجد حساب مرتبط بهذا البريد الإلكتروني";
+                    }
+                    
+                    document.getElementById('password-error').textContent = errorMessage;
+                    document.getElementById('password-error').style.display = 'block';
                 });
         });
 
         // إنشاء حساب جديد
         emailRegister.addEventListener('click', () => {
-            const username = document.getElementById('username').value;
+            const username = document.getElementById('reg-username').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm').value;
             
-            if (!username || !email || !password || !confirmPassword) {
-                showError("يرجى ملء جميع الحقول");
-                return;
+            // إخفاء رسائل الخطأ السابقة
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // التحقق من صحة المدخلات
+            let isValid = true;
+            
+            if (username.length < 3) {
+                document.getElementById('username-error').textContent = 'اسم المستخدم يجب أن يكون 3 أحرف على الأقل';
+                document.getElementById('username-error').style.display = 'block';
+                isValid = false;
             }
             
-            if (password !== confirmPassword) {
-                showError("كلمة المرور غير متطابقة!");
-                return;
+            if (!validateEmail(email)) {
+                document.getElementById('reg-email-error').textContent = 'البريد الإلكتروني غير صحيح';
+                document.getElementById('reg-email-error').style.display = 'block';
+                isValid = false;
             }
             
             if (password.length < 6) {
-                showError("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
-                return;
+                document.getElementById('reg-password-error').textContent = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+                document.getElementById('reg-password-error').style.display = 'block';
+                isValid = false;
             }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirm-error').textContent = 'كلمة المرور غير متطابقة';
+                document.getElementById('confirm-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // عرض مؤشر التحميل
+            document.getElementById('register-text').style.display = 'none';
+            document.getElementById('register-spinner').style.display = 'inline-block';
             
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // تحديث ملف المستخدم ليشمل اسم المستخدم
+                    // تحديث ملف المستخدم بإضافة اسم المستخدم
                     return userCredential.user.updateProfile({
                         displayName: username
                     });
@@ -939,7 +1060,62 @@
                 })
                 .catch(error => {
                     console.error("خطأ في إنشاء الحساب:", error);
-                    showError(`خطأ في إنشاء الحساب: ${error.message}`);
+                    document.getElementById('register-text').style.display = 'inline';
+                    document.getElementById('register-spinner').style.display = 'none';
+                    
+                    let errorMessage = "خطأ في إنشاء الحساب";
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMessage = "البريد الإلكتروني مستخدم مسبقًا";
+                        document.getElementById('reg-email-error').textContent = errorMessage;
+                        document.getElementById('reg-email-error').style.display = 'block';
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMessage = "كلمة المرور ضعيفة (يجب أن تكون 6 أحرف على الأقل)";
+                        document.getElementById('reg-password-error').textContent = errorMessage;
+                        document.getElementById('reg-password-error').style.display = 'block';
+                    } else {
+                        document.getElementById('reg-email-error').textContent = errorMessage;
+                        document.getElementById('reg-email-error').style.display = 'block';
+                    }
+                });
+        });
+
+        // إعادة تعيين كلمة المرور
+        resetPasswordBtn.addEventListener('click', () => {
+            const email = document.getElementById('forgot-email').value;
+            
+            // إخفاء رسائل الخطأ السابقة
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // التحقق من صحة البريد الإلكتروني
+            if (!validateEmail(email)) {
+                document.getElementById('forgot-email-error').textContent = 'البريد الإلكتروني غير صحيح';
+                document.getElementById('forgot-email-error').style.display = 'block';
+                return;
+            }
+            
+            // عرض مؤشر التحميل
+            document.getElementById('reset-text').style.display = 'none';
+            document.getElementById('reset-spinner').style.display = 'inline-block';
+            
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    forgotForm.style.display = 'none';
+                    resetSuccess.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error("خطأ في إعادة التعيين:", error);
+                    document.getElementById('reset-text').style.display = 'inline';
+                    document.getElementById('reset-spinner').style.display = 'none';
+                    
+                    let errorMessage = "فشل إرسال رابط إعادة التعيين";
+                    if (error.code === 'auth/user-not-found') {
+                        errorMessage = "لا يوجد حساب مرتبط بهذا البريد الإلكتروني";
+                    }
+                    
+                    document.getElementById('forgot-email-error').textContent = errorMessage;
+                    document.getElementById('forgot-email-error').style.display = 'block';
                 });
         });
 
@@ -948,12 +1124,6 @@
             auth.signOut();
         });
 
-        // عرض رسالة الخطأ
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-        }
-
         // متابعة حالة المصادقة
         auth.onAuthStateChanged(user => {
             if (user) {
@@ -961,15 +1131,21 @@
                 signInBtn.style.display = 'none';
                 userInfo.style.display = 'flex';
                 
-                // عرض معلومات المستخدم
+                // عرض اسم المستخدم (بدلاً من البريد الإلكتروني)
                 userAvatar.src = user.photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
-                userDisplayName.textContent = user.displayName || user.email;
+                userDisplayName.textContent = user.displayName || user.email.split('@')[0]; // عرض اسم المستخدم فقط
             } else {
                 // المستخدم غير مسجل الدخول
                 signInBtn.style.display = 'flex';
                 userInfo.style.display = 'none';
             }
         });
+
+        // دالة للتحقق من صحة البريد الإلكتروني
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
 
         // بقية الكود للغة والتأثيرات...
         let currentLang = 'ar';
@@ -1025,13 +1201,6 @@
 
         window.addEventListener('scroll', animateOnScroll);
         animateOnScroll();
-        
-        // حل مشكلة النطاق غير المصرح به
-        // (يجب إضافة النطاق في Firebase Console)
-        console.log("لتجنب خطأ 'unauthorized-domain':");
-        console.log("1. اذهب إلى Firebase Console -> Authentication");
-        console.log("2. اختر علامة التبويب Sign-in method");
-        console.log("3. أضف النطاق في قسم Authorized domains");
     </script>
 </body>
 </html>
