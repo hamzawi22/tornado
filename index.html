@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سكربتات FiveM مجاناً</title>
+    <title>Free FiveM Scripts</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <style>
         * {
@@ -26,6 +29,7 @@
             --gray: #6b7280;
             --gray-light: #f3f4f6;
             --error: #ef4444;
+            --success: #10b981;
         }
 
         body {
@@ -415,15 +419,19 @@
         }
 
         /* Language Direction */
+        [dir="rtl"] {
+            text-align: right;
+        }
+        
         [dir="ltr"] {
             text-align: left;
         }
         
-        [dir="ltr"] .hero {
+        .hero {
             text-align: center;
         }
         
-        [dir="ltr"] .section-title {
+        .section-title {
             text-align: center;
         }
         
@@ -605,34 +613,172 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Download page */
+        .download-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: rgba(26, 27, 46, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            text-align: center;
+        }
+        
+        .script-preview {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .script-description {
+            margin: 2rem 0;
+            line-height: 1.8;
+            text-align: left;
+        }
+        
+        .download-process {
+            margin: 3rem 0;
+        }
+        
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .timer-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .timer-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            border-top-color: transparent;
+            animation: timerAnimation 60s linear forwards;
+        }
+        
+        .timer-text {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .captcha-container {
+            margin: 2rem 0;
+        }
+        
+        .download-ready {
+            margin: 2rem 0;
+        }
+        
+        .download-ready-btn {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .download-ready-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        @keyframes timerAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Privacy policy */
+        .privacy-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: rgba(26, 27, 46, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        .privacy-container h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .privacy-section {
+            margin-bottom: 2rem;
+        }
+        
+        .privacy-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-section p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .privacy-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-section li {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">سكربتات FiveM</div>
+            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">FiveM Scripts</div>
             <ul class="nav-links">
-                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
-                <li><a href="#tutorials" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
-                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
-                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="English" data-en="العربية">English</button></li>
+                <li><a href="#home" data-ar="الرئيسية" data-en="Home">Home</a></li>
+                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">Scripts</a></li>
+                <li><a href="privacy.html" data-ar="سياسة الخصوصية" data-en="Privacy Policy">Privacy Policy</a></li>
+                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">Contact</a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="العربية" data-en="English">العربية</button></li>
             </ul>
             
             <!-- قسم تسجيل الدخول -->
             <div class="auth-container">
                 <div id="user-info" style="display: none;">
                     <div class="user-info">
-                        <img id="user-avatar" class="user-avatar" src="" alt="صورة المستخدم">
+                        <img id="user-avatar" class="user-avatar" src="" alt="User Avatar">
                         <div id="user-display-name" class="user-name"></div>
                     </div>
-                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">تسجيل الخروج</button>
+                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">Sign Out</button>
                 </div>
                 <button id="sign-in-btn" class="auth-button" data-ar="تسجيل الدخول" data-en="Sign In">
                     <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
-                    <span data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</span>
+                    <span data-ar="تسجيل الدخول" data-en="Sign In">Sign In</span>
                 </button>
             </div>
         </nav>
@@ -642,91 +788,91 @@
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title" data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</h2>
+            <h2 class="modal-title" data-ar="تسجيل الدخول" data-en="Sign In">Sign In</h2>
             
             <div class="auth-options">
                 <div class="auth-option" id="google-signin">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="auth-icon">
-                    <span class="auth-text" data-ar="تسجيل الدخول باستخدام Google" data-en="Sign in with Google">تسجيل الدخول باستخدام Google</span>
+                    <span class="auth-text" data-ar="تسجيل الدخول باستخدام Google" data-en="Sign in with Google">Sign in with Google</span>
                 </div>
             </div>
             
             <div class="email-form" id="email-form">
                 <div class="input-group">
-                    <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                    <label for="email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
                     <input type="email" id="email" required>
                     <div class="error-message" id="email-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
+                    <label for="password" data-ar="كلمة المرور" data-en="Password">Password</label>
                     <input type="password" id="password" required>
                     <div class="error-message" id="password-error"></div>
                 </div>
                 
                 <div class="forgot-password">
-                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">هل نسيت كلمة المرور؟</a>
+                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">Forgot Password?</a>
                 </div>
                 
                 <button type="button" class="form-button" id="email-signin" data-ar="تسجيل الدخول" data-en="Sign In">
-                    <span id="signin-text">تسجيل الدخول</span>
+                    <span id="signin-text">Sign In</span>
                     <span id="signin-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">إنشاء حساب جديد</span>
+                    <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">Create Account</span>
                 </div>
             </div>
             
             <div class="email-form" id="register-form" style="display: none;">
                 <div class="input-group">
-                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
+                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">Username</label>
                     <input type="text" id="reg-username" required>
                     <div class="error-message" id="username-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                    <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
                     <input type="email" id="reg-email" required>
                     <div class="error-message" id="reg-email-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
+                    <label for="reg-password" data-ar="كلمة المرور" data-en="Password">Password</label>
                     <input type="password" id="reg-password" required>
                     <div class="error-message" id="reg-password-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">تأكيد كلمة المرور</label>
+                    <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">Confirm Password</label>
                     <input type="password" id="reg-confirm" required>
                     <div class="error-message" id="confirm-error"></div>
                 </div>
                 
                 <button type="button" class="form-button" id="email-register" data-ar="إنشاء حساب" data-en="Create Account">
-                    <span id="register-text">إنشاء حساب</span>
+                    <span id="register-text">Create Account</span>
                     <span id="register-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">لديك حساب؟ تسجيل الدخول</span>
+                    <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">Have account? Sign In</span>
                 </div>
             </div>
             
             <div class="email-form" id="forgot-form" style="display: none;">
                 <div class="input-group">
-                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
                     <input type="email" id="forgot-email" required>
                     <div class="error-message" id="forgot-email-error"></div>
                 </div>
                 
                 <button type="button" class="form-button" id="reset-password" data-ar="إرسال رابط إعادة التعيين" data-en="Send Reset Link">
-                    <span id="reset-text">إرسال رابط إعادة التعيين</span>
+                    <span id="reset-text">Send Reset Link</span>
                     <span id="reset-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">العودة لتسجيل الدخول</span>
+                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">Back to Sign In</span>
                 </div>
             </div>
             
@@ -734,7 +880,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#10b981" viewBox="0 0 16 16" style="margin: 0 auto 10px;">
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                 </svg>
-                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني</p>
+                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">Password reset link has been sent to your email</p>
             </div>
         </div>
     </div>
@@ -742,55 +888,112 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">سكربتات FiveM مجانية</h1>
-                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك</p>
-                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">تصفح السكربتات</a>
+                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">Free FiveM Scripts</h1>
+                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">Discover a wide range of free and premium FiveM scripts to enhance your server</p>
+                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">Browse Scripts</a>
             </div>
         </section>
 
         <section class="scripts-section" id="scripts">
             <div class="container">
-                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">أحدث السكربتات</h2>
+                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">Latest Scripts</h2>
                 <div class="scripts-grid">
                     <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="نظام السيارات" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="Vehicle System" class="script-image">
                         <div class="script-content">
-                            <h3>نظام السيارات المتقدم</h3>
-                            <p>نظام شامل لإدارة السيارات في سيرفرك مع إمكانية التعديل والتخصيص</p>
+                            <h3>Advanced Vehicle System</h3>
+                            <p>Comprehensive vehicle management system for your server with customization options</p>
                             <div class="script-meta">
-                                <span>الإصدار: 1.2.0</span>
-                                <span>التنزيلات: 542</span>
+                                <span>Version: 1.2.0</span>
+                                <span>Downloads: 542</span>
                             </div>
-                            <a href="#" class="download-btn">تحميل الآن</a>
+                            <a href="download.html" class="download-btn">Download Now</a>
                         </div>
                     </div>
                     
                     <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="نظام الوظائف" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="Job System" class="script-image">
                         <div class="script-content">
-                            <h3>نظام الوظائف المتكامل</h3>
-                            <p>أكثر من 20 وظيفة مختلفة مع أنظمة خاصة لكل وظيفة وتفاعل حقيقي</p>
+                            <h3>Integrated Job System</h3>
+                            <p>Over 20 different jobs with unique systems and realistic interactions</p>
                             <div class="script-meta">
-                                <span>الإصدار: 2.0.3</span>
-                                <span>التنزيلات: 876</span>
+                                <span>Version: 2.0.3</span>
+                                <span>Downloads: 876</span>
                             </div>
-                            <a href="#" class="download-btn">تحميل الآن</a>
+                            <a href="download.html" class="download-btn">Download Now</a>
                         </div>
                     </div>
                     
                     <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="نظام المنازل" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="Housing System" class="script-image">
                         <div class="script-content">
-                            <h3>نظام المنازل والممتلكات</h3>
-                            <p>إدارة كاملة للمنازل والممتلكات مع نظام شراء وإيجار وتفاعل مع البيئة</p>
+                            <h3>Housing and Properties System</h3>
+                            <p>Complete management of houses and properties with purchase, rent and environment interaction</p>
                             <div class="script-meta">
-                                <span>الإصدار: 1.5.1</span>
-                                <span>التنزيلات: 321</span>
+                                <span>Version: 1.5.1</span>
+                                <span>Downloads: 321</span>
                             </div>
-                            <a href="#" class="download-btn">تحميل الآن</a>
+                            <a href="download.html" class="download-btn">Download Now</a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Section -->
+        <section id="privacy" class="privacy-container" style="display: none;">
+            <h1>Privacy Policy</h1>
+            
+            <div class="privacy-section">
+                <h2>Introduction</h2>
+                <p>Welcome to FiveM Scripts! We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, and disclose your personal information when you visit our website and use our services.</p>
+                <p>By using our website, you agree to the collection and use of information in accordance with this policy.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Information We Collect</h2>
+                <p>We collect several different types of information for various purposes to provide and improve our service to you:</p>
+                <ul>
+                    <li><strong>Personal Data:</strong> When you register for an account, we may ask for your name, email address, and other contact information.</li>
+                    <li><strong>Usage Data:</strong> We collect information on how the service is accessed and used. This may include your IP address, browser type, pages visited, and other diagnostic data.</li>
+                    <li><strong>Cookies and Tracking Data:</strong> We use cookies and similar tracking technologies to track activity on our service.</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>How We Use Your Information</h2>
+                <p>We use the collected data for various purposes:</p>
+                <ul>
+                    <li>To provide and maintain our service</li>
+                    <li>To notify you about changes to our service</li>
+                    <li>To allow you to participate in interactive features of our service when you choose to do so</li>
+                    <li>To provide customer support</li>
+                    <li>To monitor the usage of our service</li>
+                    <li>To detect, prevent and address technical issues</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Security</h2>
+                <p>The security of your data is important to us. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>FiveM Scripts</h2>
+                <p>All scripts provided on this website are intended for use with FiveM, a modification framework for Grand Theft Auto V. We ensure that all scripts are thoroughly tested and free from malicious code. However, we are not responsible for any issues that may arise from improper installation or use of our scripts.</p>
+                <p>Our scripts are provided "as is" without warranty of any kind, either express or implied.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                <p>Email: privacy@fivem-scripts.com</p>
             </div>
         </section>
     </main>
@@ -799,28 +1002,36 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>عن الموقع</h3>
-                    <p>نقدم أفضل سكربتات FiveM المجانية والمدفوعة لتحسين تجربة سيرفرك وتطويره.</p>
+                    <h3>About Us</h3>
+                    <p>We provide the best free and premium FiveM scripts to enhance your server experience.</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>روابط سريعة</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#scripts">السكربتات</a></li>
-                        <li><a href="#tutorials">التعليمات</a></li>
-                        <li><a href="#contact">اتصل بنا</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#scripts">Scripts</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>اتصل بنا</h3>
-                    <p>البريد الإلكتروني: support@fivem-scripts.com</p>
-                    <p>الدعم الفني متاح 24/7</p>
+                    <h3>Contact Us</h3>
+                    <p>Email: support@fivem-scripts.com</p>
+                    <p>24/7 Technical Support</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-ar="© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة." data-en="© 2025 Free FiveM Scripts. All rights reserved.">© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة.</p>
+                <p data-ar="© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة." data-en="© 2025 Free FiveM Scripts. All rights reserved.">© 2025 Free FiveM Scripts. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -945,13 +1156,16 @@
         // تسجيل الدخول باستخدام Google
         googleSignin.addEventListener('click', () => {
             const provider = new firebase.auth.GoogleAuthProvider();
+            // إصلاح مشكلة تسجيل الدخول بجوجل
+            firebase.auth().languageCode = currentLang;
+            
             auth.signInWithPopup(provider)
                 .then(() => {
                     closeModal();
                 })
                 .catch(error => {
-                    console.error("خطأ في تسجيل الدخول:", error);
-                    showError('email-error', `خطأ في تسجيل الدخول: ${error.message}`);
+                    console.error("Login error:", error);
+                    showError('email-error', `Login error: ${error.message}`);
                 });
         });
 
@@ -967,14 +1181,12 @@
             
             // التحقق من صحة المدخلات
             if (!validateEmail(email)) {
-                document.getElementById('email-error').textContent = 'البريد الإلكتروني غير صحيح';
-                document.getElementById('email-error').style.display = 'block';
+                showError('email-error', 'Invalid email address');
                 return;
             }
             
             if (password.length < 6) {
-                document.getElementById('password-error').textContent = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
-                document.getElementById('password-error').style.display = 'block';
+                showError('password-error', 'Password must be at least 6 characters');
                 return;
             }
             
@@ -987,19 +1199,20 @@
                     closeModal();
                 })
                 .catch(error => {
-                    console.error("خطأ في تسجيل الدخول:", error);
+                    console.error("Login error:", error);
                     document.getElementById('signin-text').style.display = 'inline';
                     document.getElementById('signin-spinner').style.display = 'none';
                     
-                    let errorMessage = "خطأ في تسجيل الدخول";
+                    let errorMessage = "Login failed";
                     if (error.code === 'auth/wrong-password') {
-                        errorMessage = "كلمة المرور غير صحيحة";
+                        errorMessage = "Incorrect password";
                     } else if (error.code === 'auth/user-not-found') {
-                        errorMessage = "لا يوجد حساب مرتبط بهذا البريد الإلكتروني";
+                        errorMessage = "No account found with this email";
+                    } else if (error.code === 'auth/too-many-requests') {
+                        errorMessage = "Too many attempts, try again later";
                     }
                     
-                    document.getElementById('password-error').textContent = errorMessage;
-                    document.getElementById('password-error').style.display = 'block';
+                    showError('password-error', errorMessage);
                 });
         });
 
@@ -1019,26 +1232,22 @@
             let isValid = true;
             
             if (username.length < 3) {
-                document.getElementById('username-error').textContent = 'اسم المستخدم يجب أن يكون 3 أحرف على الأقل';
-                document.getElementById('username-error').style.display = 'block';
+                showError('username-error', 'Username must be at least 3 characters');
                 isValid = false;
             }
             
             if (!validateEmail(email)) {
-                document.getElementById('reg-email-error').textContent = 'البريد الإلكتروني غير صحيح';
-                document.getElementById('reg-email-error').style.display = 'block';
+                showError('reg-email-error', 'Invalid email address');
                 isValid = false;
             }
             
             if (password.length < 6) {
-                document.getElementById('reg-password-error').textContent = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
-                document.getElementById('reg-password-error').style.display = 'block';
+                showError('reg-password-error', 'Password must be at least 6 characters');
                 isValid = false;
             }
             
             if (password !== confirmPassword) {
-                document.getElementById('confirm-error').textContent = 'كلمة المرور غير متطابقة';
-                document.getElementById('confirm-error').style.display = 'block';
+                showError('confirm-error', 'Passwords do not match');
                 isValid = false;
             }
             
@@ -1059,22 +1268,19 @@
                     closeModal();
                 })
                 .catch(error => {
-                    console.error("خطأ في إنشاء الحساب:", error);
+                    console.error("Account creation error:", error);
                     document.getElementById('register-text').style.display = 'inline';
                     document.getElementById('register-spinner').style.display = 'none';
                     
-                    let errorMessage = "خطأ في إنشاء الحساب";
+                    let errorMessage = "Account creation failed";
                     if (error.code === 'auth/email-already-in-use') {
-                        errorMessage = "البريد الإلكتروني مستخدم مسبقًا";
-                        document.getElementById('reg-email-error').textContent = errorMessage;
-                        document.getElementById('reg-email-error').style.display = 'block';
+                        errorMessage = "Email already in use";
+                        showError('reg-email-error', errorMessage);
                     } else if (error.code === 'auth/weak-password') {
-                        errorMessage = "كلمة المرور ضعيفة (يجب أن تكون 6 أحرف على الأقل)";
-                        document.getElementById('reg-password-error').textContent = errorMessage;
-                        document.getElementById('reg-password-error').style.display = 'block';
+                        errorMessage = "Weak password (must be at least 6 characters)";
+                        showError('reg-password-error', errorMessage);
                     } else {
-                        document.getElementById('reg-email-error').textContent = errorMessage;
-                        document.getElementById('reg-email-error').style.display = 'block';
+                        showError('reg-email-error', errorMessage);
                     }
                 });
         });
@@ -1090,8 +1296,7 @@
             
             // التحقق من صحة البريد الإلكتروني
             if (!validateEmail(email)) {
-                document.getElementById('forgot-email-error').textContent = 'البريد الإلكتروني غير صحيح';
-                document.getElementById('forgot-email-error').style.display = 'block';
+                showError('forgot-email-error', 'Invalid email address');
                 return;
             }
             
@@ -1105,17 +1310,16 @@
                     resetSuccess.style.display = 'block';
                 })
                 .catch(error => {
-                    console.error("خطأ في إعادة التعيين:", error);
+                    console.error("Reset error:", error);
                     document.getElementById('reset-text').style.display = 'inline';
                     document.getElementById('reset-spinner').style.display = 'none';
                     
-                    let errorMessage = "فشل إرسال رابط إعادة التعيين";
+                    let errorMessage = "Failed to send reset link";
                     if (error.code === 'auth/user-not-found') {
-                        errorMessage = "لا يوجد حساب مرتبط بهذا البريد الإلكتروني";
+                        errorMessage = "No account found with this email";
                     }
                     
-                    document.getElementById('forgot-email-error').textContent = errorMessage;
-                    document.getElementById('forgot-email-error').style.display = 'block';
+                    showError('forgot-email-error', errorMessage);
                 });
         });
 
@@ -1146,9 +1350,16 @@
             const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(email).toLowerCase());
         }
-
+        
+        // دالة لعرض رسائل الخطأ
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+        
         // بقية الكود للغة والتأثيرات...
-        let currentLang = 'ar';
+        let currentLang = 'en';
 
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
@@ -1162,6 +1373,19 @@
             document.body.style.transition = 'all 0.3s ease';
             setTimeout(() => document.body.style.transition = '', 300);
         }
+        
+        // تحديث اللغة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تطبيق اللغة الإنجليزية عند التحميل
+            document.documentElement.lang = 'en';
+            document.documentElement.dir = 'ltr';
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-en');
+            });
+            
+            // إصلاح مشكلة تسجيل الدخول عند تغيير اللغة
+            firebase.auth().languageCode = currentLang;
+        });
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1201,6 +1425,15 @@
 
         window.addEventListener('scroll', animateOnScroll);
         animateOnScroll();
+        
+        // تحميل صفحة سياسة الخصوصية
+        document.querySelector('a[href="privacy.html"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('privacy').style.display = 'block';
+            document.getElementById('scripts').style.display = 'none';
+            document.getElementById('home').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>
