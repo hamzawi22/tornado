@@ -1,0 +1,593 @@
+</section>
+
+        <!-- Script Details Modal -->
+        <div id="script-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modal-body">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Content Sections -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سكربتات FiveM مجاناً</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f59e0b;
+            --dark: #1a1b2e;
+            --darker: #0f0f23;
+            --light: #ffffff;
+            --gray: #6b7280;
+            --gray-light: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 27, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+
+        .lang-toggle:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--light);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Scripts Grid */
+        .scripts-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--light);
+        }
+
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .script-card {
+            background: rgba(26, 27, 46, 0.8);
+            border-radius: 15px;
+            padding: 0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .script-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .script-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .script-content {
+            padding: 2rem;
+        }
+
+        .script-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .script-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .script-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .script-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--secondary), #d97706);
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section li {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            color: var(--gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Language Direction */
+        [dir="ltr"] {
+            text-align: left;
+        }
+        
+        [dir="ltr"] .hero {
+            text-align: center;
+        }
+        
+        [dir="ltr"] .section-title {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">سكربتات FiveM</div>
+            <ul class="nav-links">
+                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
+                <li><a href="#tutorials" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
+                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="English" data-en="العربية">English</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">سكربتات FiveM مجانية</h1>
+                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك</p>
+                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">تصفح السكربتات</a>
+            </div>
+        </section>
+
+        <section class="scripts-section" id="scripts">
+            <div class="container">
+                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">أحدث السكربتات</h2>
+                <div class="scripts-grid">
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=200&fit=crop&crop=center" alt="نظام الوظائف" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="نظام الوظائف المتطور" data-en="Advanced Job System">نظام الوظائف المتطور</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: وظائف" data-en="Category: Jobs">الفئة: وظائف</span>
+                                <span data-ar="التحديث: اليوم" data-en="Updated: Today">التحديث: اليوم</span>
+                            </div>
+                            <p data-ar="نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة." data-en="Comprehensive job system supporting 15+ different jobs with advanced salary system and daily missions. Includes police, medic, taxi driver, construction worker, and more. Each job has unique tasks and promotion system with money and experience rewards.">نظام وظائف شامل يدعم أكثر من 15 وظيفة مختلفة مع نظام رواتب متقدم ومهام يومية. يتضمن وظائف الشرطة، الطبيب، سائق التاكسي، عامل البناء، والمزيد. كل وظيفة لها مهامها الخاصة ونظام ترقيات مميز مع إمكانية كسب المال والخبرة.</p>
+                            <a href="#job-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('job-system')">تحميل مجاني</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&crop=center" alt="سكربت البنك" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="سكربت البنك الذكي" data-en="Smart Banking Script">سكربت البنك الذكي</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: اقتصاد" data-en="Category: Economy">الفئة: اقتصاد</span>
+                                <span data-ar="التحديث: أمس" data-en="Updated: Yesterday">التحديث: أمس</span>
+                            </div>
+                            <p data-ar="نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية." data-en="Complete banking system with deposits, withdrawals, transfers, and smart credit cards. Supports savings and current accounts with monthly interest, ATMs throughout the city. Features advanced security system and realistic transaction fees.">نظام مصرفي متكامل مع إمكانية الإيداع والسحب والتحويلات وبطاقات الائتمان الذكية. يدعم حسابات التوفير والجاري مع فوائد شهرية، وأجهزة صراف آلي منتشرة في جميع أنحاء المدينة. يتضمن نظام أمان متقدم ورسوم معاملات واقعية.</p>
+                            <a href="#banking-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('banking')">تحميل مجاني</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=200&fit=crop&crop=center" alt="محل السيارات" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="سكربت محل السيارات" data-en="Car Dealership Script">سكربت محل السيارات</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: مركبات" data-en="Category: Vehicles">الفئة: مركبات</span>
+                                <span data-ar="التحديث: منذ 3 أيام" data-en="Updated: 3 days ago">التحديث: منذ 3 أيام</span>
+                            </div>
+                            <p data-ar="معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط." data-en="Interactive car showroom with test drives, multiple payment systems, and comprehensive catalog. Features 200+ different vehicles from economy to luxury and sports cars. Includes financing system and car loans with installment payments.">معرض سيارات تفاعلي مع إمكانية تجربة السيارات وأنظمة دفع متعددة وكتالوج شامل. يضم أكثر من 200 سيارة مختلفة من السيارات الاقتصادية إلى السيارات الفاخرة والرياضية. يتضمن نظام تمويل وقروض سيارات مع إمكانية الدفع بالتقسيط.</p>
+                            <a href="#car-dealership-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('car-dealership')">تحميل مجاني</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=200&fit=crop&crop=center" alt="نظام العقارات" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="نظام العقارات الذكي" data-en="Smart Real Estate System">نظام العقارات الذكي</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: عقارات" data-en="Category: Real Estate">الفئة: عقارات</span>
+                                <span data-ar="التحديث: منذ أسبوع" data-en="Updated: 1 week ago">التحديث: منذ أسبوع</span>
+                            </div>
+                            <p data-ar="نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع." data-en="Advanced real estate system supporting buying/selling houses and apartments with smart key system and advanced management. Includes 150+ purchasable properties, monthly rental system, and home customization with furniture. Supports commercial and residential properties with realistic location-based pricing.">نظام عقارات متطور يدعم بيع وشراء المنازل والشقق مع نظام مفاتيح ذكي وإدارة متقدمة. يشمل أكثر من 150 عقار قابل للشراء، نظام إيجار شهري، وإمكانية تخصيص المنازل بالأثاث والديكور. يدعم العقارات التجارية والسكنية مع أسعار واقعية ومتغيرة حسب الموقع.</p>
+                            <a href="#real-estate-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('real-estate')">تحميل مجاني</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=200&fit=crop&crop=center" alt="سكربت الشرطة" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="سكربت الشرطة المتقدم" data-en="Advanced Police Script">سكربت الشرطة المتقدم</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: الشرطة" data-en="Category: Police">الفئة: الشرطة</span>
+                                <span data-ar="التحديث: منذ 5 أيام" data-en="Updated: 5 days ago">التحديث: منذ 5 أيام</span>
+                            </div>
+                            <p data-ar="نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات." data-en="Comprehensive police system with advanced MDT, dispatch system, crime management, and investigation tools. Includes criminal database, search and investigation system, issuing tickets and warrants. Supports complex investigations with advanced evidence system and interrogation recording.">نظام شرطة شامل مع MDT متطور، نظام استدعاءات، إدارة الجرائم، وأدوات التحقيق. يتضمن قاعدة بيانات المجرمين، نظام البحث والتحري، إصدار المخالفات والأوامر القضائية. يدعم التحقيقات المعقدة مع نظام أدلة متقدم وتسجيل الاستجوابات.</p>
+                            <a href="#police-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('police')">تحميل مجاني</a>
+                        </div>
+                    </div>
+
+                    <div class="script-card">
+                        <img src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&h=200&fit=crop&crop=center" alt="نظام المخدرات" class="script-image">
+                        <div class="script-content">
+                            <h3 data-ar="نظام المخدرات الواقعي" data-en="Realistic Drug System">نظام المخدرات الواقعي</h3>
+                            <div class="script-meta">
+                                <span data-ar="الفئة: إجرام" data-en="Category: Crime">الفئة: إجرام</span>
+                                <span data-ar="التحديث: منذ يومين" data-en="Updated: 2 days ago">التحديث: منذ يومين</span>
+                            </div>
+                            <p data-ar="نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية." data-en="Realistic drug system with cultivation, manufacturing, and distribution, with advanced security systems and realistic risks. Features 8 different drug types, secret labs, complex distribution networks, and money laundering system. Includes arrest risks and police raids with realistic consequences.">نظام مخدرات واقعي مع زراعة وتصنيع وتوزيع، مع أنظمة أمان متقدمة ومخاطر واقعية. يشمل 8 أنواع مختلفة من المخدرات، مختبرات سرية، شبكات توزيع معقدة، ونظام غسيل أموال. يتضمن مخاطر الاعتقال والمداهمات الشرطية مع عواقب واقعية.</p>
+                            <a href="#drug-system-details" class="download-btn" data-ar="تحميل مجاني" data-en="Free Download" onclick="showScriptDetails('drug-system')">تحميل مجاني</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                        <li><a href="#" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
+                        <li><a href="#" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
+                        <li><a href="#" data-ar="الدعم" data-en="Support">الدعم</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-ar="الفئات" data-en="Categories">الفئات</h3>
+                    <ul>
+                        <li><a href="#" data-ar="سكربتات الوظائف" data-en="Job Scripts">سكربتات الوظائف</a></li>
+                        <li><a href="#" data-ar="سكربتات الاقتصاد" data-en="Economy Scripts">سكربتات الاقتصاد</a></li>
+                        <li><a href="#" data-ar="سكربتات الشرطة" data-en="Police Scripts">سكربتات الشرطة</a></li>
+                        <li><a href="#" data-ar="سكربتات العقارات" data-en="Real Estate Scripts">سكربتات العقارات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
+                    <p data-ar="للدعم والاستفسارات" data-en="For support and inquiries">للدعم والاستفسارات</p>
+                    <p data-ar="البريد: support@fivemscripts.com" data-en="Email: support@fivemscripts.com">البريد: support@fivemscripts.com</p>
+                    <p data-ar="ديسكورد: FiveM Scripts" data-en="Discord: FiveM Scripts">ديسكورد: FiveM Scripts</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-ar="© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة." data-en="© 2025 Free FiveM Scripts. All rights reserved.">© 2025 سكربتات FiveM مجاناً. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            // Update document direction and language
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update all elements with language data
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const newText = element.getAttribute(`data-${currentLang}`);
+                if (newText) {
+                    element.textContent = newText;
+                }
+            });
+            
+            // Update navigation alignment
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            if (currentLang === 'en') {
+                nav.style.flexDirection = 'row';
+                navLinks.style.order = '2';
+            } else {
+                nav.style.flexDirection = 'row';
+                navLinks.style.order = '2';
+            }
+            
+            // Smooth transition effect
+            document.body.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                document.body.style.transition = '';
+            }, 300);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 27, 46, 0.98)';
+            } else {
+                header.style.background = 'rgba(26, 27, 46, 0.95)';
+            }
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.script-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        document.querySelectorAll('.script-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on load
+    </script>
+</body>
+</html>
