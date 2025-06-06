@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveM Scripts</title>
+    <title>سكربتات FiveM مجاناً</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -415,15 +415,15 @@
         }
 
         /* Language Direction */
-        [dir="rtl"] {
-            text-align: right;
+        [dir="ltr"] {
+            text-align: left;
         }
         
-        [dir="rtl"] .hero {
+        [dir="ltr"] .hero {
             text-align: center;
         }
         
-        [dir="rtl"] .section-title {
+        [dir="ltr"] .section-title {
             text-align: center;
         }
         
@@ -605,188 +605,34 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
-        /* Download Page */
-        .download-page {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--darker);
-            z-index: 3000;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-        
-        .download-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(26, 27, 46, 0.8);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid var(--primary);
-        }
-        
-        .download-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .download-header h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .download-instructions {
-            margin-bottom: 2rem;
-        }
-        
-        .download-instructions h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .download-instructions ol {
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .download-instructions li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .timer-container {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 10px;
-            border: 1px solid var(--primary);
-        }
-        
-        .timer {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary);
-            margin: 1rem 0;
-        }
-        
-        .verification-container {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .verification-message {
-            margin-bottom: 1rem;
-        }
-        
-        .verification-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-        }
-        
-        .download-button-container {
-            text-align: center;
-            margin-top: 2rem;
-            display: none;
-        }
-        
-        .download-button {
-            background: linear-gradient(135deg, var(--secondary), #d97706);
-            color: var(--light);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .download-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
-        }
-        
-        /* Privacy Policy */
-        .privacy-policy {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem;
-            background: rgba(26, 27, 46, 0.8);
-            border-radius: 15px;
-            border: 1px solid var(--primary);
-        }
-        
-        .privacy-policy h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .privacy-policy h3 {
-            color: var(--secondary);
-            margin: 1.5rem 0 1rem;
-        }
-        
-        .privacy-policy p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .privacy-policy ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .privacy-policy li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .back-to-home {
-            display: inline-block;
-            margin-top: 2rem;
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .back-to-home:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">FiveM Scripts</div>
+            <div class="logo" data-ar="سكربتات FiveM" data-en="FiveM Scripts">سكربتات FiveM</div>
             <ul class="nav-links">
-                <li><a href="#home" data-ar="الرئيسية" data-en="Home">Home</a></li>
-                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">Scripts</a></li>
-                <li><a href="#tutorials" data-ar="التعليمات" data-en="Tutorials">Tutorials</a></li>
-                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">Contact</a></li>
-                <li><a href="#privacy" data-ar="سياسة الخصوصية" data-en="Privacy Policy">Privacy Policy</a></li>
-                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="العربية" data-en="English">العربية</button></li>
+                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#scripts" data-ar="السكربتات" data-en="Scripts">السكربتات</a></li>
+                <li><a href="#tutorials" data-ar="التعليمات" data-en="Tutorials">التعليمات</a></li>
+                <li><a href="#contact" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()" data-ar="English" data-en="العربية">English</button></li>
             </ul>
             
             <!-- قسم تسجيل الدخول -->
             <div class="auth-container">
                 <div id="user-info" style="display: none;">
                     <div class="user-info">
-                        <img id="user-avatar" class="user-avatar" src="" alt="User Avatar">
+                        <img id="user-avatar" class="user-avatar" src="" alt="صورة المستخدم">
                         <div id="user-display-name" class="user-name"></div>
                     </div>
-                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">Sign Out</button>
+                    <button id="sign-out-btn" class="sign-out-button" data-ar="تسجيل الخروج" data-en="Sign Out">تسجيل الخروج</button>
                 </div>
                 <button id="sign-in-btn" class="auth-button" data-ar="تسجيل الدخول" data-en="Sign In">
                     <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
-                    <span data-ar="تسجيل الدخول" data-en="Sign In">Sign In</span>
+                    <span data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</span>
                 </button>
             </div>
         </nav>
@@ -796,91 +642,91 @@
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title" data-ar="تسجيل الدخول" data-en="Sign In">Sign In</h2>
+            <h2 class="modal-title" data-ar="تسجيل الدخول" data-en="Sign In">تسجيل الدخول</h2>
             
             <div class="auth-options">
                 <div class="auth-option" id="google-signin">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="auth-icon">
-                    <span class="auth-text" data-ar="تسجيل الدخول باستخدام Google" data-en="Sign in with Google">Sign in with Google</span>
+                    <span class="auth-text" data-ar="تسجيل الدخول باستخدام Google" data-en="Sign in with Google">تسجيل الدخول باستخدام Google</span>
                 </div>
             </div>
             
             <div class="email-form" id="email-form">
                 <div class="input-group">
-                    <label for="email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
+                    <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
                     <input type="email" id="email" required>
                     <div class="error-message" id="email-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="password" data-ar="كلمة المرور" data-en="Password">Password</label>
+                    <label for="password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
                     <input type="password" id="password" required>
                     <div class="error-message" id="password-error"></div>
                 </div>
                 
                 <div class="forgot-password">
-                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">Forgot Password?</a>
+                    <a href="#" id="forgot-password-link" data-ar="هل نسيت كلمة المرور؟" data-en="Forgot Password?">هل نسيت كلمة المرور؟</a>
                 </div>
                 
                 <button type="button" class="form-button" id="email-signin" data-ar="تسجيل الدخول" data-en="Sign In">
-                    <span id="signin-text">Sign In</span>
+                    <span id="signin-text">تسجيل الدخول</span>
                     <span id="signin-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">Create Account</span>
+                    <span id="toggle-register" data-ar="إنشاء حساب جديد" data-en="Create Account">إنشاء حساب جديد</span>
                 </div>
             </div>
             
             <div class="email-form" id="register-form" style="display: none;">
                 <div class="input-group">
-                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">Username</label>
+                    <label for="reg-username" data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
                     <input type="text" id="reg-username" required>
                     <div class="error-message" id="username-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
+                    <label for="reg-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
                     <input type="email" id="reg-email" required>
                     <div class="error-message" id="reg-email-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-password" data-ar="كلمة المرور" data-en="Password">Password</label>
+                    <label for="reg-password" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
                     <input type="password" id="reg-password" required>
                     <div class="error-message" id="reg-password-error"></div>
                 </div>
                 
                 <div class="input-group">
-                    <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">Confirm Password</label>
+                    <label for="reg-confirm" data-ar="تأكيد كلمة المرور" data-en="Confirm Password">تأكيد كلمة المرور</label>
                     <input type="password" id="reg-confirm" required>
                     <div class="error-message" id="confirm-error"></div>
                 </div>
                 
                 <button type="button" class="form-button" id="email-register" data-ar="إنشاء حساب" data-en="Create Account">
-                    <span id="register-text">Create Account</span>
+                    <span id="register-text">إنشاء حساب</span>
                     <span id="register-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">Have account? Sign In</span>
+                    <span id="toggle-login" data-ar="لديك حساب؟ تسجيل الدخول" data-en="Have account? Sign In">لديك حساب؟ تسجيل الدخول</span>
                 </div>
             </div>
             
             <div class="email-form" id="forgot-form" style="display: none;">
                 <div class="input-group">
-                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">Email</label>
+                    <label for="forgot-email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
                     <input type="email" id="forgot-email" required>
                     <div class="error-message" id="forgot-email-error"></div>
                 </div>
                 
                 <button type="button" class="form-button" id="reset-password" data-ar="إرسال رابط إعادة التعيين" data-en="Send Reset Link">
-                    <span id="reset-text">Send Reset Link</span>
+                    <span id="reset-text">إرسال رابط إعادة التعيين</span>
                     <span id="reset-spinner" class="spinner" style="display: none;"></span>
                 </button>
                 
                 <div class="switch-form">
-                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">Back to Sign In</span>
+                    <span id="forgot-cancel" data-ar="العودة لتسجيل الدخول" data-en="Back to Sign In">العودة لتسجيل الدخول</span>
                 </div>
             </div>
             
@@ -888,53 +734,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#10b981" viewBox="0 0 16 16" style="margin: 0 auto 10px;">
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                 </svg>
-                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">Password reset link has been sent to your email</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- صفحة التحميل -->
-    <div id="download-page" class="download-page">
-        <div class="download-content">
-            <div class="download-header">
-                <h2 id="download-script-title">Advanced Vehicle System</h2>
-                <p id="download-script-version">Version: 1.2.0</p>
-            </div>
-            
-            <div class="download-instructions">
-                <h3 data-ar="تعليمات التثبيت" data-en="Installation Instructions">Installation Instructions</h3>
-                <ol>
-                    <li data-ar="قم بتنزيل ملف السكربت" data-en="Download the script file">Download the script file</li>
-                    <li data-ar="انسخ المجلد إلى مسار resources في سيرفرك" data-en="Copy the folder to your server's resources path">Copy the folder to your server's resources path</li>
-                    <li data-ar="أضف 'ensure اسم_المجلد' إلى ملف server.cfg" data-en="Add 'ensure folder_name' to your server.cfg file">Add 'ensure folder_name' to your server.cfg file</li>
-                    <li data-ar="أعد تشغيل السيرفر" data-en="Restart your server">Restart your server</li>
-                </ol>
-                
-                <h3 data-ar="المميزات" data-en="Features">Features</h3>
-                <ul>
-                    <li data-ar="نظام متكامل لإدارة السيارات" data-en="Comprehensive vehicle management system">Comprehensive vehicle management system</li>
-                    <li data-ar="إمكانية التعديل والتخصيص" data-en="Customization options">Customization options</li>
-                    <li data-ar="واجهة سهلة الاستخدام" data-en="User-friendly interface">User-friendly interface</li>
-                    <li data-ar="دعم فني متاح" data-en="Technical support available">Technical support available</li>
-                </ul>
-            </div>
-            
-            <div class="timer-container">
-                <p data-ar="الرجاء الانتظار قبل البدء بالتحميل" data-en="Please wait before downloading">Please wait before downloading</p>
-                <div class="timer" id="download-timer">60</div>
-                <p data-ar="ثانية متبقية" data-en="seconds remaining">seconds remaining</p>
-            </div>
-            
-            <div class="verification-container" id="verification-section" style="display: none;">
-                <p class="verification-message" data-ar="الرجاء التحقق من أنك لست روبوت" data-en="Please verify you're not a robot">Please verify you're not a robot</p>
-                <div class="verification-checkbox">
-                    <input type="checkbox" id="robot-check">
-                    <label for="robot-check" data-ar="أنا لست روبوت" data-en="I'm not a robot">I'm not a robot</label>
-                </div>
-            </div>
-            
-            <div class="download-button-container" id="download-button-container">
-                <a href="#" class="download-button" id="download-button" data-ar="تحميل السكربت" data-en="Download Script">Download Script</a>
+                <p data-ar="تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني" data-en="Password reset link has been sent to your email">تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني</p>
             </div>
         </div>
     </div>
@@ -942,33 +742,35 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">Free FiveM Scripts</h1>
-                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">Discover a wide range of free and premium FiveM scripts to enhance your server</p>
-                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">Browse Scripts</a>
+                <h1 data-ar="سكربتات FiveM مجانية" data-en="Free FiveM Scripts">سكربتات FiveM مجانية</h1>
+                <p data-ar="اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك" data-en="Discover a wide range of free and premium FiveM scripts to enhance your server">اكتشف مجموعة واسعة من سكربتات FiveM المجانية والمميزة لتطوير سيرفرك</p>
+                <a href="#scripts" class="cta-button" data-ar="تصفح السكربتات" data-en="Browse Scripts">تصفح السكربتات</a>
             </div>
         </section>
 
         <section class="scripts-section" id="scripts">
             <div class="container">
-                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">Latest Scripts</h2>
+                <h2 class="section-title" data-ar="أحدث السكربتات" data-en="Latest Scripts">أحدث السكربتات</h2>
                 <div class="scripts-grid">
                     <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="Vehicle System" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="نظام السيارات" class="script-image">
                         <div class="script-content">
-                            <h3 data-ar="نظام السيارات المتقدم" data-en="Advanced Vehicle System">Advanced Vehicle System</h3>
-                            <p data-ar="نظام شامل لإدارة السيارات في سيرفرك مع إمكانية التعديل والتخصيص" data-en="Comprehensive vehicle management system for your server with customization options">Comprehensive vehicle management system for your server with customization options</p>
+                            <h3>نظام السيارات المتقدم</h3>
+                            <p>نظام شامل لإدارة السيارات في سيرفرك مع إمكانية التعديل والتخصيص</p>
                             <div class="script-meta">
-                                <span data-ar="الإصدار" data-en="Version">Version: 1.2.0</span>
-                                <span data-ar="التنزيلات" data-en="Downloads">Downloads: 542</span>
+                                <span>الإصدار: 1.2.0</span>
+                                <span>التنزيلات: 542</span>
                             </div>
-                            <a href="#" class="download-btn" onclick="showDownloadPage('Advanced Vehicle System', '1.2.0')" data-ar="تحميل الآن" data-en="Download Now">Download Now</a>
+                            <a href="#" class="download-btn">تحميل الآن</a>
                         </div>
                     </div>
                     
                     <div class="script-card">
-                        <img src="https://via.placeholder.com/400x200" alt="Job System" class="script-image">
+                        <img src="https://via.placeholder.com/400x200" alt="نظام الوظائف" class="script-image">
                         <div class="script-content">
-                            <h3 data-ar="نظام الوظائف المتكامل" data-en="Integrated Job  <div class="script-meta">
+                            <h3>نظام الوظائف المتكامل</h3>
+                            <p>أكثر من 20 وظيفة مختلفة مع أنظمة خاصة لكل وظيفة وتفاعل حقيقي</p>
+                            <div class="script-meta">
                                 <span>الإصدار: 2.0.3</span>
                                 <span>التنزيلات: 876</span>
                             </div>
