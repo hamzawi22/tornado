@@ -1627,6 +1627,72 @@
                 installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
                 requirements: "ESX Framework, MySQL",
                 fileContent: null
+            },
+            {
+                id: 2,
+                title: "Vehicle Customization",
+                titleAr: "تخصيص المركبات",
+                description: "Advanced vehicle tuning and customization options",
+                descriptionAr: "خيارات متقدمة لضبط وتخصيص المركبات",
+                icon: "fas fa-car",
+                uploadDate: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000),
+                downloads: 0,
+                category: "Vehicles",
+                categoryAr: "المركبات",
+                image: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=1470&auto=format&fit=crop",
+                fullDescription: "This script allows players to customize their vehicles with various parts, colors, and performance upgrades. Includes support for neon lights, custom wheels, and engine tuning.",
+                fullDescriptionAr: "يتيح هذا السكربت للاعبين تخصيص مركباتهم بأجزاء وألوان مختلفة وترقيات للأداء. يتضمن دعمًا للأضواء النيون والعجلات المخصصة وضبط المحرك.",
+                features: [
+                    "Wide range of customization options",
+                    "Performance tuning",
+                    "Visual modifications",
+                    "Neon lights support",
+                    "Custom wheel designs"
+                ],
+                featuresAr: [
+                    "مجموعة واسعة من خيارات التخصيص",
+                    "ضبط الأداء",
+                    "تعديلات بصرية",
+                    "دعم أضواء النيون",
+                    "تصاميم عجلات مخصصة"
+                ],
+                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
+                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
+                requirements: "ESX Framework, MySQL",
+                fileContent: null
+            },
+            {
+                id: 3,
+                title: "Modern Housing System",
+                titleAr: "نظام السكن الحديث",
+                description: "Realistic housing with interior customization",
+                descriptionAr: "مساكن واقعية مع تخصيص داخلي",
+                icon: "fas fa-home",
+                uploadDate: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
+                downloads: 0,
+                category: "Housing",
+                categoryAr: "السكن",
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1470&auto=format&fit=crop",
+                fullDescription: "This housing system allows players to purchase, furnish, and customize their homes. Includes multiple interior designs, furniture placement, and storage options.",
+                fullDescriptionAr: "يتيح نظام السكن هذا للاعبين شراء وتأثيث وتخصيص منازلهم. يتضمن تصاميم داخلية متعددة ووضع الأثاث وخيارات التخزين.",
+                features: [
+                    "Purchase and sell properties",
+                    "Furniture placement system",
+                    "Multiple interior designs",
+                    "Storage options",
+                    "Customizable decorations"
+                ],
+                featuresAr: [
+                    "شراء وبيع العقارات",
+                    "نظام وضع الأثاث",
+                    "تصاميم داخلية متعددة",
+                    "خيارات التخزين",
+                    "ديكورات قابلة للتخصيص"
+                ],
+                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
+                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
+                requirements: "ESX Framework, MySQL",
+                fileContent: null
             }
         ];
 
@@ -1731,9 +1797,10 @@
                 fileContent: fileContent
             };
             
+            // Add to global scripts
             scriptsData.push(newScript);
             
-            // Save to localStorage with a global key (not user-specific)
+            // Save to localStorage with a global key
             localStorage.setItem('allScripts', JSON.stringify(scriptsData));
             
             alert(currentLang === 'en' ? 'Script created successfully!' : 'تم إنشاء السكربت بنجاح!');
@@ -2056,16 +2123,19 @@ end, false)
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize download counts
-            scriptsData.forEach(script => {
-                script.downloads = getDownloadCount(script.id);
-            });
-            
             // Load scripts from localStorage
             const storedScripts = JSON.parse(localStorage.getItem('allScripts'));
             if (storedScripts && storedScripts.length > 0) {
                 scriptsData = storedScripts;
+            } else {
+                // Save initial scripts to localStorage
+                localStorage.setItem('allScripts', JSON.stringify(scriptsData));
             }
+            
+            // Initialize download counts
+            scriptsData.forEach(script => {
+                script.downloads = getDownloadCount(script.id);
+            });
             
             // Add CSS animations
             const style = document.createElement('style');
