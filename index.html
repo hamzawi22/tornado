@@ -1694,31 +1694,46 @@
                 requirements: "ESX Framework, MySQL",
                 fileContent: null
             },
-  {
-    id: 4,
-    title: "Script Title 4",
-    titleAr: " 4",
-    description: "Brief description of the script 4",
-    descriptionAr: "وصف مختصر للسكربت 4",
-    icon: "fas fa-cogs",
-    uploadDate: new Date("2025-05-11T17:31:02.984Z"),
-    downloads: 0,
-    category: "Misc",
-    categoryAr: "متنوع",
-    image: "https://source.unsplash.com/random/800x600?sig=4",
-    fullDescription: "This is a placeholder full description for script 4. It offers a variety of features.",
-    fullDescriptionAr: "هذا وصف تفصيلي تجريبي للسكربت 4. يحتوي على العديد من الميزات.",
-    features: [
-        "Feature A", "Feature B", "Feature C", "Feature D", "Feature E"
-    ],
-    featuresAr: [
-        "الميزة أ", "الميزة ب", "الميزة ج", "الميزة د", "الميزة هـ"
-    ],
-    installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
-    installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
-    requirements: "ESX Framework, MySQL",
-    fileContent: "https://cdn.discordapp.com/attachments/1345482661719838771/1381687020568444979/alpha-phub-main.zip?ex=68486bd0&is=68471a50&hm=66239155dc45537049933216c04c157346db0b20a1862dcee9fc06ea5d8228a2"
+{
+  id: 4,
+  title: "PHub Job Control Panel",
+  titleAr: "لوحة تحكم الوظائف PHub",
+  description: "A sleek and unified control panel for all jobs in your FiveM server.",
+  descriptionAr: "لوحة تحكم موحّدة واحترافية لجميع الوظائف داخل سيرفرك.",
+  icon: "fas fa-cogs",
+  uploadDate: new Date("2025-05-11T17:31:02.984Z"),
+  downloads: 0,
+  category: "Job Systems",
+  categoryAr: "أنظمة الوظائف",
+  image: "image/phub.png",
+  fullDescription: "PHub is a universal control center system for all official jobs in FiveM servers — including police, EMS, fire department, national guard, and more. It features a sleek and professional interface allowing job members to monitor their department status, view active members, and access essential tools and shortcuts. The script includes real-time status display, quick-access buttons for map markers, callouts, report systems, and integration with external systems like MDT or dispatch. Its responsive and stylish UI offers an immersive roleplay experience. Fully customizable per job or department, PHub fits any theme and works seamlessly with QBCore or ESX frameworks. Lightweight and easy to install, it's ideal for servers seeking organized and realistic job management. All texts, icons, and colors are editable to suit your server branding.",
+  fullDescriptionAr: "سكربت PHub هو مركز تحكم متكامل لجميع الوظائف الرسمية في سيرفرات FiveM مثل الشرطة، الإسعاف، الدفاع المدني، الحرس الوطني وغيرها. يوفر السكربت واجهة رسومية احترافية تتيح للموظفين متابعة الحالة العامة للوظيفة، عدد الأعضاء المتصلين، وأدوات تسهّل الوصول إلى المعلومات الهامة والمهام اليومية. يدعم السكربت عرض مباشر للحالة التشغيلية لكل عضو، مع زرّ تحديد الموقع، إدارة البلاغات، الدخول السريع للأنظمة المرتبطة مثل MDT أو Dispatch. التصميم أنيق وسريع ويمنح تجربة استخدام سلسة في بيئة العمل داخل RP. كما يمكن تخصيص السكربت بسهولة حسب الوظيفة أو القسم. مثالي للسيرفرات التي تسعى للواقعية والتنظيم الإداري، ويدعم كليًا الأنظمة المبنية على QBCore أو ESX. خفيف وسهل الدمج، ويدعم الترجمة والتعديل على كافة النصوص والأيقونات.",
+  features: [
+    "Unified control hub for all jobs (Police, EMS, Military, etc.)",
+    "Real-time online staff tracking",
+    "Full support for QBCore and ESX",
+    "Clean, responsive UI design",
+    "Quick-access buttons (Reports, Locations, Calls...)",
+    "Compatible with MDT and Dispatch systems",
+    "Fully customizable per job",
+    "Editable texts, icons, and colors"
+  ],
+  featuresAr: [
+    "مركز تحكم موحّد لجميع الوظائف (شرطة، إسعاف، حرس...)",
+    "عرض مباشر للعاملين داخل الوظيفة",
+    "دعم شامل لـ QBCore وESX",
+    "تصميم احترافي سريع الاستجابة",
+    "اختصارات لأهم الأدوات (بلاغات، مواقع، تقارير...)",
+    "تكامل مع أنظمة MDT وDispatch",
+    "قابل للتخصيص الكامل حسب الوظيفة",
+    "دعم كامل للتعديل على النصوص والألوان والأيقونات"
+  ],
+  installation: "1. Download and extract the script\n2. Add it to your 'resources' folder\n3. Add 'start phub' to your server.cfg\n4. Configure supported jobs in config.lua\n5. (Optional) Integrate with MDT or Dispatch",
+  installationAr: "1. نزّل السكربت واستخرجه في مجلد 'resources'\n2. أضف 'start phub' في ملف server.cfg\n3. عدّل ملف config.lua لتحديد الوظائف المدعومة\n4. (اختياري) اربطه بـ MDT أو Dispatch",
+  requirements: "QBCore or ESX, MySQL, Optional: MDT/Dispatch System",
+  fileContent: "https://cdn.discordapp.com/attachments/1345482661719838771/1381687020568444979/alpha-phub-main.zip?ex=68486bd0&is=68471a50&hm=66239155dc45537049933216c04c157346db0b20a1862dcee9fc06ea5d8228a2"
 }
+
 
 
             
