@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1123,6 +1123,7 @@
     </style>
 </head>
 <body>
+    
     <!-- Language Toggle -->
     <div class="language-toggle" onclick="toggleLanguage()">
         <img id="flag-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23006c35'/%3E%3Cpath d='M0 0h60v13.33H0z' fill='%23fff'/%3E%3Cpath d='M0 26.67h60V40H0z' fill='%23000'/%3E%3Cpath d='M17.5 14L22 17.5 17.5 21 13 17.5z' fill='%23fff'/%3E%3C/svg%3E" alt="SA Flag">
@@ -1538,6 +1539,7 @@
     </footer>
 
     <script>
+        
         // Language Management
         let currentLang = 'ar';
         const translations = {
@@ -1595,120 +1597,151 @@
 
         // Sample Scripts Data
         let scriptsData = [
-            {
-                id: 1,
-                title: "Advanced Police System",
-                titleAr: "نظام الشرطة المتقدم",
-                description: "Realistic arrest mechanics and MDT integration",
-                descriptionAr: "آليات اعتقال واقعية وتكامل مع نظام البيانات",
-                icon: "fas fa-shield-alt",
-                uploadDate: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-                downloads: 0,
-                category: "Jobs",
-                categoryAr: "الوظائف",
-                image: "https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1476&auto=format&fit=crop",
-                fullDescription: "This police system features realistic arrest mechanics, vehicle impounding, evidence collection, and a comprehensive MDT. Designed for serious roleplay servers with customizable ranks and permissions.",
-                fullDescriptionAr: "يتميز هذا النظام بآليات اعتقال واقعية، حجز مركبات، جمع أدلة، ونظام بيانات متكامل. مصمم لسيرفرات لعب الأدوار الجادة مع رتب وصلاحيات قابلة للتخصيص.",
-                features: [
-                    "Dynamic arrest animations",
-                    "Vehicle impound system",
-                    "Evidence collection kit",
-                    "Mobile Data Terminal (MDT)",
-                    "Customizable ranks & permissions"
-                ],
-                featuresAr: [
-                    "حركات اعتقال ديناميكية",
-                    "نظام حجز المركبات",
-                    "عدة جمع الأدلة",
-                    "محطة البيانات المتنقلة (MDT)",
-                    "رتب وصلاحيات قابلة للتخصيص"
-                ],
-                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
-                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
-                requirements: "ESX Framework, MySQL",
-                fileContent: null
+          {
+    id: 1,
+    title: "Advanced Police System",
+    titleAr: "نظام الشرطة المتقدم",
+    description: "Realistic arrest mechanics and MDT integration",
+    descriptionAr: "آليات اعتقال واقعية وتكامل مع نظام البيانات",
+    icon: "fas fa-shield-alt",
+    uploadDate: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+    downloads: 50,
+    category: "Jobs",
+    categoryAr: "الوظائف",
+    image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTExMWFhUXGBcYGBcVGBgYFxUYGBcWFxcWFxkYHSggGBolHRgVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLS0tLy8tLS0tLS0tLS0tLS0tLS0uLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAIDBAYBBwj/xABREAABAwIEAgYGBgQKBwgDAAABAgMRAAQFEiExQVEGEyJhcZEHMoGhsdEUI0JSwfBys+HxMzVic3SCkqKy0hU0NlR1k8IIJFODpMPT4hYmQ//EABoBAAIDAQEAAAAAAAAAAAAAAAACAQMEBQb/xAAuEQACAgEEAQIFAwQDAAAAAAAAAQIRAwQSITFBE1EFIjJhkRRxobHR4fAVI8H/2gAMAwEAAhEDEQA/AKVcinxXIr2B5kbSmu1C/cJRGYxPOoGV+CZCiDIq05eFQg0HRirJOXPB75A86lubkJB1E5SoDmBvrtSShGXJZFzjwT1bw1nMo6xArOJx1O0E7Qdt958KM4fetkyFAkcAQT46Haoyu4tImEHGScizftZVeNVanuHsxqKKnGmopMSbTk2htKnUqsEG10CuxRAWyQ3m1JPuqvJkUB4QcgcRSqR1UmmhNOnxyK1zwNpVdtLFazoPOiVxg0IkaqqmepxwlTZbHBOStIHYRglzdFf0dCFBvKFFbmTVQkAQkzpHmKhw3DLh95Vu2hPWo6zOFrypT1aw2qFZTOpEabVvPR+y63ZlbbeZTt32hIENpcQw4vtETCG1GBrymquBWvV9IL0cF2/Wj+upgH+8lVcjJ8QyqUknx469/wCxvho4bYtr9/wZHFsFurZbSHmkpLy0ttqCwWlLUQAgriUnjqnUAxMGGnCbkXIs+rR9IJ2z9jLkLmbPl2gEbb6VaN64ejZdUpS1t3KSgqJURluUlME68/OvQBYpN8nE/wD+f0EjunMHAr+wVCq/+Rz+/wDCG/R4n0ed4V0fvLgvBpto9Q6plwqdIHWJAKgkhBzAAjXTeoMJwu4uVraZQgrbB6wLXlykLUgpBymTmSeVbv0aB4Yey6lGZVzcOPO6pGVLi19syROiUbSddqrdELfqcZxNJ0TCHB4OEuE+aleVEfiOenb/AIQPR47VIw1vavrt3LpLYLTTgbWM31oX2AUhsJ7RBWkb7g0b/wDxjEGmy6q3GUJzFKXEqdA3PYiCRyCj3TW2v8KSwy+URlevbd8AcCt21CvNSVH+tWE6fdJLuzxZ5VuvdlpJSsFaADrITMA6b0frdRke2/4RP6XFDlhXC8Nvn2Gnm2WurcbQtBU/ByrSFJkdWYMEaTTcPwq9eSVoYbyhbrZl+DmZcW0uB1e2ZCo5iNqmvbO1dwrDPpN6q0At2spQrLnJZbkHw3oQ1dOI6P2K0rUlf0z1gohRm6fmTMmeM71jeSTNFJBa1ePaSpKkLQcq0LjMhUAwYJBBBBBBIIINBccyZtPW40S6fXJRihSNlWzJPiHHxPjHwrPP6kmunoINvdZj1k/l2kIFKKdFKK7JyzgTXIqRBikU0t80TXBHFObVBBHClFKKZqyLDthd5HEnfNvR43PdWHbVBBo43iyIEzNcnVaZ2nFWdLTahU1J0AyabT4rkV1znEahWSxG7UtUKiEzA/GedHsavurTAGqgddIGw2nvrJTVU5eDRhh5HE611TkwCTA27vDuqzY2BXrMCiqMHZ4qPjIqh5EjXHG2Z6r+F4iplUgBQMSDxHKeFSYhhgSkqQqQPA8eYqDCy1n+t24HXf2efsqYyUhZpx7NhXYpJqVB8K1WYKBl46Qd4irbJkAnjUGJ20qRrEnXcyJHIb0XGHqCZjSq/USfLLXjbiqRSAohbOLKcs9n2VzEGUptHlA9oNrM8QYO1aPox6OMMdsrV91lRW4wy4tXXPJBUttKlGAsAak7VztVrkntUbNODSvuzKOWqgdRRfDMNOWTxFEcf9Hot2zcYatYUgZiwtZcbeSNSkZiVBUbGe7SZod0SwhWMZn3Vras0HIhptWVTy4BUVqH2RMQN+6Nc+T4jKcKqmWw0ijKy6YQIFcReUWd9FuGKBDIcac4LbfcUpJ5wtRHurKdEuiKbi/vLbEZeVboaCClbjYUFFRCwEKHrJynjBmsTy32jVtrgix/pORZWVvZvOJeSCt7J1jZC8slCiQJBWtRjX1a0SemGH/6RTdF/KFWZaXLbnZWHULSk9neCv8As1jL/CGLfE7llsFLbXVZElSlRmbClaqJJ1POlaYIy/iNoy4Cpt5TudIUpM5WlKGqSCNQNqTb8u4my10mxmxRYIw2wU48kuBxxxYIiF9ZGqUyoqy7CAAeNE3OmjCMEValwi6DCmA3lVm3LYVmjL6kK3qn016FNMX1lbWCerVcB0KKlrcAy5SV9tR9VOcwN4rXseivC0pAeDjqzutx5xJUeOiFJA8qLW2iKlZiukfS9LdvhzGH3CiGEAvdXnRJQlsJQqQMwP1kitIemOGi/fuBcjK7aNt+o5/CIW6Y9X7qk+VZn0h+j9FkW3rdSiw44htaFGVNlREFKtyk6jXUEjUzpvXPRbhA1LCgO998f+5Q9tcAlK2ZSw9IDH+iGkOrm6aLALcKlwMPNqBCoyyUJB1O81ZxXH8BcdcvnFG4dW0lAt3GiQCnaApEJXwKiqIqv6RuhWG2tit62RldSpoA9c4vRTiUq7KlkHQnhWQ/0E2dRWjT6f1rrwU5s3p1uNY7e4PeYfYMXV6tlduy2CGkmQvqkJUklTSgYI4VJhWKYOcPas37tQSxcuuJhK860puXltFRDcdpCkkwAdeFYi9wZtJb+6p1pCtY7KlAK14aV66PRlgx0DX/AKh7/wCSkz4nilsY2LJ6i3I87x/pEm+xBT7YIbShLSM2ilJQVqzkcJK1QOUTB0Ehor6ROhlvZ/RPoDRQ88+GhLjiwrMkwCFqIAmNa0lj6K7BLY+lqW+6fWWp1baSeIQlChCe4ye+tWn10cOPao8/uUZdJLJO2zDRSor6Q+gosrZd1ZOLDaRDjSlFYCVHKHG1HUEEiZJ0MzprpsO9GeFqYaWtlcqbQpSi+8JJSCTosAamtD+KrxH+SpfD5XVmFilFG+mXQY2LarqzWtbKNXWHFZ8qOK21HURuQZ0kzpFBGlhQChqCAR4HWtmm1Uc6dcNGbNglifIopRT4pRWmygZFdCaeE1et2URqde6q55No8IbihFcipSK4RT2RQEx1gHKSBBMFX2tjlAngTWUCZIHOvRCmgWIYEFKGQxofCZJ0jbfjVc4t8o0YppcMGItiUgBQgcOdWLTDwQpJJ121493Om3LKm1DNpMx5/nzqIrSTOUe1UTWKTadHRhT5RYFllSqVaEEQPjrQ2xtsy8kTqNQY0mCe8RNGbb6xQG3vjvoqxYpSUkfZSU+MkH8+Jq7Am+SjUzUeEK0t8icsyBtMAgctNN54VPFPy0orXZzys6n6xr9IfEVrFXAAANZK6MONHv8AxFFDrrPnXO1cJSlaN+nklFJjekagLd2NihXwrXX3+zKf+HM/qUViMecH0ZwTPYV8K9Q6OPMowe1VcZepFnblzOJTl6lE5gQZFc3VRaav2NWFp3QH9CK1HDBmJyh1wInYJ7Oie7Nn99WPRAlIsFBHqi4uAmNsvWGI9kUH6Wek20atyxh5C3CnKkoSUtMg6ZhIAJHAARO9EfQimMLSOTrv+KsqLU1dGL9AQ/73cd7Inv8ArBvzrf4N/Hd//R7X/rrAegL/AFt/+YH6xNb/AAb+O7/+j2v/AF1C6CPSPNenD2XGbrvLX6pFXuj6knFcOid39/5hVC/SB/HNz4tfqkVf6Mfxrh/i/wDqF1tWOL0zl5/yZpTazKJvekX8d4X/ADd5+rFYj0+Im6tv5lcd3brb9Iv47wv+bvP1YrG+nJQF5bE7dSv/AB1j/c0S6YM6QekZ69ZRbLtkNpLrJKw4VHsOJOxSNyK9P9J3R56+suoZCCvrEK7ZyphMzrB514OW4U2cqx9Y3qpCkj1hxIivfPSP0iesbTr2A2V9YhEOhSkwqZ0SpJnTnUur4CPTs8L6RdDrjDy0bhDQ6wqydWoq9TLMyBHrCimCuKKdar9Jel1ziCmvpKWQGiop6pK0znyzmzrV90cqJYWgZRFdX4emrs5+rrpD79lK0FKgCDwrNYHaoTiFnlQB/wB6t/1yOdaZ15Rc6ppl15eXMUtIzFKZiT7aGsDLf2aFNONOC7tiUOpyqyqcSQY5VOvnikmrW5fkXTKa8cHrfT7/AFnCv6aP1a6y/wD2gkgtWk/fd/wprUdPv9Zwr+mj9Wusv/2gP4K0/Td/wprjs6cumHMcP/62f6A1+qRRDpJg7l3hH0doJK1tMRnMJ7KmlmTB4JND8c/2bP8AQGv1SKJ9IMZcs8J+ktBBW20xlDgJT2i2gyEqBOijxqSSG8R9AwRaLhYcU3bKbUdwtSgUIQCdxKkpE91eSdHXvqkJ5ACvWegfShOK2zqX2UhSfq3UDVtaVpMEA6wRmEGdt68otrD6Pd3FuDIadUhJO+WZTPfEVt0E9uWvcyayO7HYXilFPCa7lrv2ciiOKcDToruSobRKTOERXIoX0qC5HZPVwTPDNtqRynbSm9FLySWld5T7NxVHrmj0QrFcy0M6Q491Si22kZgBKjqBPCOdZS5xN1ZlTivYSB5DSoecZYbCGO33WLKBEIJAjcnifDSqDD6hpAPjVAmrNpcDXOfDT5VmnK3ZrxLaqDGF3hQ6mQDnOWfuztFaoCvPLi5KjpsDpz8avsY88n7ebuVr796txZdqplOfHulaNrlruWguH9IOs0KAFAE77xqY0o8BWpST6MsoNdg29H1jfj+Iq9lqnf8A8K34/jRBWgk8KWL5Y0l8qB+Mj6h39BXwrfXv+zKf+HM/qEVgnr5laFBShBBBBI1HsNZG9uyAW0vvFsDLkLqijKNAnLMR3VzfiGNzkpL2NWlltTTRXYaJiBXs3oTxZv6OuzUQl5txawk6FaFwcyecGQeWnOvNsADZGpA8SB8aZj7aJCkqGYagpVqO8EHSq8mm3Y1JPkshmanVHtfRPoLa4atx5pxw5kZT1qk5UpBzcEjlueVB+g+MN3eL4i60Zb6thCVDZYRnSVDuJmO6K8VuLxxYyrfcWn7q3VKSeWijFK3cWiS24tExPVrUmY2nKdax+jIv9T7HvGP+jO2urly5W8+hbmWQ2pAAypCREoJ2A41nz0TbsMWwzq3nnOsVcz1ygrLkYMZYAj1jPgK8uF/cf7zcf85z/NSU+4ohReeKkzlUXVlSZ3ykmRPdUPFNKg3RfNHsPpAxZu1xXC33TDYFwlSvuhYQjMe4FQJ7gaN9K+g9riSmnXHHBlSQktKTlUlRCpkpM+I518/3ClrILjjjkaDrFqXE7xmOlJh51sZW3XUJ3yocWlOu+iTFSsMmDyLyey+mHGmkMs2gUC648yrKDqhCFhWZXKSABz15Gtd0r6ONX7HUOqWlOZK5bICpTMbgiNa+Z+qkk6kkyVEkqJ5k7zVk39z/ALzcf85z/NU+hMPVRvunvo6trGzXctOvqWlTYAWpBT23EpMwkHY1TsGYSBWMXcurEOPPLTIOVbi1JMGRIJitbgjpUnWt+gi4t2Y9U7SaC3RLFG7XFAp4hLb7PVBZ0SlwLCkhR4AxE8zW7xboHbXF63fLW6HEFpQSkpyEtHMmQUzvE615fj1oFtkESKyXXPIGRLzyUjQJS6sJA5AAwBVGr0z9RteS3T5lsp+D1X0o9LGWryxQDnNu+HngnXImMuUx9vKpSo7hzrV9JujNrizTKlOqyJlaFsqTCgoAblJkaCvndq34AVM0XWpCHHWwTJDa1IBPMhJ1NZ3glVl/qq+T2j0oX7FlhJtAqVLaSw0gmVlKQlJWe4JG+0wONaO5wVF5hyLZxSkocaZkogKGXIsRII3SOFfNy0FSipRUpR3UolSj4k61YTd3CQAH3wAIADrgAA2AAOgqPQmHqqz3dCMPwK0VBIklUKUFPPriAANJ4DQADfTU14xh9+t24ceX67rinFDgMxmB3Db2UE7SnCVEqV95RKlHxJ1NaHALI5pitGmxSU0yrPNONGqtmpqwu3FNaJAinKNdKbybuDHD09vJB1VShFKuyab5mJ8qMm9ixcORRTlJmYIIGnl++ht/dhsBLRAUR21CcxnXKDwG0xVl5CCmQZVwSAdTpMe+hOJsBM9nKR46iYkTuDIrI8qun2a/T44KS10wmoyqi1m+2lAzZJhXKZ4E99JkybVdWMogquGjDmJIA0VJg7T3xrpzoVcuBSlKHEk0sMjl2qJoaDVtq3zJkHYSe739xqilVStPEbGmk3XAUvJKhUGtZgeJuOJUiZUkSNsxH4xWOJ40c6NqKVZ0iVCSBMaRGuuxOlOs2zliPHu6NE3ZuuGTmkbEpyx4ZkirSsKeI1VPivzBiqbXTQD1mR/aI/A0VsOlKHVBKbdZJ4JUD8Ygd5q5z8lVS9garAF/yfPfxih110XUTO/t+daXGekbLYhKcyuOvZB5SN/ZWSvOlDqtiE/ogD9tJ6kZeP6AnPx/6Wbfo8UjgD+eQNVsVt0tJGaFknQCduOsUNdxh07qV5mqyr1R4nzNNuVUkMt98hTDsHNwlammwSjdOftnvCSNfOrWGWjbgy7LBgoIgjmdd6C2eJuNrStJIKTP7D3GreJY0p5fWZQgxrlJ176WKpjytoPtYIkjXQyR7RympBgSKyyMTX95XmatN42sEHMdNp1irNsH4KbyIPowZJEjXfumKVvhSXEBURVO26TqG4SfdV6xxtAGUDKNYJM6n2U6hBLoVyk3ySNYCkU5fR5BpiMQUTq7lHCUmPAZUmnG7WNOtE8ZCpHj2PhUNQ6GSn2IYAiiFpZBAgUNTdrJgvJ12JzAaf1Z91XA8QJ65Cj/AF48g3r4zSwUIOwkpSVFt1qaGXGCJUZqcX6j93jI7WvKOzpURv3Y0AnnB2q1yhLsrUJro5bYKlNPucHQrhT0XbkbBR7kq/EAVa+kKABKd+RMjx0pbx9DbMnYMbwFINdewJJoom6B+yr3fOum7Rz9xqdsBfnM5b4KkPkd3yrQ29qEjQVQFynr82sEctdv2UUFwj7wogoronJudDstLLUb1ylPM+FRi/TyV5VZuRXsZYy0stVl344JUT4fKo/9Ini2fz7KNyDYzI3CMgCs0nMYG206z7KDYk/OpEKIGk7AfPQ1JixAMDgpXE7SABr4GhjhrkyS3WdJPihs0ppk1yamwokmuE0yaU1Fk0IGng1GDXKLCiYKq9ht5kngeB3id9PKhoqRtUVD5VMOg1YWSn3SERGqidkpG5JPAUXvMRbt2y0wd/XXspw8u5Pd50EtMWUhktDQFWYxurQAAniBHvqgtwkyaa2+PBW4tvkuISt0/iTpUi8OUNiD4ftrmEXgQVA7GDtOo/fRBWJp5KPsFWJk0CFtAAzvoInXv05VXKu6p8QfzrJ4QB+NVpptwUOBroNRA0+amwo0OH2bDjQUQcw9aCRtx5VI7gaD6qlDxAUPdBqj0euFBRQCcp1IG20SR5eZo5bqcSEDMYTIOvL1VeOg86dNtCNcgd7BHR6sK8ND5H51RcQts6hSfEVqCXCkArPqkH9LTtCPf7Kr37BW2sEzIBA5KHLyFNyRwCbTFVo4n2be0VobPEA4JI2G4Gkba8qCOWKFsh1OhyyQNiRuI4bGosBxHqnJOqSIUOaTv+FDa8qyNvtwaptiQCELI4ENKI9mlOJXOUdaI3AbVpvGkdxqhh3SFbClBtUtkmAraDse40Rw3E3ioqLiFFQSn6wGQAVGYBA+0f2Ukoy8RT/JMZR8ya/AvpqxplcUYmMi5PnQx3EFEqPa4jshQAgGNlDXSdudFnW1mYUg67hJlfert6J8PLgcxdPOBahlG50IgcRInh7aVfeNfka76d/gPMYsRoEu+GZz/PT0Y4So9l06DTO5oddfW8PKgCbx0D1G/bH+ao231yTlb80xtw1qah5RPz+DSs42qB9W4dBJzO66b+vXHMbBynqlxv67uog/yvA+ys+l5wCMrf8Ad+dRqccybIgDunajbj9g/wCz3Dn0r67NlOh9XMqfV+9mnjzq2vE+0n6vQg6da5rt/L8aAErG4SFHaIy+2nKaeMaN6dw+VCePyiXGfg0QxxYSAkJEBfArMg6SZnjV1npEdAUIngdYPhr7qytu059sAiDASY33q4lGmuunHj8j/KFMoYX4FbzI0Zx5XBtHvrhx5f8A4aPfQFtwgwZIjQnfwI4nvqbOKZYcH2EeTP8Af8GFxhZLq5+8rjO6idDx3340OXRR+xcU4sDWFEEzGoqo9YrHLzPyrnykkzTGLfJRrs01Q1IpRUWTQiaVcNKiwFXUqpo2rqRRYUOzU5BqM0Swqyz6xI4kmB+2o3UNGO7hDbBjrFpRmCZMSrYeNbKx6NtjVV40JEeroP71Acbsm0IBQACCNRQbrz94+ZqN78C5Mbi6NDjOFNNaouW3e5IIP4iqAsXCJCSRwIIM+Rocl+NZpzN84mIcUByzGPLaroT9xNrOzBVPOPKkckd/tqPU6wT7KcGVcvhT2HBxCRG+tNJqVNud9PjThbDiaamLuQ7Drrq3AqJGoIHePnFFF9IDwQPafkKGoYTyqdsAbAewU8UxZSRMcYfVsAPBPzpheuFbrI9oH+GnhJ5U7J31bt92Ju+xVTZnir2DWpm7NI4mpctIjuqdqI3NnRCamauCSAnc7bfjUS06aGagQYII3FQ3T4F232Gm+u5Rtx5+FSKznsrKSN4OvxoYl5R+0fP2VIimUm+yNiXQ82RJlKDHcE/jXU4er7v6v51fsUFQOUTFXOpc+6ryNYsj2yaN+OO6KYG+hLH2fLq/wri7F3bbuKkj3UZ6wjiR7a4Vzvw7hSbyz0wIqzd5g/1pq02yuNVf31fgKIEzvB9grunIeZ+dG4NgODZP2wf6y/lUiGFHXMP7R/E1dKQfs6e38aQQj7v58qNwbCki0WTA85n4Kp/0FXH8f81Ww2nkR+fCkQOZ93zo3hsK2PpbbeKkAwoAn9LUH4Cg90gKEiK2PSTBlFouSJQJjmnjvy3rJMrTEVmk14DTu4UzK3bJSrXjqKimjGLWk6jfh8qBmmUiJxpjiaRNMmuk0WLR0HSuhVRzSBosmiZIkgDiYrW2NvlTy5UCwW2k5jR19+BSSZfijXJTxdwBEEzJ+GtAiRyq/dKzmeHCq5ZrRHHSM2TJciNB7hVttfdUSWqcVAVYko9lMuSbPSzVAFk7Cp27RR3MUyyX9KsjZXZwuDnXUGdgT+edWW7ZA7/GuuGO/up0peWLwcbaPEAe81aA5aVC2SQeXwnTWp7BxKzGp5AA6nxAMDvp1NRIabFkroRUqFIJgBSifst9uNYjynX9k2V4Y4oDshoc3Fj8JNHrRDYyD6MYBjfgN/GnpslHhw+JirjFkEjW4P8A5af+o6U9bDR3Dqv0lwO4AJquWqhHtoZYZMHPW4SCBG3kSJ+W9BXLkCj2JPMtIMMj+2o1kHFySYjuHCklqFNfKPHC12Emb/XUeVWl3YjSgBNWrdelL60kqGeJGkwZ+VGeX40ZEeHuoJ0Zy5lZgSIGxjj4GtGEN83B/ZV8CKolO3ZqxRqIwOL4KV7D+2kXV8SD4gH40ltN8HfYpJHwmoVGOM+E/jS7iyiTrDySfBI+IpBQ4pHv/A1CV/mK6F/nap3BRJKOXvI+M12U/wAr+0PkKjzDv8qWnd8PjRuCiWE81D+qD+NdAT94/wBn/wC1RJQf3a13MfvfGo3BRh7i7UrVSirxJPxp9ldz41RUarBcGRUyXBlxOmanLmFZ7ErYpX3KP76LYZdhQg71burdK0kHu8xsaqTo1SjuXBm0siYjjVZxOpHI0SeaWgwUnx4eNDVmSfGrG0UUNpzKCowNSaexZrX6qSRz4edXHcNU2jOTryE/Gosag1h9uG0RxoZjF39kcd6SbooQDmKp0gmeG9U7aDKl6knjQo88jPItvBebHZBPIfCrGIsBtKSDJO88+6qrX1jiU8J27hqfdRnFrfM2TxTCvLf3En2U2TU1JRRmjj4bZniompm2B9o+wVEF8q4VGoUl2+Qouh9KdBSTcFRgDX8+6qaNxInu591HcLtVlAW2kKKiQY+yEgZYTzJ110kCasWWT4QrikU0sOlWUJMyR3SDB120JqX6OlIlxYnghMkn1YkjY69229FU4Y5ADzobSPsIJUs7anv0GvtqzbNNtfwTYB++vtL9nBNLPKo/U/8Af2JUG+gemwccTojq25nM4cs6ADs8Txnvq5aYey2Ilbs7gkobPiNz7ZqwG1uGdVfyjsPA/KrrWHpGq1ewaDad9zseVIpZJ/Qq+7H2xj2ysH1DsphI+62I+GtSN2Titcsd6j+81bTeNp7KEkz90aHlqYHEVGnEyqcojVIBIKtSkq1A8I0O5p/QT+uTf9CN9dIcjDOa/IfiflUhsGxvPtVHwiqbj7p3VkBB3hOUymYG55Txk91QNutZgCoLc01A+7mM68NR5CrI48ceoiuUn5M70ucT1oQkQEiT4n9nxoCTVnEnuseWrmo+Q0HuFVFA/Kob9ixIU1LbHWoQKmtR2qRsY1XR1nsqPePd4+NFiI7qgw5hKW0pMg7mRpJ3qylJjsnT3e+qXI0wjSOdYRxnxFc6wfd8jTwFcvL5VwoHEx46VFjUNzp51wCeR/PfTls+33+6oy3+f2UWA7LHMU3XuNOBIpxd5x5UbgoiJ7q71p5nz/bT8ye/8+NdKRzqdwUedldVlU4Kpk09vyYlGiVh4pUCK0ljeAgE1liKns38pjhStFuOdcGyzJPDyoPiNk2VSd+7Se41G04TtMc5iPbUqFpG0rXz5Utl7phSyaCUAmB3cqrYhcCCOFQJuoHaOvLlQbELmTlHt+VQuQk1FFVwgkxtwpzZimCrFl/CI/ST8RTvoyML4Cx2isjQCB3k8vL30ZNwk6bj4zwqTqMxE7DXjOn7vdUl3bADUCOHlPyrG1LJ86XCLUkuGA04H/L/ALo/zVat8Eb+2VkcSIBHgNdfOibYJ0A15fuqwixcPAAfyjr4wJp8c8s+UhXGK7KjNrbo9RnMebpn2xqPhVhd0s6ZoHJHZHsjX31bThqR66/Lsj5+8VI8+ywJMCfM+0/OtKxZpfVLavsJugulZTYsVq4ZRzVp7tz7YqV1pDZAPbVlUqDxyxASkczznaprzEwhkux4A+35UEvMXeKW4ISpzUDkNdZEGrY4cePrliOcmES67mSVKIRM9oZJECAACD6wPZIOhqkXWkQXHZMk5UxrmSUmSQMxg71VYslqJUpwqy6qjQcTEDc6c6oW9ykZlFGZSlaE6AcAJkHlTtsWg2rEmQyVIRICgkBUkSSojTTmfMb1FcXzxWUJUlAABUQIgq14RJqr9Fy9ShR7S1FxUbRvr3VNh2GpfK3VzBWYHhRbfAFa+aKcgWorz9oxuUjhAGkmKvsoQ2wt4IymFRMTEcY75qa3hVwpah9WhISidu+q3S27+oISNCQNtN6lKrZKMYk0SSpBSRM90eX57qFA10Kg0sZuJY42ICtD0btEkFxQmDA5DQGe/es8K1eAJAaGupJPvj2aAVVkdItxq2GJHDTx/bXcxHMeFRQfz+yltsazmkm648dfEU8LSRrp7xUAXwIpwA50WFEqWwdUkHwMUi4RufPUVCscx+BrocI4+fzosKJAru9qTSVH79KaVD7ST4j8zTkQdlT3EUWFHC3pXMh5TTi2eUfo/L9lcg8x7aLA8xTNOFdpVoMRyuEUqVQQia3ejQk5eVXhiSQISAPD871ylUUWKbRXfv50SI7+NVQaVKihZNvsdUjKoUk8iD76VKhio3DS06xrB46wY4T7aiuXCRJVJ1AEbAydPbG+pgUqVYYzcY7fBq2pqwzhAGUq4zHuBpYxiXUokCVHRI5mlSrqYuMKa9jFL62Zp5LywVqdg92sdxIMgezSm4qjq1NIVqdFKgCSqJGg33FKlRXAtncTv3HUhCk5UlSRBgHu7O9PvwhTwCjlShCQSDEGNR5g0qVQ2ShyLxCGnEM6zpIB3kd54TJmp38P+paQnRW5J5yI7zx86VKmgt3YPgnGHlSsyiScuURoAnlty02q/b2uVISDAHAUqVWUl0CK91its16y0lQ4DtK90xWZ6QY+l5GRCSBIMmOHdXaVVObfBYopAAGugVylSDDgaIW1xEd3KlSoskKW98obK/P41eaxEH1hHhXaVQ4Jjxm0XkOAjQiPzw/GuHy/O1KlWaSp0aIu1YpI0+P51rpdH7qVKoGOhY4T7IjypLHdNKlQB1DhHGPH9tSm5X90HzpUqh+4I//Z",
+    fullDescription: "The Advanced Police System is a complete solution for enhancing law enforcement realism in FiveM servers. Built with immersion and control in mind, this system offers a set of robust tools to simulate the duties of a police officer in a roleplay environment. Players can handcuff suspects, drag them, escort them into vehicles, and process their arrest with documentation, photos, and digital reports. Officers can also collect and analyze evidence at crime scenes, such as fingerprints, blood samples, and bullet casings. This evidence is linked to a powerful Mobile Data Terminal (MDT), where officers can manage suspect files, issue warrants, and update crime logs. The system also includes impound mechanics to seize and release vehicles with legal protocols. It supports GPS tracking for units, lockers for weapon and evidence storage, rank-based permissions, and real-time dispatch alerts. With support for qb-target, ox_target, and integration with QBCore or ESX, it ensures performance and compatibility. Custom ranks, realistic animations, evidence tagging, full jail workflows, and ongoing support make it ideal for any RP server looking to take policing to the next level. Whether you run a whitelist serious RP or public server, this system adapts to your needs with full localization, optimization, and extendability. It is regularly updated and tested by RP communities to meet modern standards in server roleplay police systems.",
+    fullDescriptionAr: "نظام الشرطة المتقدم هو حل متكامل لتعزيز واقعية تنفيذ القانون داخل سيرفرات فايف إم. تم تطوير هذا النظام بعناية ليمنح اللاعبين تجربة غامرة وشاملة كمجموعة من الأدوات المتقدمة التي تحاكي مهام رجل الشرطة في بيئة لعب الأدوار. يمكن للاعبين تقييد المشتبه بهم باستخدام الأصفاد، وسحبهم، ومرافقتهم إلى المركبات، ثم إدخالهم إلى الزنزانات مع إمكانية تسجيل البلاغات، إدخال الأسماء، وأخذ صور المشتبه بهم. يتميز النظام كذلك بإمكانية جمع الأدلة من مسرح الجريمة، مثل بصمات الأصابع، عينات الدم، وأغلفة الطلقات النارية، ليتم ربطها بنظام بيانات الشرطة المتنقل (MDT)، حيث يمكن إدارة الملفات الجنائية، إصدار مذكرات توقيف، ومتابعة الجرائم. يشمل النظام أيضًا خاصية حجز المركبات المخالفة وفقًا لإجراءات قانونية محددة، مع إمكانية الإفراج عنها لاحقًا وفقًا للصلاحيات. يدعم النظام تتبع المواقع باستخدام GPS، ويحتوي على خزائن لتخزين الأدلة والأسلحة، وصلاحيات تُحدد حسب الرتبة. تم تطوير النظام ليتكامل بسلاسة مع `qb-target` و `ox_target` ويعمل مع QBCore أو ESX لضمان التوافق. النظام يشمل رسومات متحركة واقعية أثناء تنفيذ الاعتقالات، وتوثيق الأدلة، والتعامل مع المشتبهين داخل الزنزانات بشكل متسلسل، بالإضافة إلى تنبيهات فورية من العمليات الأمنية. يدعم النظام التخصيص الكامل للرتب والمهام، مما يجعله مثاليًا للسيرفرات الجادة سواء كانت عامة أو خاصة. كما يتم تحديثه بانتظام، ويوفر وثائق ودعمًا فنيًا لتسهيل التثبيت والتخصيص حسب احتياجات مجتمعك. في حال كنت تبحث عن تجربة شرطية واقعية ومتقدمة، فإن هذا النظام يعد أحد أفضل الخيارات المتاحة حاليًا في مجتمع فايف إم.",
+    features: [
+        "Dynamic arrest animations",
+        "Vehicle impound system",
+        "Evidence collection kit",
+        "Mobile Data Terminal (MDT)",
+        "Customizable ranks & permissions",
+        "Real-time GPS tracking",
+        "Evidence lockers and weapon storage",
+        "Dispatch alerts and logs",
+        "Integration with qb-target and ox_target",
+        "Support for QBCore and ESX"
+    ],
+    featuresAr: [
+        "حركات اعتقال ديناميكية",
+        "نظام حجز المركبات",
+        "عدة جمع الأدلة",
+        "نظام بيانات الشرطة المتنقل (MDT)",
+        "رتب وصلاحيات قابلة للتخصيص",
+        "تتبع GPS في الوقت الحقيقي",
+        "خزائن أدلة وأسلحة",
+        "تنبيهات وتسجيلات من العمليات",
+        "تكامل مع qb-target و ox_target",
+        "دعم QBCore و ESX"
+    ],
+    installation: "1. Download and extract the files\n2. Place the resource in your server resources folder\n3. Ensure you add it to your server.cfg and configure dependencies\n4. Restart the server and test the features",
+    installationAr: "1. نزّل واستخرج الملفات\n2. ضع الملفات داخل مجلد الموارد في السيرفر\n3. أضف اسم السكربت إلى server.cfg وتأكد من ضبط المتطلبات\n4. أعد تشغيل السيرفر وتأكد من أن جميع الوظائف تعمل",
+    requirements: "ESX Framework or QBCore, MySQL, ox_target (optional)",
+    fileContent: "https://github.com/i-kulgu/qb-policejob/tree/v1.3.6"
             },
-            {
-                id: 2,
-                title: "Vehicle Customization",
-                titleAr: "تخصيص المركبات",
-                description: "Advanced vehicle tuning and customization options",
-                descriptionAr: "خيارات متقدمة لضبط وتخصيص المركبات",
-                icon: "fas fa-car",
-                uploadDate: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000),
-                downloads: 0,
-                category: "Vehicles",
-                categoryAr: "المركبات",
-                image: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=1470&auto=format&fit=crop",
-                fullDescription: "This script allows players to customize their vehicles with various parts, colors, and performance upgrades. Includes support for neon lights, custom wheels, and engine tuning.",
-                fullDescriptionAr: "يتيح هذا السكربت للاعبين تخصيص مركباتهم بأجزاء وألوان مختلفة وترقيات للأداء. يتضمن دعمًا للأضواء النيون والعجلات المخصصة وضبط المحرك.",
-                features: [
-                    "Wide range of customization options",
-                    "Performance tuning",
-                    "Visual modifications",
-                    "Neon lights support",
-                    "Custom wheel designs"
-                ],
-                featuresAr: [
-                    "مجموعة واسعة من خيارات التخصيص",
-                    "ضبط الأداء",
-                    "تعديلات بصرية",
-                    "دعم أضواء النيون",
-                    "تصاميم عجلات مخصصة"
-                ],
-                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
-                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
-                requirements: "ESX Framework, MySQL",
-                fileContent: null
-            },
-            {
-                id: 3,
-                title: "Modern Housing System",
-                titleAr: "نظام السكن الحديث",
-                description: "Realistic housing with interior customization",
-                descriptionAr: "مساكن واقعية مع تخصيص داخلي",
-                icon: "fas fa-home",
-                uploadDate: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
-                downloads: 0,
-                category: "Housing",
-                categoryAr: "السكن",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1470&auto=format&fit=crop",
-                fullDescription: "This housing system allows players to purchase, furnish, and customize their homes. Includes multiple interior designs, furniture placement, and storage options.",
-                fullDescriptionAr: "يتيح نظام السكن هذا للاعبين شراء وتأثيث وتخصيص منازلهم. يتضمن تصاميم داخلية متعددة ووضع الأثاث وخيارات التخزين.",
-                features: [
-                    "Purchase and sell properties",
-                    "Furniture placement system",
-                    "Multiple interior designs",
-                    "Storage options",
-                    "Customizable decorations"
-                ],
-                featuresAr: [
-                    "شراء وبيع العقارات",
-                    "نظام وضع الأثاث",
-                    "تصاميم داخلية متعددة",
-                    "خيارات التخزين",
-                    "ديكورات قابلة للتخصيص"
-                ],
-                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
-                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
-                requirements: "ESX Framework, MySQL",
-                fileContent: null
-            },
+
+
+  {
+  "id": 2,
+  "title": "iPhone-Style Mobile UI",
+  "titleAr": "واجهة جوال آيفون",
+  "description": "A realistic iPhone-style mobile interface for in-game communication, calls, messages, and apps.",
+  "descriptionAr": "واجهة جوال آيفون واقعية داخل اللعبة لإدارة المكالمات والرسائل والتطبيقات.",
+  "icon": "fas fa-mobile-alt",
+  "uploadDate": "2025-06-09T19:00:00.000Z",
+  "downloads": 99,
+  "category": "Mobile UI Systems",
+  "categoryAr": "أنظمة واجهة الجوال",
+  "image": "https://media.discordapp.net/attachments/1346892324201824337/1377377052121890927/image.png?ex=6847e717&is=68469597&hm=bf5a537efaf30b1ccfd62e600e52208ec254a4d746048423c4df46257a17563c&=&format=webp&quality=lossless&width=541&height=810",
+  "fullDescription": "The iPhone-Style Mobile UI script brings a polished, realistic smartphone experience to your FiveM server, designed specifically for immersive roleplay environments. This UI replicates the iconic iPhone layout, complete with a home screen featuring grid-based app icons, swipe animations, and realistic sound effects. Every aspect of the interface is crafted to feel familiar yet functional, allowing players to interact seamlessly with in-game phones.\n\nCore functionalities include a robust contacts system for storing and searching player names and phone numbers, a call module for both voice and voicemail, an SMS messaging system with read receipts, and an MMS option for sharing images within the game world. The UI supports notifications, vibration pop-ups, and lock screen features that respond dynamically when the player receives a call or message. You can define which jobs or items grant access to the phone, ensuring that certain roles (like police, EMS, or mafia) receive special apps or functionalities.\n\nThe phone comes preloaded with various customizable apps: a job directory, banks with account balance display, an emergency services app (911/999) for dispatch, a GPS tracker, and even a social media clone with feed, post, and like functionalities. All apps are modular, and developers can add custom apps by defining them in config files, along with icons and permission levels.\n\nThe UI is optimized for both standard monitors and curved screens, with adaptive scaling and responsiveness. It uses CSS3 animations, sound cues, and touch-like gestures (swipe up/down, left/right) for navigation. Developers can fully customize colors, icons (via FontAwesome or custom SVGs), sounds, and layout positions. Framework compatibility includes QBCore and ESX, with built-in event handlers for phone events and callbacks for custom interactions.\n\nPerformance is a priority: the phone uses lightweight HTML/CSS UI, minimal polling loops, and only triggers when the phone is open. It supports optional SQLite or MySQL storage for message history and contact lists. The modular structure encourages third-party integrations such as cryptocurrency wallets, marketplace apps, photo galleries, and even job-specific tools.\n\nWhether your server emphasizes law enforcement, criminal underground, or city life, this iPhone-style UI elevates immersion. Players can roleplay making legitimate calls, checking bank balances, responding to emergencies, or managing personal apps. Documentation is extensive, with clear sections for config options, event triggers, styling overrides, and translation files. Installation is straightforward, and customer feedback channels are available for future enhancements.\n\nIn short, the iPhone-Style Mobile UI script offers a complete, polished in-game smartphone platform, blending functionality, realism, and customization for any FiveM roleplay server.",
+  "fullDescriptionAr": "سكربت واجهة جوال آيفون يعيد تجربة هاتف ذكي واقعية داخل سيرفرات FiveM، مصمم لتوفير تجربة غامرة وأكثر احترافية للاعبين في بيئة الـ RP. يعتمد هذا النظام على تصميم آيفون الأيقوني، ويقدم شاشة رئيسية بأيقونات تطبيقات مرتبة في شبكة، مع تحريك سلس (swipe) مؤثرات صوتية تشبه الواقع. تم التركيز على التفاصيل الصغيرة لإضفاء إحساس حقيقي باستخدام الهاتف.\n\nتشمل الوظائف الأساسية: نظام جهات اتصال متكامل يسمح بحفظ الأرقام والأسماء، والبحث السريع ضمن القائمة. كذلك يحتوي على نظام للمكالمات مع دعم لخاصية البريد الصوتي، ونظام رسائل SMS يظهر إيصالات الاستلام، بالإضافة إلى MMS يمكن اللاعبين من إرسال صور داخل اللعبة. ثم هناك الإشعارات والتنبيهات التي تظهر كشاشات منبثقة أو اهتزاز بسيط عند ورود مكالمات أو رسائل، تفاعلاً مع تنشيط المستخدم للهاتف.\n\nيمكن تحديد أي الوظائف أو العناصر التي تمنح حق الوصول للهاتف ضمن ملف الإعدادات، بما يتيح نقاط تمييز للمستخدمين مثل عناصر الشرطة أو الإسعاف أو العصابات، التي يمكن أن تحصل على تطبيقات خاصة أو صلاحيات أعلى.\n\nالهاتف يأتي مع مجموعة تطبيقات مبدئية قابلة للتعديل: دليل الوظائف، تطبيقات بنوك لعرض الرصيد، تطبيق خدمات الطوارئ (911 أو 999) للتواصل مع الـ dispatch، تطبيق تتبع (GPS)، وتطبيق تواصل اجتماعي محاكي لخاصية النشر والمتابعة والإعجاب. كل تطبيق مرن ويمكن تعديله أو إضافة تطبيقات جديدة بسهولة عبر ملفات الإعداد.\n\nالواجهة مصممة لتتكيف مع جميع أنواع الشاشات، بما في ذلك المنحنيات، مع دعم لكافة حركات السحب والإيماءات. النظام مبني باستخدام HTML/CSS خفيف، مع تأثيرات CSS3 وأصوات واقعية.كما يمكن تعديل الألوان والأيقونات (من FontAwesome أو SVG مخصص)، والمؤثرات، وأماكن ظهور النوافذ بسهولة بواسطة ملفات التهيئة.\n\nمتوافق مع أطر العمل QBCore وESX، ويحتوي على أحداث جاهزة (event handlers) للتعامل مع ما يحدث داخل الهاتف والإرسال والرد. تم تحسين الأداء من خلال تفعيل الهاتف فقط عند الحاجة ومنع عمليات الاستطلاع الثقيلة في الخلفية. يمكن استخدام SQLite أو MySQL لحفظ سجل الرسائل وجهات الاتصال عند الرغبة.\n\nالبنية البرمجية مرنة، مما يسهل دمج تطبيقات أخرى مثل محافظ العملات الرقمية، أسواق داخل اللعبة، معرض صور، أدوات خاصة بوظائف معينة، وغيرها. يوفر السكربت تجربة كاملة تُمكِّن اللاعبين من استخدام الهاتف كما في الواقع: مكالمات، رسائل، مطاردة، تفاعل اجتماعي.\n\nمرفق مع السكربت توثيق شامل يغطي جميع ملفات التهيئة، الأحداث، الخيارات، أماكن تعديل التصميم، وترجمة النصوص. يمكنك تعديل اللغة لتناسب جمهورك بسهولة. بالإضافة، يتم تقديم دعم مستمر وتعليقات من المستخدمين لإضافة ميزات مستقبلية.\n\nبشكل عام، واجهة جوال آيفون هذه هي الخيار المثالي لأي سيرفر RP يسعى لتقديم تجربة هاتف داخل اللعبة تحاكي الواقع، بجودة أداء عالية وإمكانية تخصيص واسعة لكل خادم.",
+  "features": [
+    "Realistic iPhone-style home screen and navigation",
+    "Contacts list with search and storage",
+    "Voice calls, voicemail, SMS with receipts, and MMS image sharing",
+    "Notifications, vibration, and lock-screen popups",
+    "Modular applications: bank, emergency services, GPS, social feed",
+    "Customizable colors, icons, sounds, and UI layout",
+    "Full compatibility with QBCore and ESX",
+    "Lightweight HTML/CSS UI, optimized performance",
+    "SQLite/MySQL support for persistent data",
+    "Easy extension with new apps or job-specific tools"
+  ],
+  "featuresAr": [
+    "واجهة واقعية بأسلوب آيفون وتحكم مبسّط",
+    "جهات اتصال قابلة للبحث والتخزين",
+    "مكالمات صوتية، بريد صوتي، رسائل SMS مع إيصالات، وMMS للصور",
+    "إشعارات، اهتزاز، ونوافذ منبثقة عند النشاط",
+    "تطبيقات مدمجة: بنوك، طوارئ، GPS، وتواصل اجتماعي",
+    "قابلية تعديل الألوان، الأيقونات، الأصوات، والواجهة",
+    "دعم كامل لـ QBCore وESX",
+    "واجهة HTML/CSS خفيفة وأداء محسّن",
+    "دعم SQLite/MySQL لحفظ البيانات",
+    "سهل التوسعة بإضافة تطبيقات أو أدوات خاصة"
+  ],
+  "installation": "1. Download and extract the script to your 'resources' folder\n2. Add 'start iphone_ui' to your server.cfg\n3. Configure apps, colors, permissions in config.lua\n4. Ensure framework dependency is loaded (QBCore or ESX)\n5. Restart server and test the UI in-game",
+  "installationAr": "1. نزّل السكربت واستخرجه داخل مجلد 'resources'\n2. أضف 'start iphone_ui' في server.cfg\n3. عدّل التطبيقات والألوان والصلاحيات في config.lua\n4. تأكد من تحميل إطار العمل QBCore أو ESX\n5. أعد تشغيل السيرفر وجرب الواجهة داخل اللعبة",
+  "requirements": "QBCore or ESX, HTML/CSS compatible UI renderer",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381761029540941934/qb-phone_3.rar?ex=6848b0bd&is=68475f3d&hm=03d7c0f8084e5ee431b9d2d29999595c9b2c09de4af2838156e28c9e71d83ac8&"
+},
+
+
+         {
+  "id": 3,
+  "title": "Advanced Long Hammer",
+  "titleAr": "مطرقة متقدمة طويلة",
+  "description": "An enhanced long hammer with superior visuals and utility for immersive roleplay scenarios.",
+  "descriptionAr": "مطرقة طويلة محسّنة بتصميم متقن ووظائف مميزة لتعزيز تجربة اللعب الواقعية.",
+  "icon": "fas fa-hammer",
+  "uploadDate": new Date("2025-06-09T17:30:00.000Z"),
+  "downloads": 30,
+  "category": "Weapons & Tools",
+  "categoryAr": "الأسلحة والأدوات",
+  "image": "https://media.discordapp.net/attachments/1161381056843350122/1369760374789767319/image.png?ex=684889c2&is=68473842&hm=33195af83dfc399714d7e7800e77e7750650ad916487c444c350afd85fbc1dea&=&format=webp&quality=lossless&width=1150&height=940",
+  "fullDescription": "The Advanced Long Hammer is a premium-quality melee weapon model designed specifically for immersive roleplay in FiveM servers. Unlike the default short hammer commonly found in standard GTA V gameplay, this long variant features a high-definition texture, extended handle, and a more robust impact animation. It is perfect for civilian jobs that require construction roleplay, or criminal scenarios where unique melee weapons add flavor to gameplay.\n\nThis hammer isn't just a cosmetic upgrade — it's been carefully crafted to enhance immersion. The elongated handle gives it a realistic appearance when held by a character, matching real-world proportions better than the default hammer. Its metal head has been refined to include reflective textures and detailed engravings that bring out its high-quality look.\n\nPlayers can use this hammer in various ways: breaking objects in specific scripts, performing repair or role-specific emotes (like construction or mechanics), or even in melee combat scenarios. It is fully compatible with both QBCore and ESX frameworks, and its metadata can be customized to suit your server's needs, including damage, durability, and animation sets.\n\nThis model is lightweight and optimized, ensuring it doesn't impact server performance. Its collision mesh is also well-constructed, preventing weird interactions with world objects or ragdoll glitches. Whether you're aiming for realism in your emergency services or just want better variety in your roleplay server, this tool elevates your content. Installation is simple and well-documented, making it a plug-and-play enhancement for your server.\n\nAll aspects — model, texture, behavior — are editable and localized. You can easily rename the item, change its description, or even retexture it with your own server's branding. Make your FiveM world more polished with this professional-grade hammer asset.",
+  "fullDescriptionAr": "مطرقة Long Hammer هي أداة اشتباك عالية الجودة صُممت خصيصًا لسيرفرات FiveM التي تبحث عن تجربة لعب واقعية ومميزة. تختلف هذه المطرقة عن المطرقة العادية القصيرة الموجودة في اللعبة الأصلية من GTA V، حيث تأتي هذه النسخة بتصميم مطوّل، ومقبض أكثر دقة من حيث الطول والتناسق، مع خامات عالية الدقة لرأس المطرقة الذي يظهر كأنه معدني لامع مزخرف.\n\nالسكربت لا يقدّم مجرد أداة جديدة فقط، بل يعزز من الإحساس الواقعي داخل اللعبة. عند استخدام المطرقة، يظهر اللاعب وكأنه يمسك أداة حقيقية ذات وزن وشكل منطقي، مما يجعلها مثالية للوظائف مثل البناء، والميكانيكا، والمهام التي تتطلب أدوات واقعية. يمكن أيضًا استخدامها في سيناريوهات القتال اليدوي أو كجزء من سكربتات التخريب أو السرقة أو كسر الأقفال.\n\nتدعم المطرقة جميع الإطارات المعروفة مثل QBCore وESX، كما يمكن تعديل بياناتها بسهولة في قاعدة البيانات أو ملفات الكونفيق لتخصيص الضرر أو المتانة أو نوع الأنيميشن المستخدم معها. تم تصميم النموذج الثلاثي الأبعاد بطريقة احترافية مع شبكة تصادم (collision) متقنة، ما يمنع أي مشاكل في التفاعل مع العناصر داخل العالم أو الغليتشات.\n\nالمطرقة خفيفة جدًا من حيث الأداء ولا تؤثر على أداء السيرفر، مما يجعلها خيارًا ممتازًا لإضافتها ضمن الأسلحة أو الأدوات المتوفرة للاعبين. يمكنك أيضًا تعديل شكلها أو اسمها أو الأيقونة الخاصة بها لتناسب طابع السيرفر الخاص بك.\n\nإذا كنت تبحث عن أداة مميزة تضيف لمسة احترافية لسيرفرك، فإن هذه المطرقة الطويلة تعتبر خيارًا رائعًا. سواء كنت تدير سيرفر واقعي يركّز على البناء والصيانة أو تريد فقط تنويع أدوات القتال اليدوي، فإن Long Hammer تقدم لك أفضل توازن بين الشكل الجمالي والأداء الوظيفي.",
+  "features": [
+    "High-quality 3D long hammer model",
+    "Realistic textures and reflective metal head",
+    "Extended handle for better immersion",
+    "Perfect for construction, repair, or melee use",
+    "Compatible with QBCore and ESX",
+    "Optimized for server performance",
+    "Editable name, icon, and stats",
+    "Immersive and unique roleplay tool"
+  ],
+  "featuresAr": [
+    "موديل ثلاثي الأبعاد عالي الجودة لمطرقة طويلة",
+    "خامات واقعية ورأس معدني لامع",
+    "مقبض طويل يعطي واقعية أكبر",
+    "مناسبة للبناء، الصيانة، أو القتال اليدوي",
+    "متوافقة مع QBCore وESX",
+    "محسّنة للأداء دون تأثير على السيرفر",
+    "إمكانية التعديل على الاسم، الأيقونة، والمواصفات",
+    "أداة فريدة تعزز تجربة RP"
+  ],
+  "installation": "1. Download the hammer model\n2. Add it to your stream folder\n3. Reference it in your items.lua or database\n4. (Optional) Add emotes or animations",
+  "installationAr": "1. نزّل موديل المطرقة\n2. أضفه إلى مجلد stream الخاص بك\n3. اربطه في ملف items.lua أو قاعدة البيانات\n4. (اختياري) أضف أنيميشن أو إيموتات مخصصة",
+  "requirements": "QBCore or ESX, Streaming Ready",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381762525388869772/Vip_Hammer.rar?ex=6848b221&is=684760a1&hm=5cad620eccbb1345b10197c0e1671736682ab3c44ce3830435c912b4e9d2565d&"
+},
+
 {
-  id: 4,
-  title: "PHub Job Control Panel",
-  titleAr: "لوحة تحكم الوظائف PHub",
-  description: "A sleek and unified control panel for all jobs in your FiveM server.",
-  descriptionAr: "لوحة تحكم موحّدة واحترافية لجميع الوظائف داخل سيرفرك.",
-  icon: "fas fa-cogs",
-  uploadDate: new Date("2025-05-11T17:31:02.984Z"),
-  downloads: 0,
-  category: "Job Systems",
-  categoryAr: "أنظمة الوظائف",
-  image: "image/phub.png",
-  fullDescription: "PHub is a universal control center system for all official jobs in FiveM servers — including police, EMS, fire department, national guard, and more. It features a sleek and professional interface allowing job members to monitor their department status, view active members, and access essential tools and shortcuts. The script includes real-time status display, quick-access buttons for map markers, callouts, report systems, and integration with external systems like MDT or dispatch. Its responsive and stylish UI offers an immersive roleplay experience. Fully customizable per job or department, PHub fits any theme and works seamlessly with QBCore or ESX frameworks. Lightweight and easy to install, it's ideal for servers seeking organized and realistic job management. All texts, icons, and colors are editable to suit your server branding.",
-  fullDescriptionAr: "سكربت PHub هو مركز تحكم متكامل لجميع الوظائف الرسمية في سيرفرات FiveM مثل الشرطة، الإسعاف، الدفاع المدني، الحرس الوطني وغيرها. يوفر السكربت واجهة رسومية احترافية تتيح للموظفين متابعة الحالة العامة للوظيفة، عدد الأعضاء المتصلين، وأدوات تسهّل الوصول إلى المعلومات الهامة والمهام اليومية. يدعم السكربت عرض مباشر للحالة التشغيلية لكل عضو، مع زرّ تحديد الموقع، إدارة البلاغات، الدخول السريع للأنظمة المرتبطة مثل MDT أو Dispatch. التصميم أنيق وسريع ويمنح تجربة استخدام سلسة في بيئة العمل داخل RP. كما يمكن تخصيص السكربت بسهولة حسب الوظيفة أو القسم. مثالي للسيرفرات التي تسعى للواقعية والتنظيم الإداري، ويدعم كليًا الأنظمة المبنية على QBCore أو ESX. خفيف وسهل الدمج، ويدعم الترجمة والتعديل على كافة النصوص والأيقونات.",
-  features: [
+  "id": 4,
+  "title": "PHub Job Control Panel",
+  "titleAr": "لوحة تحكم الوظائف PHub",
+  "description": "A sleek and unified control panel for all jobs in your FiveM server.",
+  "descriptionAr": "لوحة تحكم موحّدة واحترافية لجميع الوظائف داخل سيرفرك.",
+  "icon": "fas fa-cogs",
+  "uploadDate": "2025-05-11T17:31:02.984Z",
+  "downloads": 60,
+  "category": "Job Systems",
+  "categoryAr": "أنظمة الوظائف",
+  "image": "https://media.discordapp.net/attachments/1345482661719838771/1381704186613465240/image.png?ex=68487bcc&is=68472a4c&hm=378c5afdfe0844898c324e1bbd20737d3eee58bf84ef78447fbe781504c0455c&=&format=webp&quality=lossless&width=455&height=413",
+  "fullDescription": "PHub is a complete control center script designed for all official jobs in FiveM servers such as police, EMS, fire department, national guard, and more. It features a professional and user-friendly interface that allows staff members to monitor job status, track online members, and perform daily operations with ease and efficiency. The script includes fast tools like real-time status display, map marker buttons, report system, and quick access to external systems like MDT and Dispatch, enhancing workflow and inter-department coordination. Its clean and responsive UI ensures a smooth and immersive RP experience for players and admins alike. The script is fully customizable per department, enabling personalized visuals and texts that match your server's branding and job structure.\n\nPHub was built with performance and flexibility in mind. Whether you're using QBCore or ESX, the script runs seamlessly without requiring heavy dependencies or complex configuration. All data points shown in the panel are updated dynamically in real-time, providing admins and staff with accurate, actionable information at any moment. Additionally, the script supports deep integration with external APIs and tools, which allows further expansion for advanced server setups.\n\nAdministrators can define specific permissions and control access to sensitive features, ensuring security and control. The script also helps reduce staff overhead by automating repetitive tasks such as attendance tracking and location management. Every tool within PHub is designed to improve response time, internal communication, and clarity across all departments in roleplay scenarios.\n\nInstallation is fast and easy. Download and extract the script into your resources folder, add 'start phub' to server.cfg, and configure job settings via the config.lua file. You can also optionally link it with MDT or Dispatch for a complete operational ecosystem. For best performance, the script supports MySQL and can be expanded with other modules.\n\nWhether you're managing a large RP server with hundreds of players or a focused department-based setup, PHub gives you the tools needed to run an organized, immersive, and responsive job environment.",
+  "fullDescriptionAr": "سكربت PHub هو مركز تحكم متكامل لجميع الوظائف الرسمية في سيرفرات FiveM مثل الشرطة، الإسعاف، الدفاع المدني، الحرس الوطني وغيرها. يتميز بواجهة رسومية احترافية وسهلة الاستخدام، تمكّن الموظفين من الإطلاع على الحالة العامة للوظيفة، عدد الأعضاء المتصلين، وتنفيذ المهام اليومية بسهولة وفعالية. يوفّر السكربت أدوات سريعة مثل عرض الحالة المباشرة، تحديد مواقع الأعضاء، نظام البلاغات، والدخول السريع إلى أنظمة MDT و Dispatch، مما يعزز الكفاءة والتنظيم داخل بيئة العمل RP.\n\nالتصميم في PHub أنيق وسريع الاستجابة، ويوفّر تجربة استخدام متكاملة وسلسة لجميع الموظفين. كما يتيح إمكانية التخصيص الكامل حسب طبيعة الوظيفة أو القسم، سواء من حيث النصوص، الألوان، أو الأيقونات المستخدمة. السكربت يدعم QBCore وESX بشكل كامل، مما يجعله مناسباً لمجموعة واسعة من السيرفرات التي تبحث عن التنظيم، الكفاءة، والواقعية.\n\nيُمكن من خلال PHub تتبع الموظفين المتصلين بشكل مباشر، إرسال البلاغات، إدارة المواقع، متابعة الحالات، والاطلاع على جميع التفاصيل المهمة من مكان واحد. كما يوفّر تحكماً شاملاً لصنّاع المحتوى ومدراء السيرفرات، من خلال إمكانية ربطه بأنظمة خارجية أو تطوير إضافات مخصصة تتكامل معه. تم بناء السكربت بأفضل المعايير ليكون خفيفًا في الأداء، وسهل الدمج مع السكربتات الأخرى الموجودة في السيرفر.\n\nمن أبرز ميزاته أيضًا إمكانية تحديد صلاحيات الوصول لكل وظيفة على حدة، ما يسمح بالتحكم الدقيق في المهام الحساسة وإدارتها بسلاسة. كما يساعد السكربت في تقليل العبء الإداري على المدراء من خلال أدوات تساعد في إدارة الحضور، تسجيل المهام، ومتابعة النشاطات اليومية.\n\nسواء كنت تدير قسم شرطة أو إسعاف أو حرس وطني، فإن PHub هو الحل المثالي لك لإدارة الوظائف وتنظيم العمل بكل احترافية. كل عنصر داخل السكربت قابل للتعديل، من اللغة، إلى الواجهة، إلى الخيارات المتقدمة، ليمنحك تجربة مرنة وسهلة التكيّف مع بيئة السيرفر الخاصة بك. تثبيت السكربت لا يتطلب سوى خطوات بسيطة: نزّله، أضفه إلى الموارد، فعّله في server.cfg، ثم عدّل الإعدادات عبر config.lua. وللحصول على أفضل تجربة تشغيلية، يمكنك ربطه بسهولة بأنظمة MDT وDispatch.",
+  "features": [
     "Unified control hub for all jobs (Police, EMS, Military, etc.)",
     "Real-time online staff tracking",
     "Full support for QBCore and ESX",
@@ -1718,7 +1751,7 @@
     "Fully customizable per job",
     "Editable texts, icons, and colors"
   ],
-  featuresAr: [
+  "featuresAr": [
     "مركز تحكم موحّد لجميع الوظائف (شرطة، إسعاف، حرس...)",
     "عرض مباشر للعاملين داخل الوظيفة",
     "دعم شامل لـ QBCore وESX",
@@ -1728,11 +1761,130 @@
     "قابل للتخصيص الكامل حسب الوظيفة",
     "دعم كامل للتعديل على النصوص والألوان والأيقونات"
   ],
-  installation: "1. Download and extract the script\n2. Add it to your 'resources' folder\n3. Add 'start phub' to your server.cfg\n4. Configure supported jobs in config.lua\n5. (Optional) Integrate with MDT or Dispatch",
-  installationAr: "1. نزّل السكربت واستخرجه في مجلد 'resources'\n2. أضف 'start phub' في ملف server.cfg\n3. عدّل ملف config.lua لتحديد الوظائف المدعومة\n4. (اختياري) اربطه بـ MDT أو Dispatch",
-  requirements: "QBCore or ESX, MySQL, Optional: MDT/Dispatch System",
-  fileContent: "https://cdn.discordapp.com/attachments/1345482661719838771/1381687020568444979/alpha-phub-main.zip?ex=68486bd0&is=68471a50&hm=66239155dc45537049933216c04c157346db0b20a1862dcee9fc06ea5d8228a2"
-}
+  "installation": "1. Download and extract the script\n2. Add it to your 'resources' folder\n3. Add 'start phub' to your server.cfg\n4. Configure supported jobs in config.lua\n5. (Optional) Integrate with MDT or Dispatch",
+  "installationAr": "1. نزّل السكربت واستخرجه في مجلد 'resources'\n2. أضف 'start phub' في ملف server.cfg\n3. عدّل ملف config.lua لتحديد الوظائف المدعومة\n4. (اختياري) اربطه بـ MDT أو Dispatch",
+  "requirements": "QBCore or ESX, MySQL, Optional: MDT/Dispatch System",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381724603675574392/fivem-phub.rar?ex=68488ed0&is=68473d50&hm=66270bb2c9b80683f3874420d9bc56655c015f50a771e2d798b9654a2a341aaf&"
+},
+{
+  "id": 5,
+  "title": "Advanced HUD Compass System",
+  "titleAr": "نظام البوصلة والواجهة المتقدمة",
+  "description": "A modern mini-map and compass system with integrated player status icons.",
+  "descriptionAr": "نظام خريطة مصغّرة وبوصلة حديثة مع رموز لحالة اللاعب.",
+  "icon": "fas fa-map",
+  "uploadDate": new Date("2025-06-09T17:31:02.984Z"),
+  "downloads": 20,
+  "category": "HUD Systems",
+  "categoryAr": "أنظمة العرض",
+  "image": "https://media.discordapp.net/attachments/1345482661719838771/1381747530379038770/image.png?ex=6848a42a&is=684752aa&hm=d1745b93e5e0937d65842226c730bfa53b51e5d5f1146face0ab615183dca531&=&format=webp&quality=lossless&width=679&height=521https://media.discordapp.net/attachments/1345482661719838771/1381751274239819827/image.png?ex=6848a7a7&is=68475627&hm=9d2306cc72dae30647f5d5290613cacac4b125ed410134a1a06fb0d48343cccb&=&format=webp&quality=lossless&width=401&height=374",
+  "fullDescription": "The Advanced HUD Compass System is a fully featured user interface enhancement for FiveM servers. It includes a modern compass and radar overlay, showing the current street and direction of the player in real time. This system is designed with immersion and utility in mind, displaying essential status icons at the bottom for quick access to vital player information. These hexagon-shaped icons represent different statuses: weapon readiness, health, armor, hunger, thirst, and movement status. The location display dynamically updates as the player moves, keeping users aware of their environment without the need to open a map. Compatible with both QBCore and ESX frameworks, the HUD is lightweight, optimized, and fits perfectly within roleplay-themed servers. It supports full customization of icons, colors, and their behavior based on player events such as sprinting, shooting, or entering combat. Installation is straightforward, and the code is modular, allowing developers to easily extend or integrate additional features. Whether you're creating a police-focused interface or a civilian gameplay experience, this HUD system can be tailored to match the theme and identity of your server. It’s ideal for enhancing realism and delivering a clean, responsive UI experience for all players. Multilingual support is included, and developers can easily localize text or replace icons with SVGs or PNGs. This system elevates the player experience by combining functionality with sleek design.",
+  "fullDescriptionAr": "نظام البوصلة والواجهة المتقدمة هو نظام متكامل ومحسن لعرض المعلومات داخل سيرفرات FiveM، حيث يجمع بين خريطة مصغّرة ديناميكية وبوصلة تفاعلية تعرض اسم الشارع الحالي واتجاه حركة اللاعب في الوقت الفعلي. تم تصميم هذا النظام ليعزز الواقعية ويسهل تجربة اللاعب، حيث يظهر شريط أيقونات سداسية أسفل البوصلة يمثل حالات اللاعب الأساسية مثل: السلاح المجهز، الصحة، الدرع، الجوع، العطش، وحالة الحركة (ركض، مشي، إلخ). تتغير هذه الأيقونات تلقائيًا حسب تفاعل اللاعب مع البيئة من دون الحاجة لفتح قائمة أو نافذة منفصلة. واجهة المستخدم تتكيف بسلاسة مع أي خريطة أو سكربت وظيفي، وتدعم بشكل كامل كل من QBCore وESX، ما يجعل دمجها سهلاً في معظم السيرفرات الحالية. كذلك، يمكن تخصيص الأيقونات والألوان والموقع على الشاشة حسب ذوق الإدارة أو احتياجات اللاعبين. يدعم النظام إضافة وظائف جديدة أو تعديلات على الواجهة بسهولة بفضل بنيته القابلة للتوسعة. يوفّر تجربة استخدام سريعة وخفيفة، مثالية للسيرفرات التي تسعى للواقعية والتنظيم. الترجمة والدعم متعدد اللغات مدمج في النظام، مما يتيح تعديله ليتناسب مع الجمهور العربي أو أي جمهور آخر. مناسب لسيناريوهات الشرطة، الطوارئ، الحياة الواقعية أو حتى السيرفرات القتالية. بفضل التصميم العصري والأداء السلس، يرفع هذا النظام مستوى التفاعل البصري ويضيف قيمة كبيرة لأي سيرفر RP.",
+  "features": [
+    "Real-time compass and mini-map overlay",
+    "Displays current street name and direction",
+    "Hexagonal status icons (weapon, health, armor, etc.)",
+    "Customizable UI position and colors",
+    "Dynamic icon behavior (running, injured, armed)",
+    "Lightweight and optimized for RP environments",
+    "Full support for QBCore and ESX",
+    "Multilingual ready and easily extendable"
+  ],
+  "featuresAr": [
+    "بوصلة وخريطة مصغّرة في الوقت الحقيقي",
+    "عرض اسم الشارع الحالي والاتجاه",
+    "أيقونات سداسية تمثل حالة اللاعب (سلاح، صحة، درع...)",
+    "إمكانية تخصيص موقع الواجهة والألوان",
+    "تغيّر تلقائي لحالة الأيقونات حسب تصرف اللاعب",
+    "خفيّ وخفيف، مثالي لسيرفرات RP",
+    "دعم كامل لـ QBCore وESX",
+    "يدعم الترجمة الكاملة وسهل التوسعة"
+  ],
+  "installation": "1. Download and extract the script\n2. Add it to your 'resources' folder\n3. Add 'start hudcompass' to your server.cfg\n4. Configure icon behavior and visibility in config.lua",
+  "installationAr": "1. نزّل السكربت واستخرجه في مجلد 'resources'\n2. أضف 'start hudcompass' إلى ملف server.cfg\n3. عدّل config.lua لتخصيص عرض الأيقونات وتفاعلها",
+  "requirements": "QBCore or ESX, Optional: Custom Icon Packs, Framework Events",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381748223240306778/qb-hud.zip?ex=6848a4d0&is=68475350&hm=d5aa5cef0808af3662328ab6640827dfdd57d723eb0eca3f42d5b65655e4f5eb&"
+},
+{
+  "id": 6,
+  "title": "Surveillance Camera Control Panel",
+  "titleAr": "نظام التحكم بكاميرات المراقبة",
+  "description": "A dynamic and immersive camera monitoring system for law enforcement and security roles in RP servers.",
+  "descriptionAr": "نظام ديناميكي وغامر لمراقبة الكاميرات مخصص للشرطة والأمن في سيرفرات RP.",
+  "icon": "fas fa-video",
+  "uploadDate": new Date("2025-06-09T18:05:00.000Z"),
+  "downloads": 35,
+  "category": "Police & Security Systems",
+  "categoryAr": "أنظمة الشرطة والأمن",
+  "image": "https://media.discordapp.net/attachments/1346892324201824337/1375132312143921162/image.png?ex=6847a583&is=68465403&hm=7d848e95f17422d7bb0fc6f3559ba9c56bde163f2d0e125ef2a7739859a2e1c1&=&format=webp&quality=lossless&width=1496&height=810",
+  "fullDescription": "The Surveillance Camera Control Panel is a highly immersive and professional interface for monitoring public and private areas across your RP server. Designed with security teams and police departments in mind, this system allows players with appropriate permissions to access and view a grid of available CCTV feeds, categorized by locations such as banks, public parks, police stations, and parking lots. Each camera is labeled and can be selected individually with a single click to initiate live viewing. The interface includes a search bar to quickly filter through large networks of cameras, and is responsive for both keyboard and mouse navigation. With high-end visuals, blur overlays, and smooth transitions, this UI offers an immersive sense of real-world surveillance work. All camera positions are fully configurable in the config file, and administrators can add as many cameras as desired. The system supports integration with QBCore and ESX, allowing access control via job roles or items. It's lightweight, modular, and can be extended with features like PTZ (pan/tilt/zoom), motion alerts, and log systems for auditing usage. Whether you're running a roleplay-heavy server or a tactical gameplay environment, this tool boosts realism, player control, and department coordination. With full language support, customizable UI colors, and optional audio cues, the system is both stylish and functional — a must-have for any serious roleplay server.",
+  "fullDescriptionAr": "نظام التحكم بكاميرات المراقبة هو واجهة متقدمة واحترافية تتيح لموظفي الأمن والشرطة مشاهدة المناطق الحيوية داخل السيرفر بشكل مباشر من خلال شبكة كاميرات مراقبة. تم تصميم هذه الواجهة لتمنح شعورًا واقعيًا ببيئة العمل الأمنية، حيث توفر شبكة من الخلايا التي تعرض مواقع الكاميرات المنتشرة مثل مواقف السيارات، الحدائق العامة، البنوك، والمراكز الأمنية. يمكن للمستخدم تحديد الكاميرا المطلوبة بضغطة واحدة، ليبدأ البث المباشر فورًا. الواجهة تدعم التصفح السريع من خلال مربع البحث، وتعمل بكفاءة مع لوحة المفاتيح أو الماوس. تصميمها العصري مع تأثيرات التمويه والانتقال السلس بين القوائم يعطي تجربة واقعية أقرب إلى أنظمة المراقبة الحقيقية. يمكن للإدارة تعديل وتخصيص مواقع الكاميرات بكل سهولة عبر ملف الإعدادات، كما يمكن إضافة عدد غير محدود منها. النظام متوافق مع QBCore وESX، ويدعم منح الصلاحيات بناءً على الوظيفة أو الأيتمات مثل 'أداة مراقبة'. يمكن توسيعه لاحقًا ليشمل خصائص مثل تحريك الكاميرا، أو إنذارات عند وجود حركة، أو تسجيل الدخولات لخدمات الأمان الداخلي. هذا السكربت مثالي للسيرفرات التي تركز على الواقعية في سيناريوهات الشرطة أو الأمن، ويوفر أداة قوية للإشراف والتنسيق بين الفرق الأمنية. يدعم الترجمة الكاملة، وتخصيص ألوان الواجهة، وحتى إضافة مؤثرات صوتية عند التبديل بين الكاميرات، ليكون بذلك من أقوى أنظمة المراقبة المتاحة لسيرفرات RP.",
+  "features": [
+    "Modern and immersive camera control UI",
+    "Supports unlimited camera locations",
+    "Live feed switching with one click",
+    "Search bar for fast filtering",
+    "Configurable camera list in config.lua",
+    "Permissions via job or item",
+    "Works with QBCore and ESX",
+    "Supports localization and UI customization"
+  ],
+  "featuresAr": [
+    "واجهة حديثة وواقعية لمراقبة الكاميرات",
+    "دعم عدد غير محدود من الكاميرات",
+    "التبديل الفوري بين البث المباشر",
+    "شريط بحث لتصفية الكاميرات بسهولة",
+    "إمكانية تخصيص الكاميرات في ملف الإعدادات",
+    "الصلاحيات تُمنح حسب الوظيفة أو الأيتم",
+    "متوافق مع QBCore وESX",
+    "يدعم الترجمة وتخصيص واجهة المستخدم"
+  ],
+  "installation": "1. Extract the script into your resources folder\n2. Add 'start surveillance' to server.cfg\n3. Configure your cameras in config.lua\n4. Assign job or item-based access (optional)\n5. Test camera permissions in-game",
+  "installationAr": "1. استخرج السكربت داخل مجلد resources\n2. أضف 'start surveillance' إلى server.cfg\n3. قم بتعديل ملف config.lua لإضافة الكاميرات\n4. خصص الوصول حسب الوظيفة أو الأدوات (اختياري)\n5. جرّب الدخول على الكاميرات من داخل اللعبة",
+  "requirements": "QBCore or ESX, Optional: PolyZone or item-based permissions",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381756540188360814/Tornado-Cam.zip?ex=6848ac8e&is=68475b0e&hm=ebcafe926406e039fae365c86c1dc00a686532a39aeb4ec3c2cab986a68ff782&"
+},
+{
+  "id": 7,
+  "title": "Weapon Store Robbery",
+  "titleAr": "سرقة محل الأسلحة",
+  "description": "An immersive and high-stakes weapon store robbery system for FiveM servers.",
+  "descriptionAr": "نظام سرقة محلات الأسلحة الواقعي والمليء بالإثارة لسيرفرات فايف إم.",
+  "icon": "fas fa-gun",
+  "uploadDate": new Date("2025-06-09T12:00:00.000Z"),
+  "downloads": 23,
+  "category": "Robbery Systems",
+  "categoryAr": "أنظمة السرقات",
+  "image": "https://media.discordapp.net/attachments/1261999266361245816/1316780834820325376/image.png?ex=684847b7&is=6846f637&hm=f55aa46ca4b3fb2d7a92d0039f9477c942f77497ab17977dff5f3b6714f92098&=&format=webp&quality=lossless&width=950&height=715",
+  "fullDescription": "The Weapon Store Robbery script is a thrilling and dynamic system that allows players to rob gun stores in FiveM with immersive mechanics and realistic risk-reward gameplay. Players must approach the weapon shop and initiate the robbery using a lockpick or explosive charge, depending on your configuration. The shopkeeper may react with fear, call the police automatically, or even pull a hidden weapon to defend the store. The system features customizable robbery conditions, such as requiring a certain number of police online, using specific tools like drills or cutters, or enforcing cooldowns to prevent abuse. Once the robbery starts, a timer activates and alerts law enforcement through dispatch. Players can loot weapons, ammunition, attachments, or randomized loot crates. If they’re not fast enough, police can arrive to intercept. The robbery system supports animations, visual effects, and realistic sound queues for immersion. It works seamlessly with QBCore or ESX frameworks and integrates well with police alert systems, dispatch, and door-lock scripts. It’s ideal for gang roleplay, heists, or boosting black-market operations, while offering complete config options to tweak difficulty, reward pool, and interaction logic. This script adds tension, realism, and strategy to your criminal gameplay experience.",
+  "fullDescriptionAr": "سكربت سرقة محل الأسلحة هو نظام مثير وديناميكي يضيف تجربة سرقة مليئة بالإثارة لمحلات بيع الأسلحة داخل سيرفرات فايف إم. يمكن للاعبين بدء السرقة باستخدام أداة كسر أقفال أو شحنة متفجرة حسب إعدادات السيرفر. يتفاعل صاحب المحل بشكل عشوائي؛ قد يستسلم، يتصل بالشرطة تلقائيًا، أو حتى يخرج سلاحًا خفيًا للدفاع عن نفسه. يتميز السكربت بشروط سرقة قابلة للتخصيص مثل: الحاجة لعدد معين من الشرطة المتصلة، أو وجود أدوات خاصة مثل المثقاب أو القاطع، إضافة إلى نظام التبريد الزمني لمنع التكرار المفرط للسرقة. بعد بدء العملية، يتم تفعيل مؤقت زمني وإرسال إنذار فوري إلى الشرطة. يمكن للاعبين سرقة أسلحة، ذخائر، قطع تطوير، أو صناديق غنائم عشوائية. إذا لم يتم إنهاء السرقة بسرعة، ستصل الشرطة لإيقاف العملية. يدعم السكربت الرسوم المتحركة، والمؤثرات البصرية، والأصوات الواقعية لزيادة الانغماس في التجربة. كما يتكامل بسلاسة مع أنظمة QBCore أو ESX، وأنظمة البلاغات، وأقفال الأبواب. هذا السكربت مثالي لأدوار العصابات أو عمليات السطو المنظمة أو بيع الأسلحة في السوق السوداء، ويقدم إعدادات شاملة لتعديل صعوبة السرقة، نوعية المكافآت، وآلية التفاعل. يضيف هذا السكربت عنصر التحدي والتخطيط والإثارة لتجربة اللعب الإجرامية.",
+  "features": [
+    "Rob customizable weapon stores",
+    "Supports lockpick, explosives, or advanced tools",
+    "Dynamic shopkeeper behavior (surrender, call cops, shoot back)",
+    "Police alert with GPS, sound, and dispatch",
+    "Loot weapons, ammo, attachments, or randomized crates",
+    "Police requirement and cooldown system",
+    "Full QBCore and ESX support",
+    "Realistic animations, sounds, and VFX"
+  ],
+  "featuresAr": [
+    "إمكانية سرقة محلات الأسلحة المخصصة",
+    "دعم لاستخدام أدوات متعددة (كسر أقفال، متفجرات، أدوات متقدمة)",
+    "ردود فعل عشوائية لبائع الأسلحة (استسلام، اتصال بالشرطة، إطلاق نار)",
+    "إرسال إنذارات فورية للشرطة مع تحديد الموقع على الخريطة",
+    "إمكانية سرقة أسلحة وذخيرة وملحقات وصناديق غنائم",
+    "نظام تبريد بعد كل سرقة ومتطلبات شرطة متصلة",
+    "دعم كامل لـ QBCore وESX",
+    "حركات واقعية ومؤثرات بصرية وصوتية"
+  ],
+  "installation": "1. Extract the script into your resources folder\n2. Add 'start surveillance' to server.cfg\n3. Configure your cameras in config.lua\n4. Assign job or item-based access (optional)\n5. Test camera permissions in-game",
+  "installationAr": "1. استخرج السكربت داخل مجلد resources\n2. أضف 'start surveillance' إلى server.cfg\n3. قم بتعديل ملف config.lua لإضافة الكاميرات\n4. خصص الوصول حسب الوظيفة أو الأدوات (اختياري)\n5. جرّب الدخول على الكاميرات من داخل اللعبة",
+  "requirements": "QBCore or ESX, Optional: PolyZone or item-based permissions",
+  "fileContent": "https://cdn.discordapp.com/attachments/1345482661719838771/1381763956850294865/qb-ammurobbery.rar?ex=6848b377&is=684761f7&hm=83ed02a334d52eca2963ebd7d8d3cc0c1eaaa27456f53b8a8a5a3dc779ed8395&"
+},
+
+
 
 
 
