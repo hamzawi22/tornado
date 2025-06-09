@@ -1,350 +1,796 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free FiveM Scripts</title>
+    <title>مركز سكربتات فايف ام - سكربتات مميزة مجاناً</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=Af78FZyBBjxDxgVG3tnBnXawBlFc4Pz9azal7adRxSBwfnp67-fR6d8EIheFNBYXgh0EgrPZFhVieONA&vault=true"></script>
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --dark-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f9fafb;
-        }
-
-        [dir="rtl"] {
-            --text-primary: #1f2937;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --success-gradient: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            --warning-gradient: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+            --discord-gradient: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
+            --bg-dark: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --border-color: #404040;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+            --hover-transform: translateY(-5px);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--primary-gradient);
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .navbar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a1a1a"/><path d="M0 0L100 100M100 0L0 100" stroke="%23222222" stroke-width="1"/></svg>');
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-card);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            display: flex;
             align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .language-toggle img {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+        }
+
+        .language-toggle .arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .language-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Header */
+        header {
+            background: var(--dark-gradient);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        nav {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 2rem;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: white;
-            text-decoration: none;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
             display: flex;
-            align-items: center;
+            list-style: none;
             gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
         }
 
         .discord-link {
-            color: #5865f2;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
+            background: #5865f2;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
         .discord-link:hover {
-            transform: scale(1.2);
+            background: #4752c4;
+            transform: var(--hover-transform);
         }
 
-        .lang-switcher {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .lang-switcher:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .login-btn, .logout-btn {
-            background: var(--secondary-gradient);
-            border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .login-btn:hover, .logout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: white;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-section {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 5rem 0;
             text-align: center;
-            padding: 4rem 0;
-            color: white;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
         }
 
-        .hero-title {
-            font-size: 3rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(102,126,234,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: fadeInUp 1s ease;
         }
 
-        .hero-subtitle {
+        .hero p {
             font-size: 1.2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
         }
 
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid #667eea;
+        }
+
+        .btn:hover {
+            transform: var(--hover-transform);
+            box-shadow: var(--shadow);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Scripts Grid */
         .scripts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .script-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .script-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .script-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: var(--hover-transform);
+            box-shadow: var(--shadow);
         }
 
         .script-image {
             width: 100%;
             height: 200px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .script-image img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 1rem;
+            transition: transform 0.5s ease;
+        }
+        
+        .script-card:hover .script-image img {
+            transform: scale(1.05);
+        }
+
+        .script-content {
+            padding: 1.5rem;
         }
 
         .script-title {
             font-size: 1.3rem;
             font-weight: bold;
-            color: white;
             margin-bottom: 0.5rem;
+            color: var(--text-light);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .script-date {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+        .script-description {
+            color: var(--text-muted);
             margin-bottom: 1rem;
+            font-size: 0.9rem;
+            min-height: 60px;
+            text-align: center;
+        }
+
+        .script-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
         .download-btn {
             width: 100%;
-            background: var(--secondary-gradient);
+            background: var(--success-gradient);
+            color: white;
             border: none;
             padding: 0.8rem;
             border-radius: 10px;
-            color: white;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .download-btn:hover:after {
+            left: 100%;
         }
 
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--dark-gradient);
+        /* Download Page */
+        .download-page {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 2rem;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            color: white;
-            animation: modalFadeIn 0.3s ease;
         }
 
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-input {
-            padding: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .google-login-btn {
-            background: #4285f4;
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .google-login-btn:hover {
-            background: #357ae8;
-        }
-
-        .download-modal .modal-content {
-            max-width: 600px;
-        }
-
-        .script-details {
+        .download-header {
+            text-align: center;
             margin-bottom: 2rem;
         }
 
+        .download-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .script-description-full {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Discord Ad */
+        .ad-space {
+            background: linear-gradient(135deg, 
+                rgba(88, 101, 242, 0.25) 0%,
+                rgba(64, 78, 237, 0.3) 50%,
+                rgba(138, 43, 226, 0.25) 100%);
+            border-radius: 20px;
+            margin: 2rem 0;
+            color: white;
+            font-size: 1.1rem;
+            padding: 0;
+            text-align: center;
+            box-shadow: 
+                0 20px 60px rgba(88, 101, 242, 0.4),
+                0 0 100px rgba(88, 101, 242, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(88, 101, 242, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-space::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .ad-space:hover::before {
+            animation: shimmer 2s ease-in-out infinite;
+            opacity: 1;
+        }
+
+        .ad-space:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(88, 101, 242, 0.6),
+                0 0 120px rgba(88, 101, 242, 0.2);
+            border-color: rgba(88, 101, 242, 0.8);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .discord-ad {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .discord-icon {
+            font-size: 3.5rem;
+            color: white;
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 30px rgba(88, 101, 242, 0.7),
+                inset 0 2px 10px rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .discord-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #5865F2, #8A2BE2, #5865F2);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(88, 101, 242, 0.7); }
+            50% { box-shadow: 0 0 50px rgba(88, 101, 242, 1); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .discord-ad-content {
+            text-align: left;
+            flex: 1;
+        }
+
+        .discord-ad-content h3 {
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+            color: white;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .discord-ad-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .discord-btn {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            color: #5865F2;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .discord-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(88, 101, 242, 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .discord-btn:hover::before {
+            left: 100%;
+        }
+
+        .discord-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(88, 101, 242, 0.3);
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            color: #4752C4;
+        }
+
+        .discord-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+        }
+
         .countdown {
-            text-align: center;
-            font-size: 2rem;
-            margin: 2rem 0;
-            color: var(--warning-color);
+            font-size: 3rem;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 1rem 0;
         }
 
-        .captcha-container {
-            display: none;
-            text-align: center;
-            margin: 2rem 0;
+        .subscribe-to-skip {
+            margin-top: 1.5rem;
         }
 
-        .captcha-checkbox {
-            transform: scale(1.5);
-            margin: 1rem;
+        .subscribe-to-skip-btn {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subscribe-to-skip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .final-download {
-            display: none;
             text-align: center;
+            margin: 2rem 0;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
+        .final-download-btn {
+            background: var(--success-gradient);
             color: white;
-            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+            animation: pulse 2s infinite;
         }
 
-        .footer {
-            margin-top: 4rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
+        .final-download-btn:hover {
+            transform: var(--hover-transform);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Subscription Section */
+        .subscription-section {
+            background: var(--bg-card);
             padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            text-align: center;
         }
 
-        .privacy-link {
-            color: #3b82f6;
+        .subscription-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-card i {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Info Pages */
+        .info-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .info-page h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-page h3 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #667eea;
+        }
+
+        .info-page p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .info-page ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .info-page li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            margin-top: 2rem;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gradient);
+            padding: 3rem 0 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: #4A90E2;
             text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .footer-link:hover {
+            color: #667eea;
+            text-decoration: none;
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        .privacy-link:hover {
-            text-decoration: underline;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes fadeInUp {
@@ -358,515 +804,1032 @@
             }
         }
 
-        @keyframes modalFadeIn {
+        @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translate(-50%, -60%);
+                transform: scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translate(-50%, -50%);
+                transform: scale(1);
             }
         }
 
-        /* RTL Styles */
-        [dir="rtl"] .nav-content {
-            flex-direction: row-reverse;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        [dir="rtl"] .nav-links {
-            flex-direction: row-reverse;
-        }
-
-        [dir="rtl"] .user-profile {
-            flex-direction: row-reverse;
-        }
-
-        @media (max-width: 768px) {
-            .nav-content {
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .scripts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .discord-ad {
                 flex-direction: column;
-                gap: 1rem;
+                text-align: center;
             }
-
-            .hero-title {
-                font-size: 2rem;
+            
+            .discord-ad-content {
+                text-align: center;
             }
-
+        }
+        
+        @media (max-width: 768px) {
+            .logo-container {
+                position: relative;
+                left: 0;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
             .scripts-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .language-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .download-header {
+                margin-top: 1rem;
+            }
+            
+            .download-title {
+                font-size: 1.8rem;
+            }
+            
+            .script-description-full {
+                padding: 1.5rem;
+            }
+            
+            .countdown {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Create Script Page */
+        .create-script-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .feature-inputs {
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item input {
+            flex: 1;
+        }
+
+        .add-feature-btn {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .add-feature-btn:hover {
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        .secret-code-section {
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Secret Code Button */
+        .secret-code-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-gradient);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        .secret-code-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Secret Code Modal */
+        .secret-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .secret-modal.active {
+            display: flex;
+        }
+        
+        .secret-modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: fadeInScale 0.3s ease;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        
+        .close-modal:hover {
+            color: var(--text-light);
+        }
+        
+        /* PayPal Button */
+        .paypal-button {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .premium-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--warning-gradient);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .premium-benefit {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 10px;
+        }
+        
+        .premium-benefit i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #4CAF50;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo" data-en="Free FiveM Scripts" data-ar="سكربتات فايف ام مجانية">Free FiveM Scripts</a>
-            
-            <div class="nav-links">
-                <a href="https://discord.gg/uDk5kw6KQe" class="discord-link" target="_blank">
+    <!-- Language Toggle -->
+    <div class="language-toggle" onclick="toggleLanguage()">
+        <img id="flag-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23006c35'/%3E%3Cpath d='M0 0h60v13.33H0z' fill='%23fff'/%3E%3Cpath d='M0 26.67h60V40H0z' fill='%23000'/%3E%3Cpath d='M17.5 14L22 17.5 17.5 21 13 17.5z' fill='%23fff'/%3E%3C/svg%3E" alt="SA Flag">
+        <span id="lang-text">English</span>
+        <span class="arrow">▼</span>
+    </div>
+
+    <!-- Secret Code Button -->
+    <div class="secret-code-btn" onclick="openSecretModal()">
+        <i class="fas fa-key"></i>
+    </div>
+
+    <!-- Secret Code Modal -->
+    <div class="secret-modal" id="secret-modal">
+        <div class="secret-modal-content">
+            <span class="close-modal" onclick="closeSecretModal()">&times;</span>
+            <h2 data-en="Enter Secret Code" data-ar="أدخل الكود السري">أدخل الكود السري</h2>
+            <div class="form-group">
+                <input type="password" id="secret-code-input" class="form-control" placeholder="hamzahamza$$22">
+            </div>
+            <button class="btn btn-primary" onclick="checkSecretCode()" data-en="Submit" data-ar="تقديم">تقديم</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <div class="logo" data-en="FiveM Scripts Hub" data-ar="مركز سكربتات فايف ام">مركز سكربتات فايف ام</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem;" onclick="showPage('subscribe')" data-en="Subscribe" data-ar="اشتراك">اشتراك</a></li>
+                <li><a href="#" onclick="showPage('home')" data-en="Home" data-ar="الرئيسية">الرئيسية</a></li>
+                <li><a href="#" onclick="showPage('scripts')" data-en="Scripts" data-ar="السكربتات">السكربتات</a></li>
+                <li><a href="https://discord.gg/uDk5kw6KQe" class="discord-link" target="_blank">
+                    <i class="fab fa-discord"></i> ديسكورد
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Page -->
+    <section class="hero page active" id="home-page">
+        <div class="hero-content">
+            <h1 data-en="Premium FiveM Scripts" data-ar="سكربتات فايف ام المميزة">سكربتات فايف ام المميزة</h1>
+            <p data-en="Download high-quality FiveM scripts for free. Enhance your server with our premium collection." data-ar="حمل سكربتات فايف ام عالية الجودة مجاناً. طور سيرفرك مع مجموعتنا المميزة.">حمل سكربتات فايف ام عالية الجودة مجاناً. طور سيرفرك مع مجموعتنا المميزة.</p>
+            <button class="btn btn-primary" onclick="showPage('scripts')" data-en="Browse Scripts" data-ar="تصفح السكربتات">تصفح السكربتات</button>
+        </div>
+    </section>
+
+    <!-- Scripts Page -->
+    <div class="container page" id="scripts-page">
+        <!-- Scripts Section -->
+        <h2 data-en="Latest Scripts" data-ar="أحدث السكربتات">أحدث السكربتات</h2>
+        <div class="scripts-grid" id="scripts-grid">
+            <!-- Scripts will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Download Page -->
+    <div class="container page" id="download-page">
+        <div class="download-header">
+            <h1 class="download-title" id="download-script-title">نظام الشرطة المتقدم</h1>
+            <button class="btn btn-secondary" onclick="showPage('scripts')" data-en="← Back to Scripts" data-ar="← العودة للسكربتات">← العودة للسكربتات</button>
+        </div>
+
+        <!-- Discord Ad 1 -->
+        <div class="ad-space" id="discord-ad">
+            <div class="discord-ad">
+                <div class="discord-icon">
                     <i class="fab fa-discord"></i>
-                </a>
-                
-                <button class="lang-switcher" onclick="toggleLanguage()">
-                    <span class="flag">🇺🇸</span>
-                    <span class="lang-text" data-en="EN" data-ar="AR">EN</span>
+                </div>
+                <div class="discord-ad-content">
+                    <h3 data-en="Join Our Discord!" data-ar="انضم إلى ديسكورد!">انضم إلى ديسكورد!</h3>
+                    <p data-en="Get support, updates, and exclusive scripts" data-ar="احصل على الدعم والتحديثات والسكربتات الحصرية">احصل على الدعم والتحديثات والسكربتات الحصرية</p>
+                    <a href="https://discord.gg/uDk5kw6KQe" target="_blank" class="discord-btn">
+                        <i class="fab fa-discord"></i> انضم الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-description-full">
+            <h3 data-en="Script Description" data-ar="وصف السكربت">وصف السكربت</h3>
+            <p id="full-description">يتميز هذا النظام بآليات اعتقال واقعية، حجز مركبات، جمع أدلة، ونظام بيانات متكامل. مصمم لسيرفرات لعب الأدوار الجادة مع رتب وصلاحيات قابلة للتخصيص.</p>
+            
+            <h4 data-en="Features:" data-ar="المميزات:">المميزات:</h4>
+            <ul id="features-list">
+                <li>حركات اعتقال ديناميكية</li>
+                <li>نظام حجز المركبات</li>
+                <li>عدة جمع الأدلة</li>
+                <li>محطة البيانات المتنقلة (MDT)</li>
+                <li>رتب وصلاحيات قابلة للتخصيص</li>
+            </ul>
+            
+            <h4 data-en="Installation Instructions" data-ar="تعليمات التثبيت">تعليمات التثبيت</h4>
+            <p id="installation">1. نزّل واستخرج الملفات<br>
+            2. أضف لمجلد الموارد<br>
+            3. ابدأ في server.cfg</p>
+            
+            <h4 data-en="Requirements" data-ar="المتطلبات">المتطلبات</h4>
+            <p id="requirements">- ESX Framework<br>- MySQL Database</p>
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="countdown-section" id="countdown-section">
+            <h3 data-en="Please wait before downloading" data-ar="يرجى الانتظار قبل التحميل">يرجى الانتظار قبل التحميل</h3>
+            <div class="countdown" id="countdown">60</div>
+            <p data-en="Your download will be ready in" data-ar="سيكون التحميل جاهزاً خلال">سيكون التحميل جاهزاً خلال</p>
+            
+            <div class="subscribe-to-skip">
+                <button class="subscribe-to-skip-btn" onclick="showPage('subscribe')">
+                    <i class="fas fa-crown"></i> <span data-en="Subscribe to skip wait" data-ar="اشترك لتخطي الانتظار">اشترك لتخطي الانتظار</span>
                 </button>
             </div>
+        </div>
 
-            <div class="user-menu">
-                <div id="loginSection">
-                    <button class="login-btn" onclick="openLoginModal()" data-en="Login" data-ar="تسجيل الدخول">Login</button>
+        <div class="final-download" id="final-download" style="display:none;">
+            <button class="final-download-btn" onclick="startActualDownload()" data-en="Download Now" data-ar="تحميل الآن">
+                <i class="fas fa-download"></i> تحميل الآن
+            </button>
+        </div>
+
+        <!-- Discord Ad 2 -->
+        <div class="ad-space">
+            <div class="discord-ad">
+                <div class="discord-icon">
+                    <i class="fab fa-discord"></i>
                 </div>
-                <div id="userSection" style="display: none;">
-                    <div class="user-profile">
-                        <img id="userAvatar" class="user-avatar" src="" alt="User Avatar">
-                        <span id="userName"></span>
-                        <button class="logout-btn" onclick="logout()" data-en="Logout" data-ar="تسجيل الخروج">Logout</button>
+                <div class="discord-ad-content">
+                    <h3 data-en="Need Help?" data-ar="تحتاج مساعدة؟">تحتاج مساعدة؟</h3>
+                    <p data-en="Our Discord community is ready to assist you" data-ar="مجتمع ديسكورد جاهز لمساعدتك">مجتمع ديسكورد جاهز لمساعدتك</p>
+                    <a href="https://discord.gg/uDk5kw6KQe" target="_blank" class="discord-btn">
+                        <i class="fab fa-discord"></i> احصل على الدعم
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Script Page -->
+    <div class="container page" id="create-script-page">
+        <div class="create-script-container">
+            <h2 data-en="Create New Script" data-ar="إنشاء سكربت جديد">إنشاء سكربت جديد</h2>
+            
+            <div class="form-group">
+                <label data-en="Script Name (English)" data-ar="اسم السكربت (الإنجليزية)">اسم السكربت (الإنجليزية)</label>
+                <input type="text" id="script-name-en" class="form-control" placeholder="Advanced Police System">
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Script Name (Arabic)" data-ar="اسم السكربت (العربية)">اسم السكربت (العربية)</label>
+                <input type="text" id="script-name-ar" class="form-control" placeholder="نظام الشرطة المتقدم">
+            </div>
+            
+            <div class="form-group">
+                <label data-en="External Description (English)" data-ar="الوصف الخارجي (الإنجليزية)">الوصف الخارجي (الإنجليزية)</label>
+                <textarea id="external-desc-en" class="form-control" placeholder="Realistic arrest mechanics and MDT integration"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="External Description (Arabic)" data-ar="الوصف الخارجي (العربية)">الوصف الخارجي (العربية)</label>
+                <textarea id="external-desc-ar" class="form-control" placeholder="آليات اعتقال واقعية وتكامل مع نظام البيانات"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Full Description (English)" data-ar="الوصف الكامل (الإنجليزية)">الوصف الكامل (الإنجليزية)</label>
+                <textarea id="full-desc-en" class="form-control" placeholder="This advanced police system includes..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Full Description (Arabic)" data-ar="الوصف الكامل (العربية)">الوصف الكامل (العربية)</label>
+                <textarea id="full-desc-ar" class="form-control" placeholder="يتميز هذا النظام بآليات اعتقال واقعية..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Features (English)" data-ar="المميزات (الإنجليزية)">المميزات (الإنجليزية)</label>
+                <div class="feature-inputs" id="features-en">
+                    <div class="feature-item">
+                        <input type="text" class="form-control" placeholder="Feature 1">
+                        <button type="button" class="btn btn-secondary" onclick="removeFeature(this)"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
+                <button type="button" class="add-feature-btn" onclick="addFeature('en')">
+                    <i class="fas fa-plus"></i> <span data-en="Add Feature" data-ar="إضافة مميزة">إضافة مميزة</span>
+                </button>
             </div>
+            
+            <div class="form-group">
+                <label data-en="Features (Arabic)" data-ar="المميزات (العربية)">المميزات (العربية)</label>
+                <div class="feature-inputs" id="features-ar">
+                    <div class="feature-item">
+                        <input type="text" class="form-control" placeholder="الميزة 1">
+                        <button type="button" class="btn btn-secondary" onclick="removeFeature(this)"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button type="button" class="add-feature-btn" onclick="addFeature('ar')">
+                    <i class="fas fa-plus"></i> <span data-en="Add Feature" data-ar="إضافة مميزة">إضافة مميزة</span>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Requirements" data-ar="المتطلبات">المتطلبات</label>
+                <textarea id="script-requirements" class="form-control" placeholder="ESX Framework, MySQL"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Image URL" data-ar="رابط الصورة">رابط الصورة</label>
+                <input type="text" id="script-image" class="form-control" placeholder="https://example.com/image.jpg">
+            </div>
+            
+            <div class="form-group">
+                <label data-en="Script File" data-ar="ملف السكربت">ملف السكربت</label>
+                <input type="file" id="script-file" class="form-control" accept=".lua,.zip,.rar,.7z">
+            </div>
+            
+            <button class="btn btn-primary" onclick="createNewScript()" data-en="Create Script" data-ar="إنشاء السكربت">إنشاء السكربت</button>
+            <button class="btn btn-secondary" onclick="showPage('scripts')" data-en="Cancel" data-ar="إلغاء">إلغاء</button>
         </div>
-    </nav>
+    </div>
+    
+    <!-- Subscribe Page -->
+    <div class="container page" id="subscribe-page">
+        <div class="subscription-section">
+            <h2 data-en="Premium Subscription" data-ar="اشتراك مميز">اشتراك مميز</h2>
+            <p data-en="Unlock exclusive features with our premium subscription" data-ar="افتح الميزات الحصرية مع اشتراكنا المميز">افتح الميزات الحصرية مع اشتراكنا المميز</p>
+            
+            <div class="premium-benefits">
+                <div class="premium-benefit">
+                    <i class="fas fa-ad"></i>
+                    <span data-en="Ad-Free Experience" data-ar="تجربة بدون إعلانات">تجربة بدون إعلانات</span>
+                </div>
+                <div class="premium-benefit">
+                    <i class="fas fa-bolt"></i>
+                    <span data-en="Instant Downloads" data-ar="تحميل فوري">تحميل فوري</span>
+                </div>
+                <div class="premium-benefit">
+                    <i class="fas fa-headset"></i>
+                    <span data-en="Priority Support" data-ar="دعم فني بأولوية">دعم فني بأولوية</span>
+                </div>
+                <div class="premium-benefit">
+                    <i class="fas fa-crown"></i>
+                    <span data-en="Exclusive Scripts" data-ar="سكربتات حصرية">سكربتات حصرية</span>
+                </div>
+            </div>
+            
+            <h3 data-en="Subscribe Now" data-ar="اشترك الآن">اشترك الآن</h3>
+            <div class="paypal-button" id="paypal-button-container"></div>
+        </div>
+    </div>
 
-    <main class="main-content">
-        <section class="hero-section">
-            <h1 class="hero-title" data-en="Free FiveM Scripts Collection" data-ar="مجموعة سكربتات فايف ام مجانية">Free FiveM Scripts Collection</h1>
-            <p class="hero-subtitle" data-en="Download high-quality FiveM scripts for free. No registration required!" data-ar="حمل سكربتات فايف ام عالية الجودة مجاناً. لا يتطلب تسجيل!">Download high-quality FiveM scripts for free. No registration required!</p>
-        </section>
-
-        <section class="scripts-grid" id="scriptsGrid">
-            <!-- Scripts will be loaded here -->
-        </section>
-    </main>
-
-    <footer class="footer">
-        <a href="#" class="privacy-link" onclick="openPrivacyModal()" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link" onclick="showPage('privacy')" data-en="Privacy Policy" data-ar="سياسة الخصوصية">
+                    <i class="fas fa-shield-alt"></i> <span>سياسة الخصوصية</span>
+                </a>
+                <a href="#" class="footer-link" onclick="showPage('about')" data-en="About Us" data-ar="من نحن">
+                    <i class="fas fa-users"></i> <span>من نحن</span>
+                </a>
+                <a href="#" class="footer-link" onclick="showPage('contact')" data-en="Contact Us" data-ar="اتصل بنا">
+                    <i class="fas fa-envelope"></i> <span>اتصل بنا</span>
+                </a>
+            </div>
+            <p class="copyright">&copy; 2024 مركز سكربتات فايف ام. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">جميع الحقوق محفوظة.</span></p>
+        </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
-            <h2 data-en="Login to Your Account" data-ar="تسجيل الدخول لحسابك">Login to Your Account</h2>
-            
-            <div class="login-form">
-                <button class="google-login-btn" onclick="loginWithGoogle()">
-                    <i class="fab fa-google"></i>
-                    <span data-en="Continue with Google" data-ar="متابعة مع جوجل">Continue with Google</span>
-                </button>
-                
-                <div style="text-align: center; margin: 1rem 0; color: rgba(255,255,255,0.7);" data-en="Or" data-ar="أو">Or</div>
-                
-                <div class="form-group">
-                    <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
-                    <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label data-en="Password" data-ar="كلمة المرور">Password</label>
-                    <input type="password" class="form-input" id="loginPassword" data-placeholder-en="Enter your password" data-placeholder-ar="ادخل كلمة المرور" placeholder="Enter your password">
-                </div>
-                
-                <button class="login-btn" onclick="loginWithEmail()" data-en="Login" data-ar="تسجيل الدخول">Login</button>
-                
-                <div style="text-align: center; margin-top: 1rem;">
-                    <span style="color: rgba(255,255,255,0.7);" data-en="Don't have an account?" data-ar="ليس لديك حساب؟">Don't have an account?</span>
-                    <a href="#" onclick="showSignup()" style="color: #3b82f6; margin-left: 0.5rem;" data-en="Sign up" data-ar="إنشاء حساب">Sign up</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Download Modal -->
-    <div id="downloadModal" class="modal download-modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('downloadModal')">&times;</button>
-            <div class="script-details">
-                <h2 id="modalScriptTitle"></h2>
-                <p id="modalScriptDescription" data-en="This is a high-quality FiveM script that includes all necessary files and documentation. Perfect for enhancing your FiveM server experience." data-ar="هذا سكربت فايف ام عالي الجودة يتضمن جميع الملفات والتوثيق المطلوب. مثالي لتحسين تجربة خادم فايف ام الخاص بك.">This is a high-quality FiveM script that includes all necessary files and documentation. Perfect for enhancing your FiveM server experience.</p>
-            </div>
-            
-            <div id="countdownSection">
-                <div class="countdown" id="countdown">60</div>
-                <p style="text-align: center; color: rgba(255,255,255,0.7);" data-en="Please wait before downloading..." data-ar="يرجى الانتظار قبل التحميل...">Please wait before downloading...</p>
-            </div>
-            
-            <div class="captcha-container" id="captchaSection">
-                <h3 data-en="Verify you're not a robot" data-ar="تحقق من أنك لست روبوت">Verify you're not a robot</h3>
-                <label style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0;">
-                    <input type="checkbox" class="captcha-checkbox" id="robotCheck">
-                    <span data-en="I'm not a robot" data-ar="لست روبوت">I'm not a robot</span>
-                </label>
-            </div>
-            
-            <div class="final-download" id="finalDownloadSection">
-                <button class="download-btn" onclick="finalDownload()" data-en="Download Now" data-ar="تحميل الآن">Download Now</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacyModal" class="modal">
-        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
-            <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
-            <h2 data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</h2>
-            <div style="text-align: left; line-height: 1.6; margin-top: 1rem;">
-                <div class="en-content">
-                    <h3>Information Collection and Use</h3>
-                    <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us. This may include your name, email address, and other contact information.</p>
-                    
-                    <h3>Content and Scripts</h3>
-                    <p>All scripts and content provided on this website are for educational and entertainment purposes only. Users are responsible for ensuring compliance with all applicable laws and regulations in their jurisdiction. We do not guarantee the functionality, security, or legality of any scripts provided.</p>
-                    
-                    <h3>Third-Party Services</h3>
-                    <p>We use third-party services including Google Analytics, Firebase Authentication, and advertising networks. These services may collect information about your use of our website.</p>
-                    
-                    <h3>Disclaimer</h3>
-                    <p>The website owner is not responsible for any damages, losses, or legal issues arising from the use of scripts or content provided on this website. Users download and use content at their own risk.</p>
-                    
-                    <h3>Data Security</h3>
-                    <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.</p>
-                    
-                    <h3>Changes to This Policy</h3>
-                    <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.</p>
-                </div>
-                
-                <div class="ar-content" style="direction: rtl; display: none;">
-                    <h3>جمع المعلومات واستخدامها</h3>
-                    <p>نحن نجمع المعلومات التي تقدمها لنا مباشرة، مثل عندما تنشئ حساباً أو تستخدم خدماتنا أو تتصل بنا. قد يشمل ذلك اسمك وعنوان بريدك الإلكتروني ومعلومات الاتصال الأخرى.</p>
-                    
-                    <h3>المحتوى والسكربتات</h3>
-                    <p>جميع السكربتات والمحتوى المقدم في هذا الموقع مخصص للأغراض التعليمية والترفيهية فقط. المستخدمون مسؤولون عن ضمان الامتثال لجميع القوانين واللوائح المطبقة في ولايتهم القضائية. نحن لا نضمن وظائف أو أمان أو قانونية أي سكربتات مقدمة.</p>
-                    
-                    <h3>خدمات الطرف الثالث</h3>
-                    <p>نحن نستخدم خدمات الطرف الثالث بما في ذلك Google Analytics وFirebase Authentication وشبكات الإعلانات. قد تجمع هذه الخدمات معلومات حول استخدامك لموقعنا.</p>
-                    
-                    <h3>إخلاء المسؤولية</h3>
-                    <p>مالك الموقع غير مسؤول عن أي أضرار أو خسائر أو قضايا قانونية تنشأ من استخدام السكربتات أو المحتوى المقدم في هذا الموقع. المستخدمون يحملون ويستخدمون المحتوى على مسؤوليتهم الخاصة.</p>
-                    
-                    <h3>أمان البيانات</h3>
-                    <p>نحن نطبق التدابير الأمنية المناسبة لحماية معلوماتك الشخصية. ومع ذلك، لا توجد طريقة نقل عبر الإنترنت آمنة بنسبة 100%.</p>
-                    
-                    <h3>التغييرات على هذه السياسة</h3>
-                    <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase Scripts -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCQ2khhLVXys2Rln0dAZ61_b_CYDaYKpxU",
-            authDomain: "freefivemscript.firebaseapp.com",
-            projectId: "freefivemscript",
-            storageBucket: "freefivemscript.firebasestorage.app",
-            messagingSenderId: "581459763818",
-            appId: "1:581459763818:web:c37684bea59b88b9e76013",
-            measurementId: "G-672WRZZYKK"
+    <script>
+        // Language Management
+        let currentLang = 'ar';
+        const translations = {
+            en: {
+                flag: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23b22234'/%3E%3Cpath d='M0 0h60v3.08H0zM0 6.15h60v3.08H0zM0 12.31h60v3.08H0zM0 18.46h60v3.08H0zM0 24.62h60v3.08H0zM0 30.77h60v3.08H0zM0 36.92h60V40H0z' fill='%23fff'/%3E%3Crect width='24' height='17.23' fill='%233c3b6e'/%3E%3C/svg%3E",
+                text: "العربية"
+            },
+            ar: {
+                flag: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23006c35'/%3E%3Cpath d='M0 0h60v13.33H0z' fill='%23fff'/%3E%3Cpath d='M0 26.67h60V40H0z' fill='%23000'/%3E%3Cpath d='M17.5 14L22 17.5 17.5 21 13 17.5z' fill='%23fff'/%3E%3C/svg%3E",
+                text: "English"
+            }
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const analytics = getAnalytics(app);
-        const provider = new GoogleAuthProvider();
-
-        // Global variables
-        window.auth = auth;
-        window.signInWithPopup = signInWithPopup;
-        window.GoogleAuthProvider = GoogleAuthProvider;
-        window.provider = provider;
-        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
-        window.sendEmailVerification = sendEmailVerification;
-        window.signOut = signOut;
-
-        // Auth state observer
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('userSection').style.display = 'block';
-                document.getElementById('userName').textContent = user.displayName || user.email;
-                document.getElementById('userAvatar').src = user.photoURL || 'https://via.placeholder.com/40';
-            } else {
-                document.getElementById('loginSection').style.display = 'block';
-                document.getElementById('userSection').style.display = 'none';
-            }
-        });
-    </script>
-
-    <script>
-        // Sample scripts data
-        const scriptsData = [
-            {
-                id: 1,
-                title: "Advanced Car Dealer",
-                image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=300&fit=crop",
-                date: "2024-01-15",
-                description: "Complete car dealership system with financing options"
-            },
-            {
-                id: 2,
-                title: "Police MDT System",
-                image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?w=400&h=300&fit=crop",
-                date: "2024-01-20",
-                description: "Professional police mobile data terminal"
-            },
-            {
-                id: 3,
-                title: "Banking System Pro",
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-                date: "2024-01-25",
-                description: "Complete banking system with ATMs and loans"
-            },
-            {
-                id: 4,
-                title: "Hospital Management",
-                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
-                date: "2024-02-01",
-                description: "Advanced hospital and EMS system"
-            },
-            {
-                id: 5,
-                title: "Real Estate Agency",
-                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
-                date: "2024-02-05",
-                description: "Property buying and selling system"
-            },
-            {
-                id: 6,
-                title: "Racing Circuit",
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-                date: "2024-02-10",
-                description: "Street racing and circuit racing system"
-            }
-        ];
-
-        let currentLanguage = 'en';
-        let currentScript = null;
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            loadScripts();
-            updateLanguage();
-        });
-
-        function loadScripts() {
-            const grid = document.getElementById('scriptsGrid');
-            grid.innerHTML = '';
-
-            scriptsData.forEach(script => {
-                const card = document.createElement('div');
-                card.className = 'script-card';
-                card.innerHTML = `
-                    <img src="${script.image}" alt="${script.title}" class="script-image">
-                    <h3 class="script-title">${script.title}</h3>
-                    <p class="script-date">Released: ${script.date}</p>
-                    <button class="download-btn" onclick="startDownload(${script.id})" data-en="Download" data-ar="تحميل">Download</button>
-                `;
-                grid.appendChild(card);
-            });
-
-            updateLanguage();
-        }
-
         function toggleLanguage() {
-            currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
-            document.documentElement.lang = currentLanguage;
-            
-            const flag = document.querySelector('.flag');
-            const langText = document.querySelector('.lang-text');
-            
-            if (currentLanguage === 'ar') {
-                flag.textContent = '🇸🇦';
-                langText.textContent = 'AR';
-            } else {
-                flag.textContent = '🇺🇸';
-                langText.textContent = 'EN';
-            }
-            
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
             updateLanguage();
         }
 
         function updateLanguage() {
             const elements = document.querySelectorAll('[data-en][data-ar]');
-            elements.forEach(element => {
-                if (currentLanguage === 'ar') {
-                    element.textContent = element.getAttribute('data-ar');
-                } else {
-                    element.textContent = element.getAttribute('data-en');
-                }
+            elements.forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
             });
 
-            // Update placeholders
-            const inputs = document.querySelectorAll('[data-placeholder-en][data-placeholder-ar]');
-            inputs.forEach(input => {
-                if (currentLanguage === 'ar') {
-                    input.placeholder = input.getAttribute('data-placeholder-ar');
-                } else {
-                    input.placeholder = input.getAttribute('data-placeholder-en');
-                }
-            });
+            // Update direction
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
 
-            // Update privacy policy content
-            const enContent = document.querySelector('.en-content');
-            const arContent = document.querySelector('.ar-content');
-            if (currentLanguage === 'ar') {
-                enContent.style.display = 'none';
-                arContent.style.display = 'block';
+            // Update flag and text
+            document.getElementById('flag-icon').src = translations[currentLang].flag;
+            document.getElementById('lang-text').textContent = translations[currentLang].text;
+            
+            // Update scripts text
+            updateScriptsText();
+        }
+        
+        function updateScriptsText() {
+            document.querySelectorAll('.script-card').forEach((card, index) => {
+                const script = scriptsData[index];
+                if (!script) return;
+
+                // Update title
+                const title = card.querySelector('.script-title');
+                title.textContent = currentLang === 'en' ? script.title : script.titleAr;
+
+                // Update description
+                const description = card.querySelector('.script-description');
+                description.textContent = currentLang === 'en' ? script.description : script.descriptionAr;
+
+                // Update button text
+                const button = card.querySelector('.download-btn');
+                button.innerHTML = `<i class="fas fa-download"></i> ${currentLang === 'en' ? 'Download' : 'تحميل'}`;
+            });
+        }
+
+        // Sample Scripts Data
+        let scriptsData = [
+            {
+                id: 1,
+                title: "Advanced Police System",
+                titleAr: "نظام الشرطة المتقدم",
+                description: "Realistic arrest mechanics and MDT integration",
+                descriptionAr: "آليات اعتقال واقعية وتكامل مع نظام البيانات",
+                icon: "fas fa-shield-alt",
+                uploadDate: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+                downloads: 0,
+                category: "Jobs",
+                categoryAr: "الوظائف",
+                image: "https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1476&auto=format&fit=crop",
+                fullDescription: "This police system features realistic arrest mechanics, vehicle impounding, evidence collection, and a comprehensive MDT. Designed for serious roleplay servers with customizable ranks and permissions.",
+                fullDescriptionAr: "يتميز هذا النظام بآليات اعتقال واقعية، حجز مركبات، جمع أدلة، ونظام بيانات متكامل. مصمم لسيرفرات لعب الأدوار الجادة مع رتب وصلاحيات قابلة للتخصيص.",
+                features: [
+                    "Dynamic arrest animations",
+                    "Vehicle impound system",
+                    "Evidence collection kit",
+                    "Mobile Data Terminal (MDT)",
+                    "Customizable ranks & permissions"
+                ],
+                featuresAr: [
+                    "حركات اعتقال ديناميكية",
+                    "نظام حجز المركبات",
+                    "عدة جمع الأدلة",
+                    "محطة البيانات المتنقلة (MDT)",
+                    "رتب وصلاحيات قابلة للتخصيص"
+                ],
+                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
+                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
+                requirements: "ESX Framework, MySQL",
+                fileContent: null
+            }
+        ];
+
+        // Secret Code Functions
+        function openSecretModal() {
+            document.getElementById('secret-modal').classList.add('active');
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secret-modal').classList.remove('active');
+        }
+
+        function checkSecretCode() {
+            const codeInput = document.getElementById('secret-code-input').value;
+            if (codeInput === "hamzahamza$$22") {
+                closeSecretModal();
+                showPage('create-script');
             } else {
-                enContent.style.display = 'block';
-                arContent.style.display = 'none';
+                alert(currentLang === 'en' ? 'Incorrect secret code!' : 'كود سري غير صحيح!');
             }
         }
 
-        // Modal functions
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'block';
+        // Create Script Functions
+        function addFeature(lang) {
+            const container = document.getElementById(`features-${lang}`);
+            const div = document.createElement('div');
+            div.className = 'feature-item';
+            div.innerHTML = `
+                <input type="text" class="form-control" placeholder="${lang === 'en' ? 'Feature' : 'الميزة'}">
+                <button type="button" class="btn btn-secondary" onclick="removeFeature(this)"><i class="fas fa-times"></i></button>
+            `;
+            container.appendChild(div);
         }
 
-        function openPrivacyModal() {
-            document.getElementById('privacyModal').style.display = 'block';
+        function removeFeature(button) {
+            button.parentElement.remove();
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Authentication functions
-        async function loginWithGoogle() {
-            try {
-                const result = await signInWithPopup(auth, provider);
-                closeModal('loginModal');
-                showNotification('Login successful!', 'success');
-            } catch (error) {
-                showNotification('Login failed: ' + error.message, 'error');
+        function createNewScript() {
+            // Get form values
+            const title = document.getElementById('script-name-en').value;
+            const titleAr = document.getElementById('script-name-ar').value;
+            const description = document.getElementById('external-desc-en').value;
+            const descriptionAr = document.getElementById('external-desc-ar').value;
+            const fullDescription = document.getElementById('full-desc-en').value;
+            const fullDescriptionAr = document.getElementById('full-desc-ar').value;
+            
+            // Get features
+            const features = [];
+            document.querySelectorAll('#features-en input').forEach(input => {
+                if (input.value) features.push(input.value);
+            });
+            
+            const featuresAr = [];
+            document.querySelectorAll('#features-ar input').forEach(input => {
+                if (input.value) featuresAr.push(input.value);
+            });
+            
+            const requirements = document.getElementById('script-requirements').value;
+            const image = document.getElementById('script-image').value;
+            
+            // Get file content
+            const fileInput = document.getElementById('script-file');
+            let fileContent = null;
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    fileContent = e.target.result;
+                    saveNewScript(title, titleAr, description, descriptionAr, fullDescription, fullDescriptionAr, 
+                                  features, featuresAr, requirements, image, fileContent);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                saveNewScript(title, titleAr, description, descriptionAr, fullDescription, fullDescriptionAr, 
+                             features, featuresAr, requirements, image, null);
             }
         }
 
-        async function loginWithEmail() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+        function saveNewScript(title, titleAr, description, descriptionAr, fullDescription, fullDescriptionAr, 
+                              features, featuresAr, requirements, image, fileContent) {
+            const newScript = {
+                id: scriptsData.length + 1,
+                title: title,
+                titleAr: titleAr,
+                description: description,
+                descriptionAr: descriptionAr,
+                icon: "fas fa-code",
+                uploadDate: new Date(),
+                downloads: 0,
+                category: "Custom",
+                categoryAr: "مخصص",
+                image: image || "https://images.unsplash.com/photo-1511376777868-611b54f68947?q=80&w=1470&auto=format&fit=crop",
+                fullDescription: fullDescription,
+                fullDescriptionAr: fullDescriptionAr,
+                features: features,
+                featuresAr: featuresAr,
+                installation: "1. Download and extract\n2. Add to resources folder\n3. Start in server.cfg",
+                installationAr: "1. نزّل واستخرج الملفات\n2. أضف لمجلد الموارد\n3. ابدأ في server.cfg",
+                requirements: requirements,
+                fileContent: fileContent
+            };
+            
+            scriptsData.push(newScript);
+            
+            // Save to localStorage with a global key (not user-specific)
+            localStorage.setItem('allScripts', JSON.stringify(scriptsData));
+            
+            alert(currentLang === 'en' ? 'Script created successfully!' : 'تم إنشاء السكربت بنجاح!');
+            showPage('scripts');
+        }
 
-            if (!email || !password) {
-                showNotification('Please fill in all fields', 'error');
-                return;
+        // Download count management
+        function getDownloadCount(scriptId) {
+            const key = `download_count_${scriptId}`;
+            const stored = localStorage.getItem(key);
+            return stored ? parseInt(stored) : 0;
+        }
+
+        function updateDownloadCount(scriptId, count) {
+            const key = `download_count_${scriptId}`;
+            localStorage.setItem(key, count.toString());
+        }
+
+        // Page Management
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show the requested page
+            document.getElementById(`${pageId}-page`).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // If it's the scripts page, render the scripts
+            if (pageId === 'scripts') {
+                renderScripts();
+            }
+            
+            // If it's the subscribe page, initialize PayPal button
+            if (pageId === 'subscribe') {
+                initializePayPalButton();
             }
 
-            try {
-                const result = await signInWithEmailAndPassword(auth, email, password);
-                closeModal('loginModal');
-                showNotification('Login successful!', 'success');
-            } catch (error) {
-                if (error.code === 'auth/user-not-found') {
-                    // Create new account
-                    try {
-                        const newUser = await createUserWithEmailAndPassword(auth, email, password);
-                        await sendEmailVerification(newUser.user);
-                        showNotification('Account created! Please check your email for verification.', 'success');
-                        closeModal('loginModal');
-                    } catch (signupError) {
-                        showNotification('Account creation failed: ' + signupError.message, 'error');
-                    }
+            // Premium check for ads
+            const isPremium = localStorage.getItem('premium_subscriber') === 'true';
+
+            if (pageId === 'download') {
+                if (isPremium) {
+                    document.querySelectorAll('.ad-space').forEach(ad => {
+                        ad.style.display = 'none';
+                    });
                 } else {
-                    showNotification('Login failed: ' + error.message, 'error');
+                    document.querySelectorAll('.ad-space').forEach(ad => {
+                        ad.style.display = 'flex';
+                    });
+                }
+            } else {
+                // If not on download page, reset download UI and timer
+                resetDownloadProcess();
+                document.querySelectorAll('.ad-space').forEach(ad => {
+                    ad.style.display = 'none';
+                });
+            }
+        }
+
+        // Initialize PayPal Button
+        function initializePayPalButton() {
+            const container = document.getElementById('paypal-button-container');
+            container.innerHTML = '';
+            
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    label: 'subscribe',
+                    layout: 'vertical'
+                },
+                createSubscription: function(data, actions) {
+                    return actions.subscription.create({
+                        'plan_id': 'P-7H922565H1875433MNBDOTJA'
+                    });
+                },
+                onApprove: function(data, actions) {
+                    // Save premium status
+                    localStorage.setItem('premium_subscriber', 'true');
+                    
+                    // Show success message
+                    alert(currentLang === 'en' 
+                        ? 'Subscription activated successfully! You now have premium features.' 
+                        : 'تم تفعيل الاشتراك بنجاح! لديك الآن مميزات الاشتراك المميز.');
+                    
+                    // Redirect to home
+                    showPage('home');
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // Scripts Management
+        function renderScripts() {
+            // Load all scripts from localStorage (including custom ones)
+            const storedScripts = JSON.parse(localStorage.getItem('allScripts'));
+            if (storedScripts && storedScripts.length > 0) {
+                scriptsData = storedScripts;
+            }
+
+            const scriptsGrid = document.getElementById('scripts-grid');
+            scriptsGrid.innerHTML = '';
+
+            // Sort scripts by upload date (newest first)
+            const sortedScripts = [...scriptsData].sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
+
+            sortedScripts.forEach(script => {
+                const downloadCount = getDownloadCount(script.id);
+
+                const scriptCard = document.createElement('div');
+                scriptCard.className = 'script-card';
+                scriptCard.innerHTML = `
+                    <div class="script-image">
+                        <img src="${script.image}" alt="${currentLang === 'en' ? script.title : script.titleAr}">
+                    </div>
+                    <div class="script-content">
+                        <h3 class="script-title">${currentLang === 'en' ? script.title : script.titleAr}</h3>
+                        <p class="script-description">${currentLang === 'en' ? script.description : script.descriptionAr}</p>
+                        <div class="script-meta">
+                            <span><i class="fas fa-download"></i> ${downloadCount.toLocaleString()}</span>
+                            <span><i class="fas fa-calendar"></i> ${new Date(script.uploadDate).toLocaleDateString()}</span>
+                        </div>
+                        <button class="download-btn" onclick="initiateDownload(${script.id})">
+                            <i class="fas fa-download"></i> ${currentLang === 'en' ? 'Download' : 'تحميل'}
+                        </button>
+                    </div>
+                `;
+                scriptsGrid.appendChild(scriptCard);
+            });
+
+            // Setup scroll animation observer
+            setupScrollAnimation();
+        }
+        
+        function setupScrollAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.script-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Download Process
+        let currentScript = null;
+        let countdownTimer = null;
+
+        function initiateDownload(scriptId) {
+            currentScript = scriptsData.find(s => s.id === scriptId);
+            showPage('download');
+            
+            if (currentScript) {
+                document.getElementById('download-script-title').textContent = 
+                    currentLang === 'en' ? currentScript.title : currentScript.titleAr;
+                
+                // Update full description
+                document.getElementById('full-description').textContent = 
+                    currentLang === 'en' ? currentScript.fullDescription : currentScript.fullDescriptionAr;
+                
+                // Update features list
+                const featuresList = document.getElementById('features-list');
+                featuresList.innerHTML = '';
+                const features = currentLang === 'en' ? currentScript.features : currentScript.featuresAr;
+                features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresList.appendChild(li);
+                });
+                
+                // Update installation instructions
+                const installation = document.getElementById('installation');
+                installation.innerHTML = currentLang === 'en' ? 
+                    currentScript.installation.replace(/\n/g, '<br>') : 
+                    currentScript.installationAr.replace(/\n/g, '<br>');
+                
+                // Update requirements
+                const requirements = document.getElementById('requirements');
+                requirements.textContent = currentScript.requirements;
+                
+                // Check if user is premium subscriber
+                const isPremium = localStorage.getItem('premium_subscriber') === 'true';
+                
+                if (isPremium) {
+                    // Premium users can download immediately
+                    document.getElementById('countdown-section').style.display = 'none';
+                    document.getElementById('final-download').style.display = 'block';
+                } else {
+                    // Regular users must wait
+                    startCountdown();
                 }
             }
-        }
-
-        function showSignup() {
-            document.getElementById('loginEmail').value = '';
-            document.getElementById('loginPassword').value = '';
-            showNotification('Enter your email and password to create a new account', 'info');
-        }
-
-        async function logout() {
-            try {
-                await signOut(auth);
-                showNotification('Logged out successfully', 'success');
-            } catch (error) {
-                showNotification('Logout failed: ' + error.message, 'error');
-            }
-        }
-
-        // Download functions
-        function startDownload(scriptId) {
-            currentScript = scriptsData.find(s => s.id === scriptId);
-            document.getElementById('modalScriptTitle').textContent = currentScript.title;
-            document.getElementById('downloadModal').style.display = 'block';
-            
-            // Reset modal state
-            document.getElementById('countdownSection').style.display = 'block';
-            document.getElementById('captchaSection').style.display = 'none';
-            document.getElementById('finalDownloadSection').style.display = 'none';
-            document.getElementById('robotCheck').checked = false;
-            
-            startCountdown();
         }
 
         function startCountdown() {
             let timeLeft = 60;
             const countdownElement = document.getElementById('countdown');
+            document.getElementById('final-download').style.display = 'none';
+            document.getElementById('countdown-section').style.display = 'block';
             
-            const timer = setInterval(() => {
-                timeLeft--;
+            countdownTimer = setInterval(() => {
                 countdownElement.textContent = timeLeft;
+                timeLeft--;
                 
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('countdownSection').style.display = 'none';
-                    document.getElementById('captchaSection').style.display = 'block';
+                if (timeLeft < 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById('countdown-section').style.display = 'none';
+                    document.getElementById('final-download').style.display = 'block';
                 }
             }, 1000);
         }
 
-        // Add event listener for captcha
-        document.addEventListener('DOMContentLoaded', function() {
-            const robotCheck = document.getElementById('robotCheck');
-            if (robotCheck) {
-                robotCheck.addEventListener('change', function() {
-                    if (this.checked) {
-                        setTimeout(() => {
-                            document.getElementById('captchaSection').style.display = 'none';
-                            document.getElementById('finalDownloadSection').style.display = 'block';
-                        }, 1000);
-                    }
-                });
-            }
-        });
-
-        function finalDownload() {
-            // Simulate download
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`# ${currentScript.title}\n\nThis is a sample FiveM script file.\n\n## Installation\n1. Extract to your resources folder\n2. Add to server.cfg\n3. Restart server\n\n## Features\n- ${currentScript.description}\n- Easy installation\n- Full documentation included\n\nEnjoy your new script!`);
-            link.download = `${currentScript.title.replace(/\s+/g, '_').toLowerCase()}.txt`;
-            link.click();
+        function startActualDownload() {
+            if (!currentScript) return;
             
-            showNotification('Download started!', 'success');
-            closeModal('downloadModal');
+            // If script has file content
+            if (currentScript.fileContent) {
+                const link = document.createElement('a');
+                link.href = currentScript.fileContent;
+                link.download = `${currentScript.title.replace(/\s+/g, '_').toLowerCase()}.zip`;
+                link.click();
+            } else {
+                // Default content for pre-defined scripts
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`
+# ${currentScript.title}
+# This is a sample FiveM script file
+# Created by FiveM Scripts Hub
+
+print("Loading ${currentScript.title}...")
+
+-- Sample script content
+RegisterCommand("test", function(source, args, rawCommand)
+    print("${currentScript.title} is working!")
+end, false)
+                `);
+                link.download = `${currentScript.title.replace(/\s+/g, '_').toLowerCase()}.lua`;
+                link.click();
+            }
+            
+            // Update download count
+            const newCount = getDownloadCount(currentScript.id) + 1;
+            updateDownloadCount(currentScript.id, newCount);
+            
+            showNotification(currentLang === 'en' ? 'Download started!' : 'بدء التحميل!', 'success');
+            
+            // Reset after download
+            setTimeout(() => {
+                resetDownloadProcess();
+                showPage('scripts');
+            }, 2000);
         }
 
-        // Notification system
+        function resetDownloadProcess() {
+            if (countdownTimer) {
+                clearInterval(countdownTimer);
+                countdownTimer = null;
+            }
+            
+            document.getElementById('countdown').textContent = '60';
+            document.getElementById('countdown-section').style.display = 'none';
+            document.getElementById('final-download').style.display = 'none';
+        }
+
+        // Notifications
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
-                top: 100px;
+                top: 20px;
                 right: 20px;
-                background: ${type === 'success' ? 'var(--success-color)' : type === 'error' ? 'var(--danger-color)' : 'var(--warning-color)'};
+                background: ${type === 'success' ? 'var(--success-gradient)' : type === 'error' ? 'var(--secondary-gradient)' : 'var(--primary-gradient)'};
                 color: white;
                 padding: 1rem 2rem;
-                border-radius: 8px;
+                border-radius: 10px;
+                box-shadow: var(--shadow);
                 z-index: 3000;
                 animation: slideInRight 0.3s ease;
-                max-width: 300px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             `;
             notification.textContent = message;
             
@@ -880,109 +1843,36 @@
             }, 3000);
         }
 
-        // Add animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOutRight {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Close modals when clicking outside
-        window.addEventListener('click', function(e) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const openModal = document.querySelector('.modal[style*="block"]');
-                if (openModal) {
-                    openModal.style.display = 'none';
-                }
-            }
-        });
-
-        // Add some interactive effects
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            // Parallax effect for hero section
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero-section');
-                if (hero) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            // Initialize download counts
+            scriptsData.forEach(script => {
+                script.downloads = getDownloadCount(script.id);
+            });
+            
+            // Load scripts from localStorage
+            const storedScripts = JSON.parse(localStorage.getItem('allScripts'));
+            if (storedScripts && storedScripts.length > 0) {
+                scriptsData = storedScripts;
+            }
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
                 }
-            });
-
-            // Add hover effects to script cards
-            const scriptCards = document.querySelectorAll('.script-card');
-            scriptCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Set home page as active
+            showPage('home');
         });
-
-        // Add loading animation
-        function showLoading() {
-            const loader = document.createElement('div');
-            loader.id = 'loader';
-            loader.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-            `;
-            loader.innerHTML = `
-                <div style="
-                    width: 50px;
-                    height: 50px;
-                    border: 5px solid rgba(255,255,255,0.3);
-                    border-top: 5px solid white;
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                "></div>
-            `;
-            document.body.appendChild(loader);
-        }
-
-        function hideLoading() {
-            const loader = document.getElementById('loader');
-            if (loader) {
-                loader.remove();
-            }
-        }
-
-        // Add spin animation
-        const spinStyle = document.createElement('style');
-        spinStyle.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(spinStyle);
     </script>
 </body>
 </html>
