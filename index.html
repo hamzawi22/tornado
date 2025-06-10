@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
     <title>مركز سكربتات فايف ام - سكربتات مميزة مجاناً</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.paypal.com/sdk/js?client-id=Af78FZyBBjxDxgVG3tnBnXawBlFc4Pz9azal7adRxSBwfnp67-fR6d8EIheFNBYXgh0EgrPZFhVieONA&vault=true"></script>
@@ -1539,6 +1542,50 @@
     </footer>
 
     <script>
+        // في بداية الـ script تبعك
+(function() {
+    // GitHub Pages كاش بستر
+    const buildId = '2025061001'; // غيّر هذا كل تحديث
+    const currentUrl = window.location.href;
+    
+    // إذا الرابط مافيه البيلد ID
+    if (!currentUrl.includes('cb=' + buildId)) {
+        const separator = currentUrl.includes('?') ? '&' : '?';
+        window.location.replace(currentUrl + separator + 'cb=' + buildId);
+    }
+    
+    // مسح كل أنواع الكاش
+    if ('caches' in window) {
+        caches.keys().then(names => {
+            names.forEach(name => caches.delete(name));
+        });
+    }
+})();
+        // فورس ريفريش للزوار القدامى
+window.addEventListener('load', function() {
+    const version = '2.1'; // غيّر هذا الرقم كل تحديث
+    const savedVersion = localStorage.getItem('siteVersion');
+    
+    if (savedVersion !== version) {
+        localStorage.setItem('siteVersion', version);
+        if (savedVersion) { // إذا في إصدار قديم محفوظ
+            location.reload(true);
+        }
+    }
+});
+        // في بداية script.js
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+            registration.unregister();
+        }
+    });
+}
+
+// أو إجبار إعادة التحميل
+if (performance.navigation.type !== 1) {
+    location.reload(true);
+}
         
         // Language Management
         let currentLang = 'ar';
